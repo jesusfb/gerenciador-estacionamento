@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 
+
 @Data
 @Getter
 @Setter
@@ -14,9 +15,10 @@ public class Estacionamento {
     @Id
     private Integer id_vaga;
     
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Pessoa id_pessoa;
+    @ManyToOne(targetEntity = Pessoa.class)
+    private Integer id_pessoa;
     
-    @OneToOne(targetEntity = Veiculo.class)
-    private Veiculo placa_veiculo;
+    @OneToOne(targetEntity = Veiculo.class, cascade = CascadeType.ALL)
+    private String placa_veiculo;
+    
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 @Data
@@ -22,11 +23,11 @@ public class Veiculo {
     private String placa_veiculo;
     
     @NotBlank
-    @Column(length = 50)
+    @Column(length = 40)
     private String marca;
     
     @NotBlank
-    @Column(length = 100)
+    @Column(length = 20)
     private String modelo;
     
     @NotBlank

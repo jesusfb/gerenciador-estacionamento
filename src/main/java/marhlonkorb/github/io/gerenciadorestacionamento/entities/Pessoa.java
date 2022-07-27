@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Collection;
 import java.util.Date;
 
 @Data
@@ -16,14 +15,15 @@ import java.util.Date;
 public class Pessoa {
     
     @Id
+    @Column(length = 200)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_pessoa;
     
-    @OneToMany(mappedBy = "placa_veiculo")
-    private Collection<Veiculo> placa_veiculo;
+    @ManyToOne(targetEntity = Veiculo.class)
+    private String placa_veiculo;
     
-    @OneToMany(mappedBy = "id_vaga")
-    private Collection<Estacionamento> id_vaga;
+    @ManyToOne(targetEntity = Estacionamento.class)
+    private String id_vaga;
     
     @Column(length = 200)
     @NotBlank(message = "Nome é obrigatório")
@@ -38,6 +38,7 @@ public class Pessoa {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date data_nascimento;
     
+    @Column(length = 14)
     @NotBlank(message = "Telefone é obrigatório")
     private String telefone;
     
