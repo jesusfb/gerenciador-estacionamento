@@ -1,4 +1,4 @@
-package marhlonkorb.github.io.gerenciadorestacionamento.entities;
+package marhlonkorb.github.io.gerenciadorestacionamento.data.entities;
 
 import lombok.Data;
 import lombok.Getter;

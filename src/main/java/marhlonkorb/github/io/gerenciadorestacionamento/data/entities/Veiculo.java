@@ -1,4 +1,4 @@
-package marhlonkorb.github.io.gerenciadorestacionamento.entities;
+package marhlonkorb.github.io.gerenciadorestacionamento.data.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -20,6 +20,7 @@ public class Veiculo {
     @Id
     @NotBlank
     @Column(length = 9)
+    @JoinColumn(table = "pessoa", referencedColumnName = "placa_veiculo")
     private String placa_veiculo;
     
     @NotBlank
