@@ -20,6 +20,9 @@ public class VeiculoService {
     @Autowired
     VeiculoRepository veiculoRepository;
 
+    @Autowired
+    PessoaService pessoaService;
+
     /**
      * Cadastro de veículos caso seu id não exista
      *
@@ -46,9 +49,9 @@ public class VeiculoService {
      *
      * @param id
      */
-    public void excluirVeículo(String id) {
-        if (isVeiculoCadastrado(id)) {
-            veiculoRepository.deleteById(id);
+    public void excluirVeículo(Veiculo veiculo, Pessoa pessoa) {
+        if (isVeiculoCadastrado(veiculo.getPlaca_veiculo()) && !pessoaService.temVeiculocadastrado(pessoa, veiculo)) {
+            veiculoRepository.deleteById(veiculo.getPlaca_veiculo());
         } else {
             System.out.println("Registro inexistente");
         }
@@ -70,7 +73,7 @@ public class VeiculoService {
      * @param id
      * @param veiculo
      */
-    public void alterarVeiculo(String id, Veiculo veiculo,  Pessoa pessoa) {
+    public void alterarVeiculo(String id, Veiculo veiculo, Pessoa pessoa) {
         if (isVeiculoCadastrado(id)) {
             veiculo.setPlaca_veiculo(id);
             veiculoRepository.save(veiculo);

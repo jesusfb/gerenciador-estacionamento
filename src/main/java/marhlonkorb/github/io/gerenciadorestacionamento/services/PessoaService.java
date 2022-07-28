@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class PessoaService {
 
@@ -35,10 +34,9 @@ public class PessoaService {
      *
      * @param pessoa
      */
-    public void excluiPessoa(Pessoa pessoa) {
-        if (pessoaRepository.existsById(pessoa.getId_pessoa())) {
-            pessoaRepository.delete(pessoa);
-        }
+    public void excluirPessoa(Pessoa pessoa) {
+        pessoaRepository.findAll().
+                removeIf(Pessoa -> pessoa.getId_pessoa().equals(Pessoa.getId_pessoa()));
     }
 
     /**
@@ -48,12 +46,19 @@ public class PessoaService {
      * @param pessoa
      */
     public void alterarCadastroPessoa(Integer id, Pessoa pessoa) {
-        if (pessoaRepository.existsById(pessoa.getId_pessoa())) {
-            pessoa.setId_pessoa(id);
-            adicionarPessoa(pessoa);
-        } else {
-            System.out.println("Pessoa não cadastrada");
-        }
+        excluirPessoa(pessoa);
+        pessoa.setId_pessoa(id);
+        adicionarPessoa(pessoa);
+    }
+
+    /**
+     * Verifica se uma pessoa tem veículo cadastrado
+     *
+     * @param pessoa
+     * @return boolean
+     */
+    public boolean temVeiculocadastrado(Pessoa pessoa) {
+        return pessoaRepository.findAll().contains(pessoa.getPlaca_veiculo());
     }
 
     /**
@@ -76,6 +81,3 @@ public class PessoaService {
         //pessoaRepository.save(pessoa);
     }
 }
-
-
-
