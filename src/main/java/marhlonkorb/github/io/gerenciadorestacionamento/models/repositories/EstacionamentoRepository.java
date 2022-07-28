@@ -1,6 +1,6 @@
-package marhlonkorb.github.io.gerenciadorestacionamento.models.services.repositories;
+package marhlonkorb.github.io.gerenciadorestacionamento.models.repositories;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.data.entities.Estacionamento;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Estacionamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
