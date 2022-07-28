@@ -47,10 +47,10 @@ public class VeiculoService {
     /**
      * Exclui registro caso exista um id registrado no banco
      *
-     * @param id
+     * @param veiculo
      */
-    public void excluirVeículo(Veiculo veiculo, Pessoa pessoa) {
-        if (isVeiculoCadastrado(veiculo.getPlaca_veiculo()) && !pessoaService.temVeiculocadastrado(pessoa, veiculo)) {
+    public void excluirVeículo(Veiculo veiculo) {
+        if (isVeiculoCadastrado(veiculo.getPlaca_veiculo())) {
             veiculoRepository.deleteById(veiculo.getPlaca_veiculo());
         } else {
             System.out.println("Registro inexistente");
@@ -58,7 +58,7 @@ public class VeiculoService {
     }
 
     /**
-     * Retorna true se há um id registrado
+     * Retorna true se há um id registrado de Veiculo
      *
      * @param id
      * @return boolean

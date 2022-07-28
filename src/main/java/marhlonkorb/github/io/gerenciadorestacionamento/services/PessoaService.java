@@ -1,6 +1,7 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -12,6 +13,9 @@ public class PessoaService {
     @Autowired
     PessoaRepository pessoaRepository;
 
+    @Autowired
+    VeiculoService veiculoService;
+
     /**
      * Adiciona novo cadastro de pessoa se ainda não existir
      *
@@ -21,6 +25,10 @@ public class PessoaService {
         if (!pessoaRepository.existsById(pessoa.getId_pessoa())) {
             pessoaRepository.save(pessoa);
         }
+    }
+
+    private boolean isPessoaCadastrada(Integer id) {
+        return pessoaRepository.existsById(id);
     }
 
     /**
@@ -57,15 +65,25 @@ public class PessoaService {
      * @param pessoa
      * @return boolean
      */
-    public boolean temVeiculocadastrado(Pessoa pessoa) {
-        return pessoaRepository.findAll().contains(pessoa.getPlaca_veiculo());
+    public boolean temVeiculoCadastrado(Pessoa pessoa, Veiculo veiculo) {
+        return pessoaRepository.findAll().contains(pessoa.getPlaca_veiculo().equals(veiculo.getPlaca_veiculo()));
     }
 
     /**
-     * Retorna uma lista do tipo Pessoa caso existam registros no banco
+     * Adiciona uma placa de veículo ao cadastro do cliente
      *
-     * @return Object
+     * @param veiculo
+     * @param pessoa
      */
+    public void adicionarVeiculoCadastrado(Veiculo veiculo, Pessoa pessoa) {
+        if (isPessoaCadastrada(pessoa.getId_pessoa()) && veiculoService.isVeiculoCadastrado(veiculo.getPlaca_veiculo())) {
+            pessoa.setPlaca_veiculo(veiculo.getPlaca_veiculo());
+            alterarCadastroPessoa(pessoa.getId_pessoa(), pessoa);
+        } else {
+            System.out.println("Não foi possível adicionar o registro ao cadastro da pessoa.");
+        }
+    }
+
     /**
      * Mock da inserção de um novo usuário para testar funcionamento do insert
      *
