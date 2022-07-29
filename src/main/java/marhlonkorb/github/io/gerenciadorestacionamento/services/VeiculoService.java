@@ -5,7 +5,6 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
 import java.util.Optional;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +69,7 @@ public class VeiculoService {
      * @param id
      * @param veiculo
      */
-    public void alterarVeiculo(String id, Veiculo veiculo, Pessoa pessoa) {
+    public void alterarVeiculo(String id, Veiculo veiculo) {
         if (isVeiculoCadastrado(id)) {
             veiculo.setPlaca_veiculo(id);
             veiculoRepository.save(veiculo);
