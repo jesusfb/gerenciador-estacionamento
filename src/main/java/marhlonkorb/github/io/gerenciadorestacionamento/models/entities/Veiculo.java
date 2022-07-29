@@ -20,10 +20,9 @@ import lombok.NoArgsConstructor;
 public class Veiculo {
 
     @Id
-    @NotBlank
-    @Column(length = 9)
-    @JoinColumn(table = "pessoa", referencedColumnName = "placa_veiculo")
-    private String placa_veiculo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JoinColumn(table = "pessoa", referencedColumnName = "id_veiculo")
+    private Integer id_veiculo;
 
     @ManyToOne(targetEntity = Pessoa.class)
     private Pessoa pessoa;

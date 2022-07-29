@@ -1,12 +1,16 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
+
+import java.util.List;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class PessoaService {
@@ -23,11 +27,36 @@ public class PessoaService {
      * @param pessoa
      */
     public void adicionarPessoa(Pessoa pessoa) {
-        if (!pessoaRepository.existsById(pessoa.getId_pessoa())) {
-            pessoaRepository.save(pessoa);
-        }
+        pessoaRepository.save(pessoa);
     }
 
+    /**
+     * Retorna lista de pessoas cadastradas
+     *
+     * @return
+     */
+    public List<Pessoa> getlistpessoa() {
+        return pessoaRepository.findAll();
+    }
+
+    /**
+     * Retorna a pessoa pelo id
+     *
+     * @param id
+     * @return Pessoa
+     */
+    public Pessoa getpessoaPeloId(Integer id) {
+        return pessoaRepository.findById(id).
+                orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "pessoa não encontrada."));
+    }
+
+    /**
+     * Verifica se a pessoa com o Id passado está cadastrada
+     *
+     * @param id
+     * @return boolean
+     */
     private boolean isPessoaCadastrada(Integer id) {
         return pessoaRepository.existsById(id);
     }
@@ -35,11 +64,11 @@ public class PessoaService {
     /**
      * Exclui cadastro de pessoa se existir o id da pessoa
      *
-     * @param pessoa
+     * @param id
      */
-    public void excluirPessoa(Pessoa pessoa) {
+    public void excluirPessoa(Integer id) {
         pessoaRepository.findAll().
-                removeIf(Pessoa -> pessoa.getId_pessoa().equals(Pessoa.getId_pessoa()));
+                removeIf(Pessoa -> id.equals(Pessoa.getId_pessoa()));
     }
 
     /**
@@ -49,7 +78,7 @@ public class PessoaService {
      * @param pessoa
      */
     public void alterarCadastroPessoa(Integer id, Pessoa pessoa) {
-        excluirPessoa(pessoa);
+        excluirPessoa(id);
         pessoa.setId_pessoa(id);
         adicionarPessoa(pessoa);
     }
@@ -60,7 +89,7 @@ public class PessoaService {
      * @param pessoa
      * @return boolean
      */
-    public boolean temVeiculoCadastrado(Pessoa pessoa, Veiculo veiculo) {
+    private boolean temVeiculoCadastrado(Pessoa pessoa, Veiculo veiculo) {
         return pessoaRepository.findAll().contains(pessoa.getVeiculo().
                 equals(veiculoRepository.findAll()
                         .equals(veiculo)));
@@ -87,12 +116,11 @@ public class PessoaService {
      * @param args
      * @throws Exception
      */
-    public void run(String... args) throws Exception {
+    /*public void run(String... args) throws Exception {
 
         Pessoa pessoa = new Pessoa(null, null,
-                "Marhlon", "03187153097", 103,
-                "13/05/95", "51997948382");
+                "Marhlon", "03187153097", "103",LocalDate.now(), "51997948382");
 
         pessoaRepository.save(pessoa);
-    }
+    }*/
 }

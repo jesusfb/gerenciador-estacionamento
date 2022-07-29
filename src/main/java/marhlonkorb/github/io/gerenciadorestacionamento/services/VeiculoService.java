@@ -25,8 +25,10 @@ public class VeiculoService {
      * @param veiculo
      */
     public void cadastrarVeiculo(Veiculo veiculo) {
-        if (!veiculoRepository.existsById(veiculo.getPlaca_veiculo())) {
+        if (!isVeiculoCadastrado(veiculo.getId_veiculo())) {
             veiculoRepository.save(veiculo);
+        } else {
+            System.out.println("Veículo já existe!");
         }
     }
 
@@ -36,18 +38,18 @@ public class VeiculoService {
      * @param id
      * @return Optional<Veiculo>
      */
-    public Optional<Veiculo> getVeiculoPeloId(String id) {
-        return veiculoRepository.findById(id);
+    public Optional<Veiculo> getVeiculoPeloId(Integer id) {
+        return veiculoRepository.findById(id.toString());
     }
 
     /**
      * Exclui registro caso exista um id registrado no banco
      *
-     * @param veiculo
+     * @param id
      */
-    public void excluirVeículo(Veiculo veiculo) {
-        if (isVeiculoCadastrado(veiculo.getPlaca_veiculo())) {
-            veiculoRepository.deleteById(veiculo.getPlaca_veiculo());
+    public void excluirVeículo(Integer id) {
+        if (isVeiculoCadastrado(id)) {
+            veiculoRepository.deleteById(id.toString());
         } else {
             System.out.println("Registro inexistente");
         }
@@ -59,8 +61,8 @@ public class VeiculoService {
      * @param id
      * @return boolean
      */
-    public boolean isVeiculoCadastrado(String id) {
-        return veiculoRepository.existsById(id);
+    public boolean isVeiculoCadastrado(Integer id) {
+        return veiculoRepository.existsById(id.toString());
     }
 
     /**
@@ -69,9 +71,9 @@ public class VeiculoService {
      * @param id
      * @param veiculo
      */
-    public void alterarVeiculo(String id, Veiculo veiculo) {
+    public void alterarVeiculo(Integer id, Veiculo veiculo) {
         if (isVeiculoCadastrado(id)) {
-            veiculo.setPlaca_veiculo(id);
+            veiculo.setId_veiculo(id);
             veiculoRepository.save(veiculo);
         } else {
             System.out.println("Registro inexistente");
