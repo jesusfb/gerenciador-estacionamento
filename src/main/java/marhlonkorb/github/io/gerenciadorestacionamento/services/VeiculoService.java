@@ -63,7 +63,7 @@ public class VeiculoService {
      * @param id
      * @return boolean
      */
-    private boolean isVeiculoCadastrado(String id) {
+    public boolean isVeiculoCadastrado(String id) {
         return veiculoRepository.existsById(id);
     }
 
