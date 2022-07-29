@@ -3,6 +3,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.services;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,10 @@ import org.springframework.stereotype.Service;
 public class PessoaService {
 
     @Autowired
-    PessoaRepository pessoaRepository;
+    private PessoaRepository pessoaRepository;
 
     @Autowired
-    VeiculoService veiculoService;
+    private VeiculoRepository veiculoRepository;
 
     /**
      * Adiciona novo cadastro de pessoa se ainda não existir
@@ -31,12 +32,6 @@ public class PessoaService {
         return pessoaRepository.existsById(id);
     }
 
-    /**
-     * Retorna objeto do tipo pessoa se existir
-     *
-     * @param Id
-     * @return Optiona<Pessoa>
-     */
     /**
      * Exclui cadastro de pessoa se existir o id da pessoa
      *
@@ -66,18 +61,20 @@ public class PessoaService {
      * @return boolean
      */
     public boolean temVeiculoCadastrado(Pessoa pessoa, Veiculo veiculo) {
-        return pessoaRepository.findAll().contains(pessoa.getPlaca_veiculo().equals(veiculo.getPlaca_veiculo()));
+        return pessoaRepository.findAll().contains(pessoa.getVeiculo().
+                equals(veiculoRepository.findAll()
+                        .equals(veiculo)));
     }
 
     /**
-     * Adiciona uma placa de veículo ao cadastro do cliente
+     * Adiciona um veiculo ao cadastro do cliente se o veículo está cadastrado
      *
      * @param veiculo
      * @param pessoa
      */
     public void adicionarVeiculoCadastrado(Veiculo veiculo, Pessoa pessoa) {
-        if (isPessoaCadastrada(pessoa.getId_pessoa()) && veiculoService.isVeiculoCadastrado(veiculo.getPlaca_veiculo())) {
-            pessoa.setPlaca_veiculo(veiculo.getPlaca_veiculo());
+        if (isPessoaCadastrada(pessoa.getId_pessoa()) && !temVeiculoCadastrado(pessoa, veiculo)) {
+            pessoa.setVeiculo(veiculo);
             alterarCadastroPessoa(pessoa.getId_pessoa(), pessoa);
         } else {
             System.out.println("Não foi possível adicionar o registro ao cadastro da pessoa.");
@@ -92,10 +89,10 @@ public class PessoaService {
      */
     public void run(String... args) throws Exception {
 
-        Pessoa pessoa = new Pessoa(null, null, null,
+        Pessoa pessoa = new Pessoa(null, null,
                 "Marhlon", "03187153097", 103,
                 "13/05/95", "51997948382");
 
-        //pessoaRepository.save(pessoa);
+        pessoaRepository.save(pessoa);
     }
 }

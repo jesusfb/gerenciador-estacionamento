@@ -18,10 +18,7 @@ import org.springframework.stereotype.Service;
 public class VeiculoService {
 
     @Autowired
-    VeiculoRepository veiculoRepository;
-
-    @Autowired
-    PessoaService pessoaService;
+    private VeiculoRepository veiculoRepository;
 
     /**
      * Cadastro de veículos caso seu id não exista
