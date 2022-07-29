@@ -1,13 +1,11 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
-
 import java.util.List;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -48,7 +46,7 @@ public class PessoaService {
     public Pessoa getpessoaPeloId(Integer id) {
         return pessoaRepository.findById(id).
                 orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "pessoa não encontrada."));
+                HttpStatus.NOT_FOUND, "Pessoa não encontrada."));
     }
 
     /**
@@ -67,8 +65,7 @@ public class PessoaService {
      * @param id
      */
     public void excluirPessoa(Integer id) {
-        pessoaRepository.findAll().
-                removeIf(Pessoa -> id.equals(Pessoa.getId_pessoa()));
+        pessoaRepository.deleteById(id);
     }
 
     /**
