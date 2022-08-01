@@ -10,6 +10,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Responsável pelas regras de negócio do cadastro de veículos
@@ -45,7 +46,7 @@ public class VeiculoService {
      * @return Optional<Veiculo>
      */
     public Optional<Veiculo> getVeiculoPeloId(Integer id) {
-        return veiculoRepository.findById(id.toString());
+        return veiculoRepository.findById(id);
     }
 
     /**
@@ -53,12 +54,12 @@ public class VeiculoService {
      *
      * @param id
      */
-    public void excluirVeículo(Integer id) {
+    public boolean excluirVeículo(Integer id) {
         if (isVeiculoCadastrado(id)) {
-            veiculoRepository.deleteById(id.toString());
-        } else {
-            System.out.println("Registro inexistente");
+            veiculoRepository.deleteById(id);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -68,7 +69,7 @@ public class VeiculoService {
      * @return boolean
      */
     public boolean isVeiculoCadastrado(Integer id) {
-        return veiculoRepository.existsById(id.toString());
+        return veiculoRepository.existsById(id);
     }
 
     /**
@@ -77,12 +78,12 @@ public class VeiculoService {
      * @param id
      * @param veiculo
      */
-    public void alterarVeiculo(Integer id, Veiculo veiculo) {
+    public Veiculo alterarVeiculo(Integer id, Veiculo veiculo) {
         if (isVeiculoCadastrado(id)) {
             veiculo.setId_veiculo(id);
             veiculoRepository.save(veiculo);
-        } else {
-            System.out.println("Registro inexistente");
+            return veiculo;
         }
+        return null;
     }
 }
