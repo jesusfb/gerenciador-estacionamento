@@ -34,6 +34,7 @@ public class PessoaController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.FOUND)
     public List<Pessoa> getListaPessoa() {
         return pessoaService.getlistpessoa();
     }
@@ -41,8 +42,8 @@ public class PessoaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody
-    Pessoa adicionarPessoa(@RequestBody @Valid Pessoa pessoa) {
-        return pessoaService.adicionarPessoa(pessoa);
+    Pessoa cadastrarPessoa(@RequestBody @Valid Pessoa pessoa) {
+        return pessoaService.cadastrarPessoa(pessoa);
     }
 
     @PutMapping("{id}")

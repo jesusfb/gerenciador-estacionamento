@@ -4,6 +4,7 @@
  */
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
+import java.util.List;
 import java.util.Optional;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
@@ -24,12 +25,17 @@ public class VeiculoService {
      *
      * @param veiculo
      */
-    public void cadastrarVeiculo(Veiculo veiculo) {
-        if (!isVeiculoCadastrado(veiculo.getId_veiculo())) {
-            veiculoRepository.save(veiculo);
-        } else {
-            System.out.println("Veículo já existe!");
-        }
+    public Veiculo cadastrarVeiculo(Veiculo veiculo) {
+        return veiculoRepository.save(veiculo);
+    }
+
+    /**
+     * Retorna lista de veículos cadastrados
+     *
+     * @return veiculo
+     */
+    public List<Veiculo> getListaVeiculos() {
+        return veiculoRepository.findAll();
     }
 
     /**

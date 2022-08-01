@@ -25,7 +25,7 @@ public class PessoaService {
      * @param pessoa
      * @return pessoa
      */
-    public Pessoa adicionarPessoa(Pessoa pessoa) {
+    public Pessoa cadastrarPessoa(Pessoa pessoa) {
         return pessoaRepository.save(pessoa);
     }
 
@@ -116,17 +116,4 @@ public class PessoaService {
         }
     }
 
-    /**
-     * Mock da inserção de um novo usuário para testar funcionamento do insert
-     *
-     * @param args
-     * @throws Exception
-     */
-    /*public void run(String... args) throws Exception {
-
-        Pessoa pessoa = new Pessoa(null, null,
-                "Marhlon", "03187153097", "103",LocalDate.now(), "51997948382");
-
-        pessoaRepository.save(pessoa);
-    }*/
 }
