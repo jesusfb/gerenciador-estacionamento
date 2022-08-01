@@ -62,4 +62,9 @@ public class PessoaController {
         return ResponseEntity.accepted().body("Registro não encontrado.");
     }
 
+    @PostMapping("/addVeiculo/{idVeiculo}&{idPessoa}")
+    public Pessoa adicionarVeiculoCadastrado(@PathVariable Integer idVeiculo) {
+        return null;
+    }
+
 }

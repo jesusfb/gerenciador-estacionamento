@@ -38,6 +38,11 @@ public class VeiculoController {
         return veiculoService.getListaVeiculos();
     }
 
+    @GetMapping("{id}")
+    public Optional<Veiculo> getVeiculopeloId(@PathVariable Integer id) {
+        return veiculoService.getVeiculoPeloId(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody
