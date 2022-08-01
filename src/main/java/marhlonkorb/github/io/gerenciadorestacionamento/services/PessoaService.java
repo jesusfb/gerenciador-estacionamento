@@ -1,12 +1,15 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -25,6 +28,10 @@ public class PessoaService {
      * @param pessoa
      */
     public void adicionarPessoa(Pessoa pessoa) {
+        if(pessoa.getId_pessoa() != null){
+            ResponseEntity.badRequest().body("Registro já existe.");
+            return;
+        }
         pessoaRepository.save(pessoa);
     }
 
@@ -36,7 +43,8 @@ public class PessoaService {
     public List<Pessoa> getlistpessoa() {
         return pessoaRepository.findAll();
     }
-
+    
+    
     /**
      * Retorna a pessoa pelo id
      *
@@ -64,8 +72,13 @@ public class PessoaService {
      *
      * @param id
      */
-    public void excluirPessoa(Integer id) {
+    public ResponseEntity<?> excluirPessoa(Integer id) {
+        Optional<Pessoa> pessoa = pessoaRepository.findById(id);
+        if(pessoa.isPresent()){
         pessoaRepository.deleteById(id);
+        return ResponseEntity.ok("Registro excluído com sucesso.");
+        }
+        return ResponseEntity.notFound().build();
     }
 
     /**
@@ -75,9 +88,16 @@ public class PessoaService {
      * @param pessoa
      */
     public void alterarCadastroPessoa(Integer id, Pessoa pessoa) {
+        if(isPessoaCadastrada(id)){
         excluirPessoa(id);
         pessoa.setId_pessoa(id);
         adicionarPessoa(pessoa);
+            ResponseEntity.ok("Registro alterado com sucesso");
+        }
+        
+        else{
+            ResponseEntity.notFound().build();
+        }
     }
 
     /**
