@@ -48,8 +48,11 @@ public class VeiculoController {
     @PutMapping("/{id}")
     public @ResponseBody
     Veiculo atualizarVeiculo(@PathVariable Integer id, @RequestBody @Valid Veiculo veiculo) {
-        veiculoService.alterarVeiculo(id, veiculo);
-        return veiculo;
+        Optional<Veiculo> veiculoVerificado = veiculoService.getVeiculoPeloId(id);
+        if (veiculoVerificado.isPresent()) {
+            return veiculoService.alterarVeiculo(id, veiculo);
+        }
+        return null;
     }
 
     @DeleteMapping("/{id}")

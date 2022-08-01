@@ -23,6 +23,9 @@ public class Veiculo {
     @JoinColumn(table = "pessoa", referencedColumnName = "id_veiculo")
     private Integer id_veiculo;
 
+    @NotBlank(message = "A placa do veículo deve ser informada")
+    private String placa;
+
     @ManyToOne(targetEntity = Pessoa.class)
     private Pessoa pessoa;
 
