@@ -1,11 +1,13 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import java.io.Serializable;
 import java.time.LocalDate;
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
 
 @Data
 @Getter
@@ -13,7 +15,8 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pessoa implements Serializable {
+@Table(name = "pessoa")
+public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +31,7 @@ public class Pessoa implements Serializable {
     @NotBlank(message = "CPF é obrigatório")
     private String cpf;
 
+    @NotBlank(message = "Número do apartamento é obrigatório")
     private String apto;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -35,5 +39,4 @@ public class Pessoa implements Serializable {
 
     @NotBlank(message = "Telefone é obrigatório")
     private String telefone;
-
 }

@@ -8,10 +8,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class PessoaService {
@@ -26,13 +23,10 @@ public class PessoaService {
      * Adiciona novo cadastro de pessoa se ainda não existir
      *
      * @param pessoa
+     * @return pessoa
      */
-    public void adicionarPessoa(Pessoa pessoa) {
-        if(pessoa.getId_pessoa() != null){
-            ResponseEntity.badRequest().body("Registro já existe.");
-            return;
-        }
-        pessoaRepository.save(pessoa);
+    public Pessoa adicionarPessoa(Pessoa pessoa) {
+        return pessoaRepository.save(pessoa);
     }
 
     /**
@@ -43,18 +37,18 @@ public class PessoaService {
     public List<Pessoa> getlistpessoa() {
         return pessoaRepository.findAll();
     }
-    
-    
+
     /**
      * Retorna a pessoa pelo id
      *
      * @param id
      * @return Pessoa
      */
-    public Pessoa getpessoaPeloId(Integer id) {
-        return pessoaRepository.findById(id).
-                orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Pessoa não encontrada."));
+    public Optional<Pessoa> getpessoaPeloId(Integer id) {
+        if (pessoaRepository.existsById(id)) {
+            return pessoaRepository.findById(id);
+        }
+        return null;
     }
 
     /**
@@ -71,14 +65,15 @@ public class PessoaService {
      * Exclui cadastro de pessoa se existir o id da pessoa
      *
      * @param id
+     * @return ResponseEntity
      */
-    public ResponseEntity<?> excluirPessoa(Integer id) {
+    public boolean excluirPessoa(Integer id) {
         Optional<Pessoa> pessoa = pessoaRepository.findById(id);
-        if(pessoa.isPresent()){
-        pessoaRepository.deleteById(id);
-        return ResponseEntity.ok("Registro excluído com sucesso.");
+        if (pessoa.isPresent()) {
+            pessoaRepository.deleteById(id);
+            return true;
         }
-        return ResponseEntity.notFound().build();
+        return false;
     }
 
     /**
@@ -87,17 +82,13 @@ public class PessoaService {
      * @param id
      * @param pessoa
      */
-    public void alterarCadastroPessoa(Integer id, Pessoa pessoa) {
-        if(isPessoaCadastrada(id)){
-        excluirPessoa(id);
-        pessoa.setId_pessoa(id);
-        adicionarPessoa(pessoa);
-            ResponseEntity.ok("Registro alterado com sucesso");
+    public Pessoa alterarCadastroPessoa(Integer id, Pessoa pessoa) {
+        if (isPessoaCadastrada(id)) {
+            pessoa.setId_pessoa(id);
+            pessoaRepository.save(pessoa);
+            return pessoa;
         }
-        
-        else{
-            ResponseEntity.notFound().build();
-        }
+        return null;
     }
 
     /**
@@ -122,8 +113,6 @@ public class PessoaService {
         if (isPessoaCadastrada(pessoa.getId_pessoa()) && !temVeiculoCadastrado(pessoa, veiculo)) {
             pessoa.setVeiculo(veiculo);
             alterarCadastroPessoa(pessoa.getId_pessoa(), pessoa);
-        } else {
-            System.out.println("Não foi possível adicionar o registro ao cadastro da pessoa.");
         }
     }
 

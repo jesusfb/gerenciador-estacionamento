@@ -5,6 +5,7 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 
 import java.util.List;
+import java.util.Optional;
 import javax.validation.Valid;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.services.PessoaService;
@@ -23,9 +24,13 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
 
-    @GetMapping("{id}")
-    public Pessoa getPessoaPeloId(@PathVariable Integer id) {
-        return pessoaService.getpessoaPeloId(id);
+    @GetMapping("/{id}")
+    public @ResponseBody
+    Optional<Pessoa> getPessoaPeloId(@PathVariable Integer id) {
+        if (pessoaService.getpessoaPeloId(id) != null) {
+            return pessoaService.getpessoaPeloId(id);
+        }
+        return null;
     }
 
     @GetMapping
@@ -37,20 +42,23 @@ public class PessoaController {
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody
     Pessoa adicionarPessoa(@RequestBody @Valid Pessoa pessoa) {
-        pessoaService.adicionarPessoa(pessoa);
-        return pessoa;
+        return pessoaService.adicionarPessoa(pessoa);
     }
-    
+
     @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void alterarPessoa(@PathVariable Integer id, @Valid Pessoa pessoa){
-        pessoaService.alterarCadastroPessoa(id, pessoa);
+    public ResponseEntity<?> atualizarCadastro(@PathVariable Integer id, @RequestBody Pessoa pessoa) {
+        if (pessoaService.alterarCadastroPessoa(id, pessoa) != null) {
+            return ResponseEntity.ok("Registro alterado com sucesso.");
+        }
+        return ResponseEntity.accepted().body("Registro não encontrado.");
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> excluirpessoa(@PathVariable Integer id) {
-        pessoaService.excluirPessoa(id);
-        return ResponseEntity.ok("Registro excluído com sucesso.");
+    public ResponseEntity<?> excluirPessoa(@PathVariable Integer id) {
+        if (pessoaService.excluirPessoa(id)) {
+            return ResponseEntity.ok("Registro excluído com sucesso.");
+        }
+        return ResponseEntity.accepted().body("Registro não encontrado.");
     }
 
 }

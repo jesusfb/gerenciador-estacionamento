@@ -27,15 +27,15 @@ public class Veiculo {
     @ManyToOne(targetEntity = Pessoa.class)
     private Pessoa pessoa;
 
-    @NotBlank
+    @NotBlank(message = "A marca do veículo é obrigatória informar")
     @Column(length = 40)
     private String marca;
 
-    @NotBlank
+    @NotBlank(message = "O modelo do veículo é obrigatório informar")
     @Column(length = 20)
     private String modelo;
 
-    @NotBlank
+    @NotBlank(message = "O ano do veículo é obrigatório informar")
     @JsonFormat(pattern = "yyyy")
     private Date ano;
 
