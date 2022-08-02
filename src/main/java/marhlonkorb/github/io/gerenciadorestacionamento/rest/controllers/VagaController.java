@@ -4,10 +4,12 @@
  */
 package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Estacionamento;
+import java.util.List;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Vaga;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
-import marhlonkorb.github.io.gerenciadorestacionamento.services.EstacionamentoService;
+import marhlonkorb.github.io.gerenciadorestacionamento.services.VagaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,16 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
  * Classe responsável por controlar o registro de veiculos no estacionamento
  */
 @RestController
-@RequestMapping("/api/estacionamento")
-public class EstacionamentoController {
+@RequestMapping("/api/vagas")
+public class VagaController {
 
     @Autowired
-    private EstacionamentoService estacionamentoService;
+    private VagaService vagaService;
 
-    @PostMapping("/addVeiculoVaga{veiculo}&{estacionamento}")
-    public Estacionamento adicionarVeiculoVaga(@PathVariable Veiculo veiculo,
-            @PathVariable Estacionamento estacionamento) {
-        return estacionamentoService.adicionarVeiculoVaga(veiculo, estacionamento);
+    @GetMapping
+    public List listarVagas() {
+        return vagaService.listarVagas();
+    }
+
+    @PostMapping("/addVeiculoVaga{veiculo}&{vaga}")
+    public Vaga adicionarVeiculoVaga(@PathVariable Veiculo veiculo,
+            @PathVariable Vaga vaga) {
+        return vagaService.adicionarVeiculoVaga(veiculo, vaga);
     }
 
 }
