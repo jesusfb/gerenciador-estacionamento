@@ -63,9 +63,16 @@ public class PessoaController {
         return ResponseEntity.accepted().body("Registro não encontrado.");
     }
 
-    @PostMapping("/addVeiculo/{veiculo}&{id}")
-    public Veiculo adicionarVeiculoCadastrado(@PathVariable Veiculo veiculo,@PathVariable Integer id) {
-        return pessoaService.adicionarVeiculoCadastrado(veiculo, id);
+    /**
+     * Executa a ação de salvar o id de Pessoa a tabela de Veiculo
+     *
+     * @param idVeiculo
+     * @param idPessoa
+     * @return veiculo
+     */
+    @PostMapping("/addVeiculo{idVeiculo}&{idPessoa}")
+    public Veiculo adicionarVeiculoCadastrado(@PathVariable Veiculo idVeiculo, @PathVariable Pessoa idPessoa) {
+        return pessoaService.adicionarVeiculoCadastrado(idVeiculo, idPessoa);
     }
 
 }

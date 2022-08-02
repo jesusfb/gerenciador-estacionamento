@@ -20,14 +20,13 @@ public class Veiculo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(table = "pessoa", referencedColumnName = "id_veiculo")
     private Integer id_veiculo;
 
     @NotBlank(message = "A placa do veículo deve ser informada")
     private String placa;
 
     @ManyToOne(targetEntity = Pessoa.class)
-    private Integer id_pessoa;
+    private Pessoa pessoa;
 
     @NotBlank(message = "A marca do veículo é obrigatória informar")
     private String marca;
