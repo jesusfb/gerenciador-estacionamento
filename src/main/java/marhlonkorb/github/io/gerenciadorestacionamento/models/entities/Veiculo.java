@@ -27,7 +27,7 @@ public class Veiculo {
     private String placa;
 
     @ManyToOne(targetEntity = Pessoa.class)
-    private Pessoa pessoa;
+    private Integer id_pessoa;
 
     @NotBlank(message = "A marca do veículo é obrigatória informar")
     private String marca;

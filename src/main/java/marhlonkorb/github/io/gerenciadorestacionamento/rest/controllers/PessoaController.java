@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.services.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -62,9 +63,9 @@ public class PessoaController {
         return ResponseEntity.accepted().body("Registro não encontrado.");
     }
 
-    @PostMapping("/addVeiculo/{idVeiculo}&{idPessoa}")
-    public Pessoa adicionarVeiculoCadastrado(@PathVariable Integer idVeiculo) {
-        return null;
+    @PostMapping("/addVeiculo/{veiculo}&{id}")
+    public Veiculo adicionarVeiculoCadastrado(@PathVariable Veiculo veiculo,@PathVariable Integer id) {
+        return pessoaService.adicionarVeiculoCadastrado(veiculo, id);
     }
 
 }

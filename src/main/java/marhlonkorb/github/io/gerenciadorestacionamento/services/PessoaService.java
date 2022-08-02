@@ -97,23 +97,25 @@ public class PessoaService {
      * @param pessoa
      * @return boolean
      */
-    private boolean temVeiculoCadastrado(Pessoa pessoa, Veiculo veiculo) {
+    /*private boolean temVeiculoCadastrado(Pessoa pessoa, Veiculo veiculo) {
         return pessoaRepository.findAll().contains(pessoa.getVeiculo().
                 equals(veiculoRepository.findAll()
                         .equals(veiculo)));
-    }
+    }*/
 
     /**
      * Adiciona um veiculo ao cadastro do cliente se o veículo está cadastrado
      *
      * @param veiculo
      * @param pessoa
+     * @return
      */
-    public void adicionarVeiculoCadastrado(Veiculo veiculo, Pessoa pessoa) {
-        if (isPessoaCadastrada(pessoa.getId_pessoa()) && !temVeiculoCadastrado(pessoa, veiculo)) {
-            pessoa.setVeiculo(veiculo);
-            alterarCadastroPessoa(pessoa.getId_pessoa(), pessoa);
+    public Veiculo adicionarVeiculoCadastrado(Veiculo veiculo, Integer idPessoa) {
+        if (pessoaRepository.existsById(idPessoa)) {
+            veiculo.setId_pessoa(idPessoa);
+            veiculoRepository.save(veiculo);
         }
+        return veiculo;
     }
 
 }

@@ -2,6 +2,8 @@ package marhlonkorb.github.io.gerenciadorestacionamento.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
+import java.util.List;
+
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -18,9 +20,6 @@ public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_pessoa;
-
-    @ManyToOne(targetEntity = Veiculo.class)
-    private Veiculo veiculo;
 
     @NotBlank(message = "Nome é obrigatório")
     private String nome;
