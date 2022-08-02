@@ -63,21 +63,4 @@ public class PessoaController {
         return ResponseEntity.accepted().body("Registro não encontrado.");
     }
 
-    /**
-     * Executa a ação de adicionar o id de Pessoa a tabela de Veiculo
-     *
-     * @param idVeiculo
-     * @param idPessoa
-     * @return veiculo
-     */
-    @PostMapping("/addVeiculo{idVeiculo}&{idPessoa}")
-    public ResponseEntity<?> adicionarVeiculoCadastrado(@PathVariable Veiculo idVeiculo, @PathVariable Pessoa idPessoa) {
-        if (pessoaService.adicionarVeiculoCadastrado(idVeiculo, idPessoa)) {
-            return ResponseEntity.ok("Pessoa vinculada a veículo com sucesso.");
-        } else {
-            return ResponseEntity.badRequest().body("Não foi possível realizar o vínculo das entidades.");
-        }
-
-    }
-
 }

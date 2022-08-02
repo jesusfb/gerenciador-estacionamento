@@ -102,23 +102,6 @@ public class PessoaService {
                 equals(veiculoRepository.findAll()
                         .equals(veiculo)));
     }*/
-    /**
-     * Adiciona o id de Pessoa a tabela de veiculo se o veículo e a pessoa estão cadastrados
-     *
-     * @param veiculo
-     * @param pessoa
-     * @return
-     */
-    public boolean adicionarVeiculoCadastrado(Veiculo veiculo, Pessoa pessoa) {
-        if (pessoaRepository.existsById(pessoa.getId_pessoa()) && pessoa.getId_pessoa() != null &&
-                veiculoRepository.existsById(veiculo.getId_veiculo()) && veiculo.getId_veiculo() != null) {
-            veiculo.setPessoa(pessoa);
-            pessoa.setId_pessoa(pessoa.getId_pessoa());
-            pessoaRepository.save(pessoa);
-            veiculoRepository.save(veiculo);
-            return true;
-        }
-        return false;
-    }
+
 
 }

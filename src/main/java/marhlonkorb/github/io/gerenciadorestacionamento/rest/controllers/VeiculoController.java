@@ -7,6 +7,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.services.VeiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,4 +69,19 @@ public class VeiculoController {
         return ResponseEntity.notFound().build();
     }
 
+    /**
+     * Executa a ação de adicionar o id de Pessoa a tabela de Veiculo
+     *
+     * @param idVeiculo
+     * @param idPessoa
+     * @return veiculo
+     */
+    @PostMapping("/addVeiculo{idVeiculo}&{idPessoa}")
+    public ResponseEntity<?> adicionarVeiculoCadastrado(@PathVariable Veiculo idVeiculo, @PathVariable Pessoa idPessoa) {
+        if (veiculoService.adicionarVeiculoCadastrado(idVeiculo, idPessoa)) {
+            return ResponseEntity.ok("Pessoa vinculada a veículo com sucesso.");
+        } else {
+            return ResponseEntity.badRequest().body("Não foi possível realizar o vínculo das entidades.");
+        }
+    }
 }

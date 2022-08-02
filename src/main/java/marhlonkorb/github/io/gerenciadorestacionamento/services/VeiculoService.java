@@ -6,7 +6,9 @@ package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
 import java.util.List;
 import java.util.Optional;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class VeiculoService {
 
     @Autowired
     private VeiculoRepository veiculoRepository;
+
+    @Autowired
+    private PessoaRepository pessoaRepository;
 
     /**
      * Cadastro de veículos caso seu id não exista
@@ -84,5 +89,24 @@ public class VeiculoService {
             return veiculo;
         }
         return cadastrarVeiculo(veiculo);
+    }
+
+    /**
+     * Adiciona o id de Pessoa a tabela de veiculo se o veículo e a pessoa estão cadastrados
+     *
+     * @param veiculo
+     * @param pessoa
+     * @return boolean
+     */
+    public boolean adicionarVeiculoCadastrado(Veiculo veiculo, Pessoa pessoa) {
+        if (pessoaRepository.existsById(pessoa.getId_pessoa()) &&
+                veiculoRepository.existsById(veiculo.getId_veiculo())) {
+            veiculo.setPessoa(pessoa);
+            pessoa.setId_pessoa(pessoa.getId_pessoa());
+            pessoaRepository.save(pessoa);
+            veiculoRepository.save(veiculo);
+            return true;
+        }
+        return false;
     }
 }
