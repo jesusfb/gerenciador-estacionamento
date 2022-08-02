@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.services.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

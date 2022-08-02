@@ -1,5 +1,6 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities;
 
+import java.util.List;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,7 @@ public class Estacionamento {
     @Id
     @Min(value = 1)
     @Max(value = 200)
-    private Integer id_vaga;
+    private List id_vaga;
 
     @OneToOne(targetEntity = Veiculo.class, cascade = CascadeType.ALL)
     private Veiculo veiculo;
