@@ -34,7 +34,8 @@ public class VagaService {
      */
     public Vaga adicionarVeiculoVaga(@PathVariable Veiculo veiculo, Vaga vaga) {
         if (!veiculoRepository.existsById(veiculo.getId_veiculo()) &&
-                !vagaRepository.existsById(vaga.getId_vaga())) {
+                !vagaRepository.existsById(vaga.getId_vaga()) &&
+                veiculoRepository.existsById(veiculo.getPessoa().getId_pessoa())) {
             vaga.setVeiculo(veiculo);
             veiculo.setId_veiculo(veiculo.getId_veiculo());
             vagaRepository.save(vaga);
@@ -46,6 +47,7 @@ public class VagaService {
 
     /**
      * Lista as vagas totais no estacionamento
+     *
      * @return List Vaga
      */
     public List<Vaga> listarVagas() {
