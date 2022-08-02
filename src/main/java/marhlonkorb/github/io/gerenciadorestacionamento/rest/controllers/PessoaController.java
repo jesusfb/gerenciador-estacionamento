@@ -64,15 +64,20 @@ public class PessoaController {
     }
 
     /**
-     * Executa a ação de salvar o id de Pessoa a tabela de Veiculo
+     * Executa a ação de adicionar o id de Pessoa a tabela de Veiculo
      *
      * @param idVeiculo
      * @param idPessoa
      * @return veiculo
      */
     @PostMapping("/addVeiculo{idVeiculo}&{idPessoa}")
-    public Veiculo adicionarVeiculoCadastrado(@PathVariable Veiculo idVeiculo, @PathVariable Pessoa idPessoa) {
-        return pessoaService.adicionarVeiculoCadastrado(idVeiculo, idPessoa);
+    public ResponseEntity<?> adicionarVeiculoCadastrado(@PathVariable Veiculo idVeiculo, @PathVariable Pessoa idPessoa) {
+        if (pessoaService.adicionarVeiculoCadastrado(idVeiculo, idPessoa)) {
+            return ResponseEntity.ok("Pessoa vinculada a veículo com sucesso.");
+        } else {
+            return ResponseEntity.badRequest().body("Não foi possível realizar o vínculo das entidades.");
+        }
+
     }
 
 }

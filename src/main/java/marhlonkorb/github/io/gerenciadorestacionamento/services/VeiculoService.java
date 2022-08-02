@@ -83,6 +83,6 @@ public class VeiculoService {
             veiculoRepository.save(veiculo);
             return veiculo;
         }
-        return null;
+        return cadastrarVeiculo(veiculo);
     }
 }
