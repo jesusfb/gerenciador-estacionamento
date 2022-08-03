@@ -16,7 +16,8 @@ public class Vaga {
     @Id
     @Min(value = 1)
     @Max(value = 200)
-    private Integer id_vaga;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_lista;
 
     @OneToOne(targetEntity = Veiculo.class, cascade = CascadeType.ALL)
     private Veiculo veiculo;

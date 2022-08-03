@@ -32,12 +32,12 @@ public class VagaService {
      * @param vaga
      * @return vaga
      */
-    public Vaga adicionarVeiculoVaga(@PathVariable Veiculo veiculo, Vaga vaga) {
-        if (!veiculoRepository.existsById(veiculo.getId_veiculo()) &&
-                !vagaRepository.existsById(vaga.getId_vaga()) &&
+    public Vaga adicionarVeiculoVaga(Veiculo veiculo, Vaga vaga) {
+        if (!veiculoRepository.existsById(veiculo.getId_veiculo())&&
                 veiculoRepository.existsById(veiculo.getPessoa().getId_pessoa())) {
             vaga.setVeiculo(veiculo);
             veiculo.setId_veiculo(veiculo.getId_veiculo());
+            vaga.setId_lista(vaga.getId_lista());
             vagaRepository.save(vaga);
             veiculoRepository.save(veiculo);
             return vaga;

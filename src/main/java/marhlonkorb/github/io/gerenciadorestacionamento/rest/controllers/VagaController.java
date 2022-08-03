@@ -30,9 +30,8 @@ public class VagaController {
         return vagaService.listarVagas();
     }
 
-    @PostMapping("/addVeiculoVaga{veiculo}&{vaga}")
-    public Vaga adicionarVeiculoVaga(@PathVariable Veiculo veiculo,
-            @PathVariable Vaga vaga) {
+    @PostMapping("/addVeiculoVaga{veiculo}")
+    public Vaga adicionarVeiculoVaga(@PathVariable Veiculo veiculo, Vaga vaga) {
         return vagaService.adicionarVeiculoVaga(veiculo, vaga);
     }
 
