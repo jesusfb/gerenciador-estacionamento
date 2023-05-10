@@ -6,8 +6,8 @@ package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
 import java.util.List;
 import java.util.Optional;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +20,21 @@ import org.springframework.stereotype.Service;
 public class VeiculoService {
 
     @Autowired
-    private VeiculoRepository veiculoRepository;
+    private final VeiculoRepository veiculoRepository;
 
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private final PessoaRepository pessoaRepository;
+
+    public VeiculoService(VeiculoRepository veiculoRepository, PessoaRepository pessoaRepository) {
+        this.veiculoRepository = veiculoRepository;
+        this.pessoaRepository = pessoaRepository;
+    }
 
     /**
      * Cadastro de veículos caso seu id não exista
      *
      * @param veiculo
+     * @return veiculo
      */
     public Veiculo cadastrarVeiculo(Veiculo veiculo) {
         return veiculoRepository.save(veiculo);
@@ -39,7 +45,7 @@ public class VeiculoService {
      *
      * @return veiculo
      */
-    public List<Veiculo> getListaVeiculos() {
+    public List<Veiculo> getVeiculos() {
         return veiculoRepository.findAll();
     }
 
@@ -49,7 +55,7 @@ public class VeiculoService {
      * @param id
      * @return Optional<Veiculo>
      */
-    public Optional<Veiculo> getVeiculoPeloId(Integer id) {
+    public Optional<Veiculo> getById(Long id) {
         return veiculoRepository.findById(id);
     }
 
@@ -58,37 +64,33 @@ public class VeiculoService {
      *
      * @param id
      */
-    public boolean excluirVeículo(Integer id) {
-        if (isVeiculoCadastrado(id)) {
+    public void excluirVeículo(Long id) {
+        if (isExists(id)) {
             veiculoRepository.deleteById(id);
-            return true;
         }
-        return false;
     }
 
     /**
-     * Retorna true se há um id registrado de Veiculo
+     * Retorna se há um id registrado de Veiculo
      *
      * @param id
      * @return boolean
      */
-    public boolean isVeiculoCadastrado(Integer id) {
+    public boolean isExists(Long id) {
         return veiculoRepository.existsById(id);
     }
 
     /**
      * Altera o cadastro do veículo
      *
-     * @param id
      * @param veiculo
      */
-    public Veiculo alterarVeiculo(Integer id, Veiculo veiculo) {
-        if (isVeiculoCadastrado(id)) {
-            veiculo.setId_veiculo(id);
+    public void alterarVeiculo(Veiculo veiculo) {
+        if (isExists(veiculo.getId())) {
             veiculoRepository.save(veiculo);
-            return veiculo;
+            return;
         }
-        return cadastrarVeiculo(veiculo);
+        cadastrarVeiculo(veiculo);
     }
 
     /**
@@ -99,10 +101,10 @@ public class VeiculoService {
      * @return boolean
      */
     public boolean adicionarVeiculoCadastrado(Veiculo veiculo, Pessoa pessoa) {
-        if (pessoaRepository.existsById(pessoa.getId_pessoa()) &&
-                veiculoRepository.existsById(veiculo.getId_veiculo())) {
+        if (pessoaRepository.existsById(pessoa.getId()) &&
+                veiculoRepository.existsById(veiculo.getId())) {
             veiculo.setPessoa(pessoa);
-            pessoa.setId_pessoa(pessoa.getId_pessoa());
+            pessoa.setId(pessoa.getId());
             pessoaRepository.save(pessoa);
             veiculoRepository.save(veiculo);
             return true;

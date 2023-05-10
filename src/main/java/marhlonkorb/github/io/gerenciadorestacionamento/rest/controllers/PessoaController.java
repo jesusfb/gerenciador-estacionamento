@@ -7,7 +7,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.services.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,7 @@ public class PessoaController {
 
     @GetMapping("/{id}")
     public @ResponseBody
-    Optional<Pessoa> getPessoaPeloId(@PathVariable Integer id) {
+    Optional<Pessoa> getPessoaPeloId(@PathVariable Long id) {
         if (pessoaService.getpessoaPeloId(id) != null) {
             return pessoaService.getpessoaPeloId(id);
         }
@@ -47,7 +47,7 @@ public class PessoaController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<?> atualizarCadastro(@PathVariable Integer id, @RequestBody Pessoa pessoa) {
+    public ResponseEntity<?> atualizarCadastro(@PathVariable Long id, @RequestBody Pessoa pessoa) {
         if (pessoaService.alterarCadastroPessoa(id, pessoa) != null) {
             return ResponseEntity.ok("Registro alterado com sucesso.");
         }
@@ -55,7 +55,7 @@ public class PessoaController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> excluirPessoa(@PathVariable Integer id) {
+    public ResponseEntity<?> excluirPessoa(@PathVariable Long id) {
         if (pessoaService.excluirPessoa(id)) {
             return ResponseEntity.ok("Registro excluído com sucesso.");
         }

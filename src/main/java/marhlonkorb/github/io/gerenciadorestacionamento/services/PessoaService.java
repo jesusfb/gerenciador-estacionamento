@@ -3,8 +3,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.services;
 import java.util.List;
 import java.util.Optional;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +13,15 @@ import org.springframework.stereotype.Service;
 public class PessoaService {
 
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private final PessoaRepository pessoaRepository;
 
     @Autowired
-    private VeiculoRepository veiculoRepository;
+    private final VeiculoRepository veiculoRepository;
+
+    public PessoaService(PessoaRepository pessoaRepository, VeiculoRepository veiculoRepository) {
+        this.pessoaRepository = pessoaRepository;
+        this.veiculoRepository = veiculoRepository;
+    }
 
     /**
      * Adiciona novo cadastro de pessoa se ainda não existir
@@ -44,7 +48,7 @@ public class PessoaService {
      * @param id
      * @return Pessoa
      */
-    public Optional<Pessoa> getpessoaPeloId(Integer id) {
+    public Optional<Pessoa> getpessoaPeloId(Long id) {
         if (pessoaRepository.existsById(id)) {
             return pessoaRepository.findById(id);
         }
@@ -57,7 +61,7 @@ public class PessoaService {
      * @param id
      * @return boolean
      */
-    private boolean isPessoaCadastrada(Integer id) {
+    private boolean isPessoaCadastrada(Long id) {
         return pessoaRepository.existsById(id);
     }
 
@@ -67,7 +71,7 @@ public class PessoaService {
      * @param id
      * @return ResponseEntity
      */
-    public boolean excluirPessoa(Integer id) {
+    public boolean excluirPessoa(Long id) {
         Optional<Pessoa> pessoa = pessoaRepository.findById(id);
         if (pessoa.isPresent()) {
             pessoaRepository.deleteById(id);
@@ -82,9 +86,9 @@ public class PessoaService {
      * @param id
      * @param pessoa
      */
-    public Pessoa alterarCadastroPessoa(Integer id, Pessoa pessoa) {
+    public Pessoa alterarCadastroPessoa(Long id, Pessoa pessoa) {
         if (isPessoaCadastrada(id)) {
-            pessoa.setId_pessoa(id);
+            pessoa.setId(id);
             pessoaRepository.save(pessoa);
             return pessoa;
         }

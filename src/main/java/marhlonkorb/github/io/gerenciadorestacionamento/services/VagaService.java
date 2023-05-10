@@ -5,12 +5,11 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
 import java.util.List;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Vaga;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VagaRepository;
 
 /**
@@ -20,10 +19,15 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VagaR
 public class VagaService {
 
     @Autowired
-    private VagaRepository vagaRepository;
+    private final VagaRepository vagaRepository;
 
     @Autowired
-    private VeiculoRepository veiculoRepository;
+    private final VeiculoRepository veiculoRepository;
+
+    public VagaService(VagaRepository vagaRepository, VeiculoRepository veiculoRepository) {
+        this.vagaRepository = vagaRepository;
+        this.veiculoRepository = veiculoRepository;
+    }
 
     /**
      * Permite adicionar veiculo a vaga se há vaga disponível(Em desenvolvimento)
@@ -33,11 +37,11 @@ public class VagaService {
      * @return vaga
      */
     public Vaga adicionarVeiculoVaga(Veiculo veiculo, Vaga vaga) {
-        if (!veiculoRepository.existsById(veiculo.getId_veiculo())&&
-                veiculoRepository.existsById(veiculo.getPessoa().getId_pessoa())) {
+        if (!veiculoRepository.existsById(veiculo.getId())&&
+                veiculoRepository.existsById(veiculo.getPessoa().getId())) {
             vaga.setVeiculo(veiculo);
-            veiculo.setId_veiculo(veiculo.getId_veiculo());
-            vaga.setId_lista(vaga.getId_lista());
+            veiculo.setId(veiculo.getId());
+            vaga.setId(vaga.getId());
             vagaRepository.save(vaga);
             veiculoRepository.save(veiculo);
             return vaga;
@@ -50,7 +54,7 @@ public class VagaService {
      *
      * @return List Vaga
      */
-    public List<Vaga> listarVagas() {
+    public List<Vaga> getAll() {
         return vagaRepository.findAll();
     }
 

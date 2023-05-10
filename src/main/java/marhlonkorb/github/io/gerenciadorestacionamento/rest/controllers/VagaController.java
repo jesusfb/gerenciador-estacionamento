@@ -5,8 +5,8 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 
 import java.util.List;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Vaga;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.services.VagaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +27,7 @@ public class VagaController {
 
     @GetMapping
     public List listarVagas() {
-        return vagaService.listarVagas();
+        return vagaService.getAll();
     }
 
     @PostMapping("/addVeiculoVaga{veiculo}")

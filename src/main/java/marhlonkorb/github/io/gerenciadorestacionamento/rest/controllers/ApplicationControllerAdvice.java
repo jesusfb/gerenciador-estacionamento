@@ -1,6 +1,7 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.rest.exception.ApiErrors;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -17,9 +18,8 @@ import java.util.stream.Collectors;
 public class ApplicationControllerAdvice {
     
     /**
-     * Erro será captado através da annotation @Valid e armazenado em exception, onde será armazenado em uma lista de erros dentro em um
-     * objeto bindResult
-     * @param exception
+     * Erro será captado através da annotation @Valid e armazenado em exception, onde será armazenado
+     * em uma lista de erros dentro em um objeto bindResult
      * @return new ApiErrors
      */
      @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -28,19 +28,18 @@ public class ApplicationControllerAdvice {
         BindingResult bindingResult = exception.getBindingResult();
         List<String> messages = bindingResult.getAllErrors().
                 stream().
-                map(objectError -> objectError.getDefaultMessage()).
+                map(DefaultMessageSourceResolvable::getDefaultMessage).
                 collect(Collectors.toList());
         return new ApiErrors(messages);
     }
     
     /**
      * Tratar as exceções
-     * @param exception
      * @return new ResponseEntity
      */
     
     @ExceptionHandler(ResponseStatusException.class)
-    public ResponseEntity handleResponseStatusException(ResponseStatusException exception){
+    public ResponseEntity<?> handleResponseStatusException(ResponseStatusException exception){
         String mensagemErro = exception.getMessage();
         HttpStatus codigoStatus = exception.getStatus();
         ApiErrors apiErrors = new ApiErrors(mensagemErro);

@@ -7,8 +7,8 @@ package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Pessoa;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.Veiculo;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.services.VeiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,12 +36,12 @@ public class VeiculoController {
 
     @GetMapping
     public List<Veiculo> getListaVeiculos() {
-        return veiculoService.getListaVeiculos();
+        return veiculoService.getVeiculos();
     }
 
     @GetMapping("{id}")
-    public Optional<Veiculo> getVeiculopeloId(@PathVariable Integer id) {
-        return veiculoService.getVeiculoPeloId(id);
+    public Optional<Veiculo> getById(@PathVariable Long id) {
+        return veiculoService.getById(id);
     }
 
     @PostMapping
@@ -52,18 +52,19 @@ public class VeiculoController {
     }
 
     @PutMapping("/{id}")
-    public @ResponseBody
-    Veiculo atualizarVeiculo(@PathVariable Integer id, @RequestBody @Valid Veiculo veiculo) {
-        Optional<Veiculo> veiculoVerificado = veiculoService.getVeiculoPeloId(id);
-        if (veiculoVerificado.isPresent()) {
-            return veiculoService.alterarVeiculo(id, veiculo);
+    public ResponseEntity<Veiculo> atualizarVeiculo(@PathVariable Long id, @RequestBody @Valid Veiculo veiculo) {
+        Optional<Veiculo> veiculoEncontrado = veiculoService.getById(id);
+        if (veiculoEncontrado.isPresent()) {
+            veiculoService.alterarVeiculo(veiculo);
+            return ResponseEntity.ok(veiculo);
         }
-        return null;
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> excluirVeiculo(@PathVariable Integer id) {
-        if (veiculoService.excluirVeículo(id)) {
+    public ResponseEntity<?> excluirVeiculo(@PathVariable Long id) {
+        if (veiculoService.isExists(id)) {
+            veiculoService.excluirVeículo(id);
             return ResponseEntity.ok("Registro excluído com sucesso.");
         }
         return ResponseEntity.notFound().build();
