@@ -18,48 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * Controla as requisições da entidade Pessoa
  */
 @RestController
-@RequestMapping("/api/pessoas")
-public class PessoaController {
-
-    @Autowired
-    private PessoaService pessoaService;
-
-    @GetMapping("/{id}")
-    public @ResponseBody
-    Optional<Pessoa> getPessoaPeloId(@PathVariable Long id) {
-        if (pessoaService.getpessoaPeloId(id) != null) {
-            return pessoaService.getpessoaPeloId(id);
-        }
-        return null;
-    }
-
-    @GetMapping
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Pessoa> getListaPessoa() {
-        return pessoaService.getlistpessoa();
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public @ResponseBody
-    Pessoa cadastrarPessoa(@RequestBody @Valid Pessoa pessoa) {
-        return pessoaService.cadastrarPessoa(pessoa);
-    }
-
-    @PutMapping("{id}")
-    public ResponseEntity<?> atualizarCadastro(@PathVariable Long id, @RequestBody Pessoa pessoa) {
-        if (pessoaService.alterarCadastroPessoa(id, pessoa) != null) {
-            return ResponseEntity.ok("Registro alterado com sucesso.");
-        }
-        return ResponseEntity.accepted().body("Registro não encontrado.");
-    }
-
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> excluirPessoa(@PathVariable Long id) {
-        if (pessoaService.excluirPessoa(id)) {
-            return ResponseEntity.ok("Registro excluído com sucesso.");
-        }
-        return ResponseEntity.accepted().body("Registro não encontrado.");
-    }
+@RequestMapping("pessoa")
+public class PessoaController extends EntityController<Pessoa, Long>{
 
 }

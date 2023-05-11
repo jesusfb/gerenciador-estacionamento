@@ -28,47 +28,11 @@ import org.springframework.web.bind.annotation.RestController;
  * Classe responsável por tratar as requisições Http para a classe Veiculo
  */
 @RestController
-@RequestMapping("/api/veiculos")
-public class VeiculoController {
+@RequestMapping("veiculo")
+public class VeiculoController extends EntityController<Veiculo, Long>{
 
     @Autowired
     VeiculoService veiculoService;
-
-    @GetMapping
-    public List<Veiculo> getListaVeiculos() {
-        return veiculoService.getVeiculos();
-    }
-
-    @GetMapping("{id}")
-    public Optional<Veiculo> getById(@PathVariable Long id) {
-        return veiculoService.getById(id);
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public @ResponseBody
-    Veiculo cadastrarVeiculo(@RequestBody @Valid Veiculo veiculo) {
-        return veiculoService.cadastrarVeiculo(veiculo);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Veiculo> atualizarVeiculo(@PathVariable Long id, @RequestBody @Valid Veiculo veiculo) {
-        Optional<Veiculo> veiculoEncontrado = veiculoService.getById(id);
-        if (veiculoEncontrado.isPresent()) {
-            veiculoService.alterarVeiculo(veiculo);
-            return ResponseEntity.ok(veiculo);
-        }
-        return ResponseEntity.noContent().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> excluirVeiculo(@PathVariable Long id) {
-        if (veiculoService.isExists(id)) {
-            veiculoService.excluirVeículo(id);
-            return ResponseEntity.ok("Registro excluído com sucesso.");
-        }
-        return ResponseEntity.notFound().build();
-    }
 
     /**
      * Executa a ação de adicionar o id de Pessoa a tabela de Veiculo

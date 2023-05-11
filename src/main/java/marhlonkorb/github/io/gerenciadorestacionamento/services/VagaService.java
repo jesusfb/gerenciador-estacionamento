@@ -40,8 +40,8 @@ public class VagaService {
         if (!veiculoRepository.existsById(veiculo.getId())&&
                 veiculoRepository.existsById(veiculo.getPessoa().getId())) {
             vaga.setVeiculo(veiculo);
-            veiculo.setId(veiculo.getId());
-            vaga.setId(vaga.getId());
+//            veiculo.setId(veiculo.getId());
+//            vaga.setId(vaga.getId());
             vagaRepository.save(vaga);
             veiculoRepository.save(veiculo);
             return vaga;

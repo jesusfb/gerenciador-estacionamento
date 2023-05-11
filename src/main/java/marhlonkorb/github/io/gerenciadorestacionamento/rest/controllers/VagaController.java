@@ -5,6 +5,8 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 
 import java.util.List;
+
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.services.VagaService;
@@ -19,16 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
  * Classe responsável por controlar o registro de veiculos no estacionamento
  */
 @RestController
-@RequestMapping("/api/vagas")
-public class VagaController {
+@RequestMapping("vaga")
+public class VagaController extends EntityController<Vaga, Integer>{
 
     @Autowired
     private VagaService vagaService;
-
-    @GetMapping
-    public List listarVagas() {
-        return vagaService.getAll();
-    }
 
     @PostMapping("/addVeiculoVaga{veiculo}")
     public Vaga adicionarVeiculoVaga(@PathVariable Veiculo veiculo, Vaga vaga) {

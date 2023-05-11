@@ -2,12 +2,16 @@ package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstract_entity.Entidade;
+import org.hibernate.validator.constraints.br.CPF;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "pessoa")
@@ -16,7 +20,8 @@ public class Pessoa extends Entidade {
     @NotBlank(message = "Nome é obrigatório")
     private String nome;
 
-    @NotBlank(message = "CPF é obrigatório")
+    @CPF(message = "CPF inválido")
+    @NotNull(message = "CPF é obrigatório")
     private String cpf;
 
     @NotBlank(message = "Número do apartamento é obrigatório")

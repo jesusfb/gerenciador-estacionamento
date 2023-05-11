@@ -1,23 +1,34 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga;
 
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.enums.Status;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 
 @Entity
 public class Vaga {
 
     @Id
-    @Min(value = 1)
-    @Max(value = 200)
+    @Max(value = 199)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne(targetEntity = Veiculo.class)
     @JoinColumn(name = "id_veiculo")
     private Veiculo veiculo;
+
+    @Column
+    @Enumerated(EnumType.ORDINAL)
+    private Status status;
+
+    public Vaga() {
+    }
+
+    public Vaga(Status status) {
+        this.status = Status.ATIVO;
+    }
 
     public Integer getId() {
         return id;
@@ -33,5 +44,13 @@ public class Vaga {
 
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
