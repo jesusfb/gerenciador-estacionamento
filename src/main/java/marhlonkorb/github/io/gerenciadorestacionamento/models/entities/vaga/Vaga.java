@@ -2,12 +2,11 @@ package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.enums.Status;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
-import org.springframework.beans.factory.annotation.Value;
-
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 
-@Entity
+
+@Entity(name = VagaDbConstantes.TABLE_NAME)
 public class Vaga {
 
     @Id
@@ -15,8 +14,8 @@ public class Vaga {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(targetEntity = Veiculo.class)
-    @JoinColumn(name = "id_veiculo")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = VagaDbConstantes.VEICULO_ID)
     private Veiculo veiculo;
 
     @Column

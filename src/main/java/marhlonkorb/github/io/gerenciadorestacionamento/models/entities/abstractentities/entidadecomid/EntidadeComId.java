@@ -1,4 +1,4 @@
-package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstract_entity;
+package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 @MappedSuperclass
-public abstract class Entidade implements Serializable {
+public abstract class EntidadeComId implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

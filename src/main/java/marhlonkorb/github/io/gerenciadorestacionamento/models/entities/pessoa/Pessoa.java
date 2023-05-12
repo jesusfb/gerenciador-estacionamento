@@ -1,21 +1,19 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstract_entity.Entidade;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
 import org.hibernate.validator.constraints.br.CPF;
-
-import java.io.Serializable;
 import java.time.LocalDate;
-
-
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 @Entity
-@Table(name = "pessoa")
-public class Pessoa extends Entidade {
+@Table(name = PessoaDbConstantes.TABLE_NAME)
+public class Pessoa extends EntidadeComId {
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = PessoaDbConstantes.ID_USUARIO)
+    private Usuario usuario;
 
     @NotBlank(message = "Nome é obrigatório")
     private String nome;
@@ -25,13 +23,24 @@ public class Pessoa extends Entidade {
     private String cpf;
 
     @NotBlank(message = "Número do apartamento é obrigatório")
-    private String apto;
+    private String apartamento;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate data_nascimento;
+    @JsonFormat(pattern = PessoaDbConstantes.DATA_NASCIMENTO_PATTERN)
+    private LocalDate dataNascimento;
 
     @NotBlank(message = "Telefone é obrigatório")
     private String telefone;
+
+    public Pessoa() {
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public String getNome() {
         return nome;
@@ -49,20 +58,20 @@ public class Pessoa extends Entidade {
         this.cpf = cpf;
     }
 
-    public String getApto() {
-        return apto;
+    public String getApartamento() {
+        return apartamento;
     }
 
-    public void setApto(String apto) {
-        this.apto = apto;
+    public void setApartamento(String apartamento) {
+        this.apartamento = apartamento;
     }
 
-    public LocalDate getData_nascimento() {
-        return data_nascimento;
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setData_nascimento(LocalDate data_nascimento) {
-        this.data_nascimento = data_nascimento;
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getTelefone() {

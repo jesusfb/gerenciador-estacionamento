@@ -5,18 +5,21 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstract_entity.Entidade;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
 
-@Entity
-public class Veiculo extends Entidade {
+@Entity(name = VeiculoDbConstantes.TABLE_NAME)
+public class Veiculo extends EntidadeComId {
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = VeiculoDbConstantes.PESSOA_ID)
+    private Pessoa pessoa;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private Vaga vaga;
 
     @NotBlank(message = "A placa do veículo deve ser informada")
     private String placa;
-
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Pessoa.class)
-    @JoinColumn(name = "id_pessoa")
-    private Pessoa pessoa;
 
     @NotBlank(message = "A marca do veículo é obrigatória informar")
     private String marca;
@@ -24,16 +27,8 @@ public class Veiculo extends Entidade {
     @NotBlank(message = "O modelo do veículo é obrigatório informar")
     private String modelo;
 
-    @JsonFormat(pattern = "yyyy")
+    @JsonFormat(pattern = VeiculoDbConstantes.ANO_PATTERN)
     private Date ano;
-
-    public String getPlaca() {
-        return placa;
-    }
-
-    public void setPlaca(String placa) {
-        this.placa = placa;
-    }
 
     public Pessoa getPessoa() {
         return pessoa;
@@ -41,6 +36,22 @@ public class Veiculo extends Entidade {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    public Vaga getVaga() {
+        return vaga;
+    }
+
+    public void setVaga(Vaga vaga) {
+        this.vaga = vaga;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
 
     public String getMarca() {
