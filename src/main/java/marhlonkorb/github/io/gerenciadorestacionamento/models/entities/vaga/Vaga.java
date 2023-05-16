@@ -1,6 +1,6 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.enums.Status;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import javax.persistence.*;
 import javax.validation.constraints.Max;

@@ -1,7 +1,7 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.enums.Role;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Role;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

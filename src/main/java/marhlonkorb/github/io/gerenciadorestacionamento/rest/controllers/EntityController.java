@@ -1,15 +1,16 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 
-import org.apache.catalina.core.ApplicationContext;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityMapper;
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
+
+import static java.util.stream.Collectors.toMap;
 
 @RestController
 public abstract class EntityController<T, ID> {
@@ -43,7 +44,7 @@ public abstract class EntityController<T, ID> {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable ID id) {
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Não foi possível encontrar a entidade com o ID ".concat(id.toString()));
+            throw new EntityNotFoundException("Não foi possível excluir a entidade com o ID ".concat(id.toString()).concat(". Verifique."));
         }
         repository.deleteById(id);
     }
