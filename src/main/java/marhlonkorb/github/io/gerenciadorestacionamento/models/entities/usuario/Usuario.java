@@ -1,24 +1,35 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario;
 
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Role;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
 @Entity
 @Table(name = UsuarioDbConstantes.TABLE_NAME)
 public class Usuario extends EntidadeComId {
 
-    @Column
+    @Column(nullable = false)
     private String email;
     @Column
     private String senha;
 
     @Column
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    public Usuario() {
+    }
+
+    public Usuario(String email) {
+        this.email = email;
+        this.role = Role.UM;
+        this.status = Status.ATIVO;
+    }
 
     public String getEmail() {
         return email;
@@ -42,5 +53,13 @@ public class Usuario extends EntidadeComId {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

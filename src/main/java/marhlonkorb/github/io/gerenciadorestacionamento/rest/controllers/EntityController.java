@@ -4,6 +4,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityMapper
 import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -24,6 +25,7 @@ public abstract class EntityController<T, ID> {
     }
 
     @GetMapping("/{id}")
+    @Transactional(rollbackFor = Exception.class)
     public T getById(@PathVariable ID id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Não foi possível encontrar a entidade com o ID " + id));
     }

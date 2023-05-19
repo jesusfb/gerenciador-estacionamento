@@ -1,40 +1,33 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 
 
 @Entity(name = VagaDbConstantes.TABLE_NAME)
-public class Vaga {
+public class Vaga extends EntidadeComId {
 
-    @Id
-    @Max(value = 199)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = VagaDbConstantes.VAGA_ID)
+    @Max(value = 200)
+    private Integer idVaga;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = VagaDbConstantes.VEICULO_ID)
     private Veiculo veiculo;
 
     @Column
-    @Enumerated(EnumType.ORDINAL)
-    private Status status;
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.ATIVO;
 
-    public Vaga() {
+    public Integer getIdVaga() {
+        return idVaga;
     }
 
-    public Vaga(Status status) {
-        this.status = Status.ATIVO;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdVaga(Integer idVaga) {
+        this.idVaga = idVaga;
     }
 
     public Veiculo getVeiculo() {

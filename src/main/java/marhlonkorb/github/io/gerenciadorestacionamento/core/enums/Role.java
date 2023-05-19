@@ -1,5 +1,7 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.core.enums;
 
 public enum Role {
-    AE, UP
+    // AE = Admin Empresa
+    // UM = Usuario Morador
+    AE, UM
 }

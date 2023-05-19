@@ -4,13 +4,11 @@
  */
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
-import java.util.List;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VagaRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VagaRepository;
 
 /**
  * Classe responsável por implementar as regras de negócio do cadastro de veículos no estacionamento
@@ -30,32 +28,20 @@ public class VagaService {
     }
 
     /**
-     * Permite adicionar veiculo a vaga se há vaga disponível(Em desenvolvimento)
+     * Permite adicionar veiculo a vaga se há vaga disponível(Em teste)
      *
-     * @param veiculo
-     * @param vaga
+     * @param idVeiculo
+     * @param idVaga
      * @return vaga
      */
-    public Vaga adicionarVeiculoVaga(Veiculo veiculo, Vaga vaga) {
-        if (!veiculoRepository.existsById(veiculo.getId())&&
-                veiculoRepository.existsById(veiculo.getPessoa().getId())) {
-            vaga.setVeiculo(veiculo);
-//            veiculo.setId(veiculo.getId());
-//            vaga.setId(vaga.getId());
-            vagaRepository.save(vaga);
-            veiculoRepository.save(veiculo);
-            return vaga;
+    public Vaga adicionarVeiculoVaga(Long idVeiculo, Long idVaga) {
+        final Vaga vagaEncontrada = vagaRepository.findById(idVaga).orElse(new Vaga());
+        final var veiculoEncontrado = veiculoRepository.findById(idVeiculo).get();
+        if (vagaEncontrada.getVeiculo() == null && veiculoEncontrado.getVaga() == null && veiculoEncontrado.getPessoa() != null) {
+            vagaEncontrada.setVeiculo(veiculoEncontrado);
+            veiculoRepository.save(veiculoEncontrado);
         }
-        return vaga;
+        vagaRepository.save(vagaEncontrada);
+        return vagaEncontrada;
     }
-
-    /**
-     * Lista as vagas totais no estacionamento
-     *
-     * @return List Vaga
-     */
-    public List<Vaga> getAll() {
-        return vagaRepository.findAll();
-    }
-
 }

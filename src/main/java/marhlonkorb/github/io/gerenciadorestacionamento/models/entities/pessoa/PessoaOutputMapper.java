@@ -3,14 +3,11 @@ package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa;
 import java.time.LocalDate;
 
 public class PessoaOutputMapper {
-
     private String nome;
     private String cpf;
     private String apartamento;
-
     private LocalDate dataNascimento;
     private String telefone;
-
     public String getNome() {
         return nome;
     }

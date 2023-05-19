@@ -36,11 +36,10 @@ public class ApplicationControllerAdvice {
     }
 
     /**
-     * Tratar as exceções
+     * Trata as exceções
      *
      * @return new ResponseEntity
      */
-
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<?> handleResponseStatusException(ResponseStatusException exception) {
         String mensagemErro = exception.getMessage();

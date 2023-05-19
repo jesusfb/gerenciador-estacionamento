@@ -12,10 +12,11 @@ import javax.validation.constraints.NotNull;
 @Table(name = PessoaDbConstantes.TABLE_NAME)
 public class Pessoa extends EntidadeComId {
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = PessoaDbConstantes.ID_USUARIO)
+    @JoinColumn(name = PessoaDbConstantes.ID_USUARIO, nullable = false)
     private Usuario usuario;
 
-    @NotBlank(message = "Nome é obrigatório")
+    @NotNull(message = "Nome é obrigatório")
+    @Column(nullable = false)
     private String nome;
 
     @CPF(message = "CPF inválido")
