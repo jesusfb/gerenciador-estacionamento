@@ -1,10 +1,12 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
@@ -15,6 +17,7 @@ public class Veiculo extends EntidadeComId {
     @JoinColumn(name = VeiculoDbConstantes.PESSOA_ID)
     private Pessoa pessoa;
 
+    @JsonBackReference
     @OneToOne(fetch = FetchType.EAGER)
     private Vaga vaga;
 

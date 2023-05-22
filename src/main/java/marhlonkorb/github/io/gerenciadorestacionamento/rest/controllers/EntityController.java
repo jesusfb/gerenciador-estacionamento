@@ -1,9 +1,10 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityMapper;
-import org.apache.catalina.mapper.Mapper;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ import static java.util.stream.Collectors.toMap;
 public abstract class EntityController<T, ID> {
 
     @Autowired
-    private CrudRepository<T, ID> repository;
+    private JpaRepository<T, ID> repository;
 
     @GetMapping
     public List<T> getAll() {
@@ -28,6 +29,11 @@ public abstract class EntityController<T, ID> {
     @Transactional(rollbackFor = Exception.class)
     public T getById(@PathVariable ID id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Não foi possível encontrar a entidade com o ID " + id));
+    }
+
+    @GetMapping("/")
+    public Page<EntidadeComId> listEntities(Pageable pageable) {
+        return (Page<EntidadeComId>) repository.findAll(pageable);
     }
 
     @PostMapping

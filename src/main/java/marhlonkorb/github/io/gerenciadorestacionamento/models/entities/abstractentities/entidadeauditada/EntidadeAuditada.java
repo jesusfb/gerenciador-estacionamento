@@ -16,8 +16,20 @@ public abstract class EntidadeAuditada extends EntidadeComId {
     private String alteradoPor;
     @Column
     @JsonFormat(pattern = EntidadeAuditadaDbConstantes.DATE_PATTERN)
-    private LocalDate data_criacao;
+    private LocalDate dataCriacao;
     @Column
     @JsonFormat(pattern = EntidadeAuditadaDbConstantes.DATE_PATTERN)
-    private LocalDate data_alteracao;
+    private LocalDate dataAlteracao;
+
+    public EntidadeAuditada() {
+        saveLocalDate();
+    }
+
+    private void saveLocalDate(){
+        if(this.dataCriacao == null) {
+            this.dataCriacao = LocalDate.now();
+        } else {
+            this.dataAlteracao = LocalDate.now();
+        }
+    }
 }

@@ -1,13 +1,14 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Role;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadeauditada.EntidadeAuditada;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = UsuarioDbConstantes.TABLE_NAME)
-public class Usuario extends EntidadeComId {
+public class Usuario extends EntidadeAuditada {
 
     @Column(nullable = false)
     private String email;
@@ -23,12 +24,13 @@ public class Usuario extends EntidadeComId {
     private Status status;
 
     public Usuario() {
+        this.status = Status.A;
     }
 
     public Usuario(String email) {
         this.email = email;
         this.role = Role.UM;
-        this.status = Status.ATIVO;
+        this.status = Status.A;
     }
 
     public String getEmail() {
