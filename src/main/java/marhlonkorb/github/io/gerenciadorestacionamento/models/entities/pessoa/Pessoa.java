@@ -12,7 +12,8 @@ import javax.validation.constraints.NotNull;
 @Table(name = PessoaDbConstantes.TABLE_NAME)
 public class Pessoa extends EntidadeComId {
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = PessoaDbConstantes.ID_USUARIO, nullable = false)
+//    @JoinColumn(name = PessoaDbConstantes.ID_USUARIO, nullable = false)
+    @JoinColumn(name = PessoaDbConstantes.ID_USUARIO)
     private Usuario usuario;
 
     @NotNull(message = "Nome é obrigatório")
@@ -26,6 +27,7 @@ public class Pessoa extends EntidadeComId {
     @NotBlank(message = "Número do apartamento é obrigatório")
     private String apartamento;
 
+    @Column(name = PessoaDbConstantes.DATA_NASCIMENTO)
     @JsonFormat(pattern = PessoaDbConstantes.DATA_NASCIMENTO_PATTERN)
     private LocalDate dataNascimento;
 

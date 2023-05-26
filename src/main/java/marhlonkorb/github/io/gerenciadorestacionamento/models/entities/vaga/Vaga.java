@@ -30,6 +30,10 @@ public class Vaga extends EntidadeAuditada {
         return numeroVaga;
     }
 
+    public void setNumeroVaga(Integer numeroVaga) {
+        this.numeroVaga = numeroVaga;
+    }
+
     public Veiculo getVeiculo() {
         return veiculo;
     }

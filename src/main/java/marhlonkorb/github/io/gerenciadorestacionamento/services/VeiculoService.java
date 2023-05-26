@@ -6,8 +6,11 @@ package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
 import java.util.List;
 import java.util.Optional;
+
+import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoOutputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +20,7 @@ import org.springframework.stereotype.Service;
  * Responsável pelas regras de negócio do cadastro de veículos
  */
 @Service
-public class VeiculoService {
+public class VeiculoService extends AbstractEntityService<Veiculo, Long, VeiculoOutputMapper> {
 
     @Autowired
     private final VeiculoRepository veiculoRepository;
@@ -28,69 +31,6 @@ public class VeiculoService {
     public VeiculoService(VeiculoRepository veiculoRepository, PessoaRepository pessoaRepository) {
         this.veiculoRepository = veiculoRepository;
         this.pessoaRepository = pessoaRepository;
-    }
-
-    /**
-     * Cadastro de veículos caso seu id não exista
-     *
-     * @param veiculo
-     * @return veiculo
-     */
-    public Veiculo cadastrarVeiculo(Veiculo veiculo) {
-        return veiculoRepository.save(veiculo);
-    }
-
-    /**
-     * Retorna lista de veículos cadastrados
-     *
-     * @return veiculo
-     */
-    public List<Veiculo> getVeiculos() {
-        return veiculoRepository.findAll();
-    }
-
-    /**
-     * Retorna um objeto Veiculo caso exista um cadastro
-     *
-     * @param id
-     * @return Optional<Veiculo>
-     */
-    public Optional<Veiculo> getById(Long id) {
-        return veiculoRepository.findById(id);
-    }
-
-    /**
-     * Exclui registro caso exista um id registrado no banco
-     *
-     * @param id
-     */
-    public void excluirVeículo(Long id) {
-        if (isExists(id)) {
-            veiculoRepository.deleteById(id);
-        }
-    }
-
-    /**
-     * Retorna se há um id registrado de Veiculo
-     *
-     * @param id
-     * @return boolean
-     */
-    public boolean isExists(Long id) {
-        return veiculoRepository.existsById(id);
-    }
-
-    /**
-     * Altera o cadastro do veículo
-     *
-     * @param veiculo
-     */
-    public void alterarVeiculo(Veiculo veiculo) {
-        if (isExists(veiculo.getId())) {
-            veiculoRepository.save(veiculo);
-            return;
-        }
-        cadastrarVeiculo(veiculo);
     }
 
     /**
@@ -110,5 +50,15 @@ public class VeiculoService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public VeiculoOutputMapper convertToDto(Object input) {
+        return null;
+    }
+
+    @Override
+    public Veiculo convertToEntity(Object o) {
+        return null;
     }
 }

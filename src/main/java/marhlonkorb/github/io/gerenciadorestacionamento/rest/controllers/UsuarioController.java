@@ -4,14 +4,9 @@
  */
 package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityController;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
-import marhlonkorb.github.io.gerenciadorestacionamento.services.VeiculoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.UsuarioOutputMapper;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("usuario")
-public class UsuarioController extends EntityController<Usuario, Long>{
+public class UsuarioController extends AbstractEntityController<Usuario, Long, UsuarioOutputMapper> {
 
 }

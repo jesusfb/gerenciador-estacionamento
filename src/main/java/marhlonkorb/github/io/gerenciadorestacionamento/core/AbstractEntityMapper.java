@@ -1,6 +1,11 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.core;
 
-public abstract class AbstractEntityMapper<Entity, Input, Output>  {
-    public abstract Output doWrap(Entity input);
-    public abstract Entity doUnwrap(Input input);
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
+import org.springframework.stereotype.Component;
+
+@Component
+public abstract class AbstractEntityMapper<T, Input, DtoType> {
+    public abstract DtoType convertToDto(T input);
+    public abstract EntidadeComId convertToEntity(Input input);
+
 }
