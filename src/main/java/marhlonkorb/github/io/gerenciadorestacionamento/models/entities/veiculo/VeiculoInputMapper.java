@@ -1,6 +1,6 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo;
 /**
- * Output da entidade Veiculo
+ * Input da entidade Veiculo
  */
-public class VeiculoOutputMapper {
+public class VeiculoInputMapper {
 }

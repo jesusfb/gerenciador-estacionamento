@@ -9,7 +9,9 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.V
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
-
+/**
+ * Entidade Vaga
+ */
 @Entity(name = VagaDbConstantes.TABLE_NAME)
 public class Vaga extends EntidadeAuditada {
 

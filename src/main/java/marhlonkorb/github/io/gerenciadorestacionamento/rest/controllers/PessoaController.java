@@ -6,6 +6,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityController;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.PessoaInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.PessoaOutputMapper;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,6 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("pessoa")
-public class PessoaController extends AbstractEntityController<Pessoa, Long, PessoaOutputMapper> {
+public class PessoaController extends AbstractEntityController<Pessoa, Long, PessoaInputMapper, PessoaOutputMapper> {
 
 }

@@ -10,6 +10,7 @@ import java.util.Optional;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoOutputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
@@ -17,10 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Responsável pelas regras de negócio do cadastro de veículos
+ * Service da entidade Veiculo
  */
 @Service
-public class VeiculoService extends AbstractEntityService<Veiculo, Long, VeiculoOutputMapper> {
+public class VeiculoService extends AbstractEntityService<Veiculo, Long, VeiculoInputMapper, VeiculoOutputMapper> {
 
     @Autowired
     private final VeiculoRepository veiculoRepository;

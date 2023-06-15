@@ -8,10 +8,14 @@ import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+/**
+ * Entidade Pessoa
+ */
 @Entity
 @Table(name = PessoaDbConstantes.TABLE_NAME)
 public class Pessoa extends EntidadeComId {
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = PessoaDbConstantes.ID_USUARIO, nullable = false)
     @JoinColumn(name = PessoaDbConstantes.ID_USUARIO)
     private Usuario usuario;

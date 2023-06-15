@@ -1,13 +1,23 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa;
 
 import java.time.LocalDate;
-
+/**
+ * Output da entidade Pessoa
+ */
 public class PessoaOutputMapper {
+    private Long idUsuario;
     private String nome;
     private String cpf;
     private String apartamento;
     private LocalDate dataNascimento;
     private String telefone;
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
     public String getNome() {
         return nome;
     }

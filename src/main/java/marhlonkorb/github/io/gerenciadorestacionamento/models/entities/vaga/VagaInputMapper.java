@@ -1,6 +1,6 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga;
 /**
- * Output da entidade Vaga
+ * Input da entidade Vaga
  */
-public class VagaOutputMapper {
+public class VagaInputMapper {
 }

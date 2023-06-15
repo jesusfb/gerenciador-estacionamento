@@ -1,7 +1,5 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.core;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,13 +13,13 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
-public abstract class AbstractEntityController<T, ID, DtoType> {
+public abstract class AbstractEntityController<T, ID, Input, DtoType> {
 
     @Autowired
     private JpaRepository<T, ID> repository;
 
     @Autowired
-    List<AbstractEntityService<T, ID, DtoType>> entityServices;
+    List<AbstractEntityService<T, ID, Input, DtoType>> entityServices;
 
     @GetMapping
     public List<Object> getAll() {
@@ -33,7 +31,7 @@ public abstract class AbstractEntityController<T, ID, DtoType> {
     @GetMapping("/{id}")
     @Transactional(rollbackFor = Exception.class)
     public DtoType getById(@PathVariable ID id) {
-        return entityServices.stream()
+        return (DtoType) entityServices.stream()
                 .map(service -> service.getById(id))
                 .filter(Objects::nonNull)
                 .findFirst()
@@ -41,26 +39,26 @@ public abstract class AbstractEntityController<T, ID, DtoType> {
     }
 
     @GetMapping("/")
-    public Page<EntidadeComId> listEntities(Pageable pageable) {
-        return (Page<EntidadeComId>) repository.findAll(pageable);
+    public Page<DtoType> listEntities(Pageable pageable) {
+        return (Page<DtoType>) repository.findAll(pageable);
     }
 
     @PostMapping
-    public DtoType create(@RequestBody T entity) {
-        return entityServices.stream()
-                .map(service -> service.create(entity))
+    public DtoType create(@RequestBody Input input) {
+        return (DtoType) entityServices.stream()
+                .map(service -> service.create(input))
                 .filter(Objects::nonNull)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Falha ao criar a entidade"));
     }
 
     @PutMapping("/{id}")
-    public DtoType update(@PathVariable ID id, @RequestBody @Valid T entity) {
+    public DtoType update(@PathVariable ID id, @RequestBody @Valid Input input) {
         if (!repository.existsById(id)) {
             throw new EntityNotFoundException("Não foi possível encontrar a entidade com o ID " + id);
         }
-        return entityServices.stream()
-                .map(service -> service.update(id, entity))
+        return (DtoType) entityServices.stream()
+                .map(service -> service.update(id, input))
                 .filter(Objects::nonNull)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Falha ao atualizar a entidade"));

@@ -6,6 +6,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityController;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaOutputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.services.VagaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("vaga")
-public class VagaController extends AbstractEntityController<Vaga, Long, VagaOutputMapper> {
+public class VagaController extends AbstractEntityController<Vaga, Long, VagaInputMapper, VagaOutputMapper> {
 
     @Autowired
     private VagaService vagaService;

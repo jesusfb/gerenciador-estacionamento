@@ -7,6 +7,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityController;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoOutputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.services.VeiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("veiculo")
-public class VeiculoController extends AbstractEntityController<Veiculo, Long, VeiculoOutputMapper> {
+public class VeiculoController extends AbstractEntityController<Veiculo, Long, VeiculoInputMapper, VeiculoOutputMapper> {
 
     @Autowired
     VeiculoService veiculoService;

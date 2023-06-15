@@ -7,31 +7,31 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.Pesso
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.UsuarioRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PessoaMapper extends AbstractEntityMapper<Pessoa, PessoaInputMapper, PessoaOutputMapper> {
-
     @Autowired
     private PessoaRepository pessoaRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
-
     @Autowired
     private ModelMapper modelMapper;
-    
+
     @Override
     public PessoaOutputMapper convertToDto(Pessoa input) {
-        final PessoaOutputMapper outputMapper = new PessoaOutputMapper();
-        return modelMapper.map(outputMapper, PessoaOutputMapper.class) ;
+        return modelMapper.map(input, PessoaOutputMapper.class);
     }
 
     @Override
     public Pessoa convertToEntity(PessoaInputMapper input) {
-        final Pessoa pessoaEncontrada = pessoaRepository.findById(input.getId()).orElse(new Pessoa());
+        Pessoa pessoaEncontrada = input.getId() != null ? pessoaRepository.findById(input.getId()).get() : new Pessoa();
         final Usuario usuarioEncontrado = usuarioRepository.findById(input.getIdUsuario()).get();
-        pessoaEncontrada.setId(input.getId());
         pessoaEncontrada.setUsuario(usuarioEncontrado);
+        pessoaEncontrada.setNome(input.getNome());
         pessoaEncontrada.setCpf(input.getCpf());
         pessoaEncontrada.setApartamento(input.getApartamento());
+        System.out.println(DataConverter.converteStringParaData(input.getDataNascimento()));
         pessoaEncontrada.setDataNascimento(DataConverter.converteStringParaData(input.getDataNascimento()));
         pessoaEncontrada.setTelefone(input.getTelefone());
         return pessoaEncontrada;

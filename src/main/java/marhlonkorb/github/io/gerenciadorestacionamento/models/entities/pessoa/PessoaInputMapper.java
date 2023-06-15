@@ -1,9 +1,11 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa;
 
+/**
+ * Input da entidade Pessoa
+ */
 public class PessoaInputMapper {
 
     private Long id;
-
     private Long idUsuario;
     private String nome;
     private String cpf;

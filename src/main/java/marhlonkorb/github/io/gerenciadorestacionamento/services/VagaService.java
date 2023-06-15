@@ -6,6 +6,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaOutputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VagaRepository;
@@ -14,10 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Classe responsável por implementar as regras de negócio do cadastro de veículos no estacionamento
+ * Service da entidade Vaga
  */
 @Service
-public class VagaService extends AbstractEntityService<Vaga, Long, VagaOutputMapper> {
+public class VagaService extends AbstractEntityService<Vaga, Long, VagaInputMapper, VagaOutputMapper> {
 
     @Autowired
     private final VagaRepository vagaRepository;

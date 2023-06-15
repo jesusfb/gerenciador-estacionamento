@@ -7,22 +7,28 @@ import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityServic
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.PessoaInputMapper;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.PessoaMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.PessoaOutputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Entity;
+
+/**
+ * Service da entidade Pessoa
+ */
 @Service
-public class PessoaService extends AbstractEntityService<Pessoa, Long, PessoaOutputMapper> {
+public class PessoaService extends AbstractEntityService<Pessoa, Long, PessoaInputMapper, PessoaOutputMapper> {
+    @Autowired
+    PessoaMapper pessoaMapper;
     @Override
     public PessoaOutputMapper convertToDto(Object input) {
-        PessoaOutputMapper pessoaOutputMapper = new PessoaOutputMapper();
-        pessoaOutputMapper.setNome("Jandir");
-        return pessoaOutputMapper;
+        return pessoaMapper.convertToDto((Pessoa) input);
     }
 
     @Override
-    public Pessoa convertToEntity(Object o) {
-        return null;
+    public Pessoa convertToEntity(Object input) {
+        return pessoaMapper.convertToEntity((PessoaInputMapper) input);
     }
 }

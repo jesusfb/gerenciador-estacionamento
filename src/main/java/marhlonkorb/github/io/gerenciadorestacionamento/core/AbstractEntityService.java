@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public abstract class AbstractEntityService<T, ID, DtoType> extends AbstractEntityMapper {
+public abstract class AbstractEntityService<T, ID, Input, DtoType> extends AbstractEntityMapper {
 
     @Autowired
     private JpaRepository<T, ID> repository;
 
     public List<Object> getAll() {
         List<T> entities = repository.findAll();
-        return entities.stream()
+        return  entities.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
@@ -34,16 +34,18 @@ public abstract class AbstractEntityService<T, ID, DtoType> extends AbstractEnti
         return (Page<DtoType>) ((Page<T>) entities).map(this::convertToDto);
     }
 
-    public DtoType create(T entity) {
-        T savedEntity = repository.save(entity);
+    public DtoType create(Input input) {
+        final var convertedInput = convertToEntity(input);
+        T savedEntity = repository.save((T)convertedInput);
         return (DtoType) convertToDto(savedEntity);
     }
 
-    public DtoType update(ID id, T entity) {
+    public DtoType update(ID id, Input input) {
         if (!repository.existsById(id)) {
             throw new EntityNotFoundException("Não foi possível encontrar a entidade com o ID " + id);
         }
-        T savedEntity = repository.save(entity);
+        final var entityConverted = convertToEntity(input);
+        T savedEntity =  repository.save((T) entityConverted);
         return (DtoType) convertToDto(savedEntity);
     }
 

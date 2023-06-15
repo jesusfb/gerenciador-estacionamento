@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
-
+/**
+ * Entidade Veiculo
+ */
 @Entity(name = VeiculoDbConstantes.TABLE_NAME)
 public class Veiculo extends EntidadeComId {
     @ManyToOne(fetch = FetchType.EAGER)

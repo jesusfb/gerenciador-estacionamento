@@ -5,24 +5,22 @@ import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadeauditada.EntidadeAuditada;
 
 import javax.persistence.*;
-
+/**
+ * Entidade Usuario
+ */
 @Entity
 @Table(name = UsuarioDbConstantes.TABLE_NAME)
 public class Usuario extends EntidadeAuditada {
-
     @Column(nullable = false)
     private String email;
     @Column
     private String senha;
-
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
-
     @Column
     @Enumerated(EnumType.STRING)
     private Status status;
-
     public Usuario() {
         this.status = Status.A;
     }
