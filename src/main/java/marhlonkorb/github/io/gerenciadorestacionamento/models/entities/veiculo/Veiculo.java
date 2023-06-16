@@ -10,6 +10,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 /**
  * Entidade Veiculo
  */
@@ -17,6 +21,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga
 public class Veiculo extends EntidadeComId {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = VeiculoDbConstantes.PESSOA_ID)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Pessoa pessoa;
 
     @JsonBackReference

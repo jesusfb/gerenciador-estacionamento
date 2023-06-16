@@ -31,7 +31,6 @@ public class PessoaMapper extends AbstractEntityMapper<Pessoa, PessoaInputMapper
         pessoaEncontrada.setNome(input.getNome());
         pessoaEncontrada.setCpf(input.getCpf());
         pessoaEncontrada.setApartamento(input.getApartamento());
-        System.out.println(DataConverter.converteStringParaData(input.getDataNascimento()));
         pessoaEncontrada.setDataNascimento(DataConverter.converteStringParaData(input.getDataNascimento()));
         pessoaEncontrada.setTelefone(input.getTelefone());
         return pessoaEncontrada;

@@ -32,6 +32,27 @@ public class VagaService extends AbstractEntityService<Vaga, Long, VagaInputMapp
     }
 
     /**
+     * Aplica regra para vincular ou não veículo a vaga
+     *
+     * @param veiculo
+     * @param vaga
+     * @return boolean
+     */
+    private boolean isDeveVincularVeiculoVaga(Veiculo veiculo, Vaga vaga) {
+        return vaga.getVeiculo() == null && veiculo.getVaga() == null && veiculo.getPessoa() != null;
+    }
+
+    private void removerVeiculoVagaAnterior(Veiculo veiculo) {
+        if (veiculo.getVaga() != null) {
+            final var vagaEncontrada = vagaRepository.findById(veiculo.getVaga().getId()).get();
+            vagaEncontrada.setVeiculo(null);
+            vagaRepository.save(vagaEncontrada);
+            veiculo.setVaga(null);
+            veiculoRepository.save(veiculo);
+        }
+    }
+
+    /**
      * Permite adicionar veiculo a vaga se há vaga disponível(Em teste)
      *
      * @param idVeiculo
@@ -48,27 +69,6 @@ public class VagaService extends AbstractEntityService<Vaga, Long, VagaInputMapp
             vagaEncontrada.setVeiculo(veiculoEncontrado);
         }
         vagaRepository.save(vagaEncontrada);
-    }
-
-    /**
-     * Aplica regra para vincular ou não veículo a vaga
-     *
-     * @param veiculo
-     * @param vaga
-     * @return boolean
-     */
-    private boolean isDeveVincularVeiculoVaga(Veiculo veiculo, Vaga vaga) {
-        return vaga.getVeiculo() == null && veiculo.getVaga() == null && veiculo.getPessoa() != null;
-    }
-
-    private void removerVeiculoVagaAnterior(Veiculo veiculo) {
-        if (veiculo.getVaga() != null) {
-            final var vagaEncontrada = vagaRepository.findById(veiculo.getVaga().getId()).get();
-                vagaEncontrada.setVeiculo(null);
-                vagaRepository.save(vagaEncontrada);
-                veiculo.setVaga(null);
-                veiculoRepository.save(veiculo);
-        }
     }
 
     @Override

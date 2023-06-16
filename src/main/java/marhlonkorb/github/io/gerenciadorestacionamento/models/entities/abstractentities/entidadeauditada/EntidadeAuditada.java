@@ -7,6 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
 
+/**
+ * Classe abstrata que representa uma entidade auditada
+ */
 @MappedSuperclass
 public abstract class EntidadeAuditada extends EntidadeComId {
 

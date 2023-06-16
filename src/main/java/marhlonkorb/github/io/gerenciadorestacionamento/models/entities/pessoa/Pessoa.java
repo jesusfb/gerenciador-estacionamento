@@ -3,8 +3,10 @@ package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import org.hibernate.validator.constraints.br.CPF;
 import java.time.LocalDate;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -17,8 +19,12 @@ import javax.validation.constraints.NotNull;
 public class Pessoa extends EntidadeComId {
     @OneToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = PessoaDbConstantes.ID_USUARIO, nullable = false)
-    @JoinColumn(name = PessoaDbConstantes.ID_USUARIO)
+    @JoinColumn(name = PessoaDbConstantes.USUARIO_ID)
     private Usuario usuario;
+
+    @JoinColumn(name = "veiculo")
+    @OneToMany
+    private Set<Veiculo> veiculo;
 
     @NotNull(message = "Nome é obrigatório")
     @Column(nullable = false)

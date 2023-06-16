@@ -6,6 +6,9 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
+/**
+ * Classe abstrata que representa uma entidade padrão
+ */
 @MappedSuperclass
 public abstract class EntidadeComId implements Serializable {
 
