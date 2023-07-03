@@ -29,7 +29,7 @@ public abstract class AbstractEntityService<T, ID, Input, DtoType> extends Abstr
         return (DtoType) convertToDto(entity);
     }
 
-    public Page<DtoType> listEntities(Pageable pageable) {
+    public Page<DtoType> getPageable(Pageable pageable) {
         List<T> entities = (List<T>) repository.findAll(pageable);
         return (Page<DtoType>) ((Page<T>) entities).map(this::convertToDto);
     }
@@ -51,7 +51,7 @@ public abstract class AbstractEntityService<T, ID, Input, DtoType> extends Abstr
 
     public void delete(ID id) {
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Não foi possível excluir a entidade com o ID " + id);
+            throw new EntityNotFoundException("Não foi possível excluir a entidade com o ID " + id + ".");
         }
         repository.deleteById(id);
     }

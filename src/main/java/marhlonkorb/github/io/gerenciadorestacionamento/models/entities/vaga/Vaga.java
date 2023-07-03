@@ -15,10 +15,6 @@ import javax.validation.constraints.Max;
 @Entity(name = VagaDbConstantes.TABLE_NAME)
 public class Vaga extends EntidadeAuditada {
 
-    @Column(name = VagaDbConstantes.NUMERO_VAGA)
-    @Max(value = 200)
-    private Integer numeroVaga;
-
     @JsonManagedReference
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = VagaDbConstantes.VEICULO_ID)
@@ -27,14 +23,6 @@ public class Vaga extends EntidadeAuditada {
     @Column
     @Enumerated(EnumType.STRING)
     private Status status = Status.A;
-
-    public Integer getNumeroVaga() {
-        return numeroVaga;
-    }
-
-    public void setNumeroVaga(Integer numeroVaga) {
-        this.numeroVaga = numeroVaga;
-    }
 
     public Veiculo getVeiculo() {
         return veiculo;

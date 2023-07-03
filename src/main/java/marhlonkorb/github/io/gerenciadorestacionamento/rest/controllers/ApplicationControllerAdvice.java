@@ -38,7 +38,7 @@ public class ApplicationControllerAdvice {
     /**
      * Trata as exceções
      *
-     * @return new ResponseEntity
+     * @return ResponseEntity
      */
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<?> handleResponseStatusException(ResponseStatusException exception) {

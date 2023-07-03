@@ -1,16 +1,30 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 /**
  * Output da entidade Pessoa
  */
 public class PessoaOutputMapper {
+
+    private Long id;
     private Long idUsuario;
     private String nome;
     private String cpf;
     private String apartamento;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
     private String telefone;
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getIdUsuario() {
         return idUsuario;
     }

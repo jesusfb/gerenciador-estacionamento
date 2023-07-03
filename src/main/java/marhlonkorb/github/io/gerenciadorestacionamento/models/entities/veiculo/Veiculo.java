@@ -19,7 +19,7 @@ import org.hibernate.annotations.OnDeleteAction;
  */
 @Entity(name = VeiculoDbConstantes.TABLE_NAME)
 public class Veiculo extends EntidadeComId {
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = VeiculoDbConstantes.PESSOA_ID)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Pessoa pessoa;
@@ -37,8 +37,7 @@ public class Veiculo extends EntidadeComId {
     @NotBlank(message = "O modelo do veículo é obrigatório informar")
     private String modelo;
 
-    @JsonFormat(pattern = VeiculoDbConstantes.ANO_PATTERN)
-    private Date ano;
+    private String ano;
 
     public Pessoa getPessoa() {
         return pessoa;
@@ -80,11 +79,11 @@ public class Veiculo extends EntidadeComId {
         this.modelo = modelo;
     }
 
-    public Date getAno() {
+    public String getAno() {
         return ano;
     }
 
-    public void setAno(Date ano) {
+    public void setAno(String ano) {
         this.ano = ano;
     }
 }

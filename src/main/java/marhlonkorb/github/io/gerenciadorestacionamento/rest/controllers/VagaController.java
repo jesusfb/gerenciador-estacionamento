@@ -25,9 +25,9 @@ public class VagaController extends AbstractEntityController<Vaga, Long, VagaInp
     @Autowired
     private VagaService vagaService;
 
-    @PostMapping("/addVeiculo={idVeiculo}Vaga={idVaga}")
-    public void vincularVeiculoVaga(@PathVariable Long idVeiculo, @PathVariable Long idVaga) {
-        vagaService.vincularVeiculoVaga(idVeiculo, idVaga);
-    }
+//    @PostMapping("/addVeiculo={idVeiculo}Vaga={idVaga}")
+//    public void vincularVeiculoVaga(@PathVariable Long idVeiculo, @PathVariable Long idVaga) {
+//        vagaService.vincularVeiculoVaga(idVeiculo, idVaga);
+//    }
 
 }

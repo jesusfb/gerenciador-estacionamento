@@ -11,6 +11,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityServic
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoInputMapper;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoOutputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
@@ -28,6 +29,9 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
 
     @Autowired
     private final PessoaRepository pessoaRepository;
+
+    @Autowired
+    VeiculoMapper veiculoMapper;
 
     public VeiculoService(VeiculoRepository veiculoRepository, PessoaRepository pessoaRepository) {
         this.veiculoRepository = veiculoRepository;
@@ -55,11 +59,10 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
 
     @Override
     public VeiculoOutputMapper convertToDto(Object input) {
-        return null;
+        return veiculoMapper.convertToDto((Veiculo) input);
     }
 
-    @Override
-    public Veiculo convertToEntity(Object o) {
-        return null;
+    public Veiculo convertToEntity(Object input) {
+        return veiculoMapper.convertToEntity((VeiculoInputMapper) input);
     }
 }

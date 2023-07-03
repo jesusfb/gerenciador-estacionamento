@@ -35,25 +35,26 @@ public class DataInitializer implements CommandLineRunner {
         userRepository.save(new Usuario("John Doe"));
         var usuario = userRepository.save(new Usuario("Jane Smith"));
         var veiculo = new Veiculo();
-        var pessoa= new Pessoa();
+        var pessoa = new Pessoa();
         pessoa.setNome("Julius");
+        pessoa.setCpf("669.317.360-86");
         pessoa.setUsuario(usuario);
         pessoaRepository.save(pessoa);
         veiculo.setPessoa(pessoa);
         veiculoRepository.save(veiculo);
+
         try (Connection connection = DriverManager.getConnection(URL, USUARIO, SENHA)) {
-            String query = "INSERT INTO vaga (status, numero_vaga) VALUES (?, ?)";
+            String query = "INSERT INTO vaga (status) VALUES (?)";
 
             try (PreparedStatement statement = ((Connection) connection).prepareStatement(query)) {
                 for (int i = 0; i < 200; i++) {
                     // Crie um novo registro com os dados desejados
                     Vaga registro = new Vaga();
-                    registro.setNumeroVaga(i + 1);
                     statement.setString(1, registro.getStatus().toString());
-                    statement.setString(2, registro.getNumeroVaga().toString());
                     // Executa a inserção dos registros
                     statement.executeUpdate();
                 }
+                connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();

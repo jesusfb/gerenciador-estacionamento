@@ -22,6 +22,9 @@ import javax.persistence.Entity;
 public class PessoaService extends AbstractEntityService<Pessoa, Long, PessoaInputMapper, PessoaOutputMapper> {
     @Autowired
     PessoaMapper pessoaMapper;
+
+    @Autowired
+    PessoaRepository pessoaRepository;
     @Override
     public PessoaOutputMapper convertToDto(Object input) {
         return pessoaMapper.convertToDto((Pessoa) input);

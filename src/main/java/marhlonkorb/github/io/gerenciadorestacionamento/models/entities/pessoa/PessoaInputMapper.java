@@ -1,5 +1,7 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * Input da entidade Pessoa
  */

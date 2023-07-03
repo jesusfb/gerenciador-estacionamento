@@ -5,7 +5,11 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstracte
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -30,8 +34,6 @@ public class Pessoa extends EntidadeComId {
     @Column(nullable = false)
     private String nome;
 
-    @CPF(message = "CPF inválido")
-    @NotNull(message = "CPF é obrigatório")
     private String cpf;
 
     @NotBlank(message = "Número do apartamento é obrigatório")
