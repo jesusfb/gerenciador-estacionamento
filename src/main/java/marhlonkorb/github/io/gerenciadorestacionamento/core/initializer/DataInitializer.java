@@ -1,5 +1,6 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.core.initializer;
 
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Ocupada;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
@@ -44,13 +45,15 @@ public class DataInitializer implements CommandLineRunner {
         veiculoRepository.save(veiculo);
 
         try (Connection connection = DriverManager.getConnection(URL, USUARIO, SENHA)) {
-            String query = "INSERT INTO vaga (status) VALUES (?)";
+            String query = "INSERT INTO vaga (status, ocupada) VALUES (?, ?)";
 
             try (PreparedStatement statement = ((Connection) connection).prepareStatement(query)) {
                 for (int i = 0; i < 200; i++) {
                     // Crie um novo registro com os dados desejados
                     Vaga registro = new Vaga();
+                    registro.setOcupada(Ocupada.N);
                     statement.setString(1, registro.getStatus().toString());
+                    statement.setString(2, registro.getOcupada().toString());
                     // Executa a inserção dos registros
                     statement.executeUpdate();
                 }

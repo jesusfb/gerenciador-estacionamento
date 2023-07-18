@@ -25,7 +25,7 @@ public class Veiculo extends EntidadeComId {
     private Pessoa pessoa;
 
     @JsonBackReference
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     private Vaga vaga;
 
     @NotBlank(message = "A placa do veículo deve ser informada")

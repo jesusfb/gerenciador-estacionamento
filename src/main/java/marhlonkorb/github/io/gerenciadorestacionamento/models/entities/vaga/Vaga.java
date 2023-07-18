@@ -1,14 +1,13 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Ocupada;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadeauditada.EntidadeAuditada;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
+
 /**
  * Entidade Vaga
  */
@@ -16,13 +15,24 @@ import javax.validation.constraints.Max;
 public class Vaga extends EntidadeAuditada {
 
     @JsonManagedReference
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = VagaDbConstantes.VEICULO_ID)
     private Veiculo veiculo;
 
     @Column
     @Enumerated(EnumType.STRING)
     private Status status = Status.A;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Ocupada ocupada = Ocupada.N;
+
+    public Vaga(Ocupada ocupada) {
+        this.ocupada = Ocupada.N;
+    }
+
+    public Vaga() {
+
+    }
 
     public Veiculo getVeiculo() {
         return veiculo;
@@ -40,4 +50,11 @@ public class Vaga extends EntidadeAuditada {
         this.status = status;
     }
 
+    public Ocupada getOcupada() {
+        return ocupada;
+    }
+
+    public void setOcupada(Ocupada ocupada) {
+        this.ocupada = ocupada;
+    }
 }
