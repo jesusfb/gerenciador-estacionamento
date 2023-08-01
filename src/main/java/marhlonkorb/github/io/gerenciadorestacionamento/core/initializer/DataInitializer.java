@@ -23,8 +23,8 @@ public class DataInitializer implements CommandLineRunner {
     private static final String URL = "jdbc:h2:mem:db";
     private static final String USUARIO = "sa";
     private static final String SENHA = "";
-    @Autowired
-    private UsuarioRepository userRepository;
+//    @Autowired
+//    private UsuarioRepository userRepository;
     @Autowired
     private VeiculoRepository veiculoRepository;
     @Autowired
@@ -33,13 +33,13 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Inserir dados iniciais para testes
-        userRepository.save(new Usuario("John Doe"));
-        var usuario = userRepository.save(new Usuario("Jane Smith"));
+//        userRepository.save(new Usuario("John Doe"));
+//        var usuario = userRepository.save(new Usuario("Jane Smith"));
         var veiculo = new Veiculo();
         var pessoa = new Pessoa();
         pessoa.setNome("Julius");
         pessoa.setCpf("669.317.360-86");
-        pessoa.setUsuario(usuario);
+//        pessoa.setUsuario(usuario);
         pessoaRepository.save(pessoa);
         veiculo.setPessoa(pessoa);
         veiculoRepository.save(veiculo);
