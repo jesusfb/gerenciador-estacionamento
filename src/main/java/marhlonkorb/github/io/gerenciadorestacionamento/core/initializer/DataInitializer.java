@@ -35,14 +35,14 @@ public class DataInitializer implements CommandLineRunner {
         // Inserir dados iniciais para testes
 //        userRepository.save(new Usuario("John Doe"));
 //        var usuario = userRepository.save(new Usuario("Jane Smith"));
-        var veiculo = new Veiculo();
-        var pessoa = new Pessoa();
-        pessoa.setNome("Julius");
-        pessoa.setCpf("669.317.360-86");
-//        pessoa.setUsuario(usuario);
-        pessoaRepository.save(pessoa);
-        veiculo.setPessoa(pessoa);
-        veiculoRepository.save(veiculo);
+//        var veiculo = new Veiculo();
+//        var pessoa = new Pessoa();
+//        pessoa.setNome("Julius");
+//        pessoa.setCpf("669.317.360-86");
+////        pessoa.setUsuario(usuario);
+//        pessoaRepository.save(pessoa);
+//        veiculo.setPessoa(pessoa);
+//        veiculoRepository.save(veiculo);
 
         try (Connection connection = DriverManager.getConnection(URL, USUARIO, SENHA)) {
             String query = "INSERT INTO vaga (status, ocupada) VALUES (?, ?)";

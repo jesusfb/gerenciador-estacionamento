@@ -25,18 +25,13 @@ import org.springframework.stereotype.Service;
 public class VeiculoService extends AbstractEntityService<Veiculo, Long, VeiculoInputMapper, VeiculoOutputMapper> {
 
     @Autowired
-    private final VeiculoRepository veiculoRepository;
+    private VeiculoRepository veiculoRepository;
 
     @Autowired
-    private final PessoaRepository pessoaRepository;
+    private PessoaRepository pessoaRepository;
 
     @Autowired
-    VeiculoMapper veiculoMapper;
-
-    public VeiculoService(VeiculoRepository veiculoRepository, PessoaRepository pessoaRepository) {
-        this.veiculoRepository = veiculoRepository;
-        this.pessoaRepository = pessoaRepository;
-    }
+    private VeiculoMapper veiculoMapper;
 
     /**
      * Adiciona o id de Pessoa a tabela de veiculo se o veículo e a pessoa estão cadastrados
