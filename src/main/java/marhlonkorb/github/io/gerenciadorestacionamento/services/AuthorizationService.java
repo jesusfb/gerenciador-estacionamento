@@ -2,7 +2,6 @@ package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
