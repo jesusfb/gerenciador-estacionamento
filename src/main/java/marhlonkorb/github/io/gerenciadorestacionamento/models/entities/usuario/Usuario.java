@@ -31,17 +31,10 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
         this.status = Status.A;
     }
 
-    public Usuario(String login) {
-        this.login = login;
-        this.role = UserRole.USER;
-        this.status = Status.A;
-    }
-
     public Usuario(String login, String password, UserRole role) {
         this.login = login;
         this.password = password;
         this.role = role;
-        this.status = Status.A;
     }
 
     public String getLogin() {
@@ -97,16 +90,16 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
