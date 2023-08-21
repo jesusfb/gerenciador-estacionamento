@@ -1,11 +1,8 @@
--- Criação do Esquema
-CREATE SCHEMA IF NOT EXISTS gerenciador_estacionamento;
-
--- Tabela Pessoa
-CREATE TABLE gerenciador_estacionamento.pessoa (
+-- Tabela Proprietario
+CREATE TABLE "proprietario"(
     id BIGSERIAL PRIMARY KEY,
     apartamento VARCHAR(255),
-    cpf VARCHAR(255),
+    cpf_cnpj VARCHAR(255),
     data_nascimento DATE,
     nome VARCHAR(255) NOT NULL,
     telefone VARCHAR(255),
@@ -13,7 +10,7 @@ CREATE TABLE gerenciador_estacionamento.pessoa (
 );
 
 -- Tabela Usuário
-CREATE TABLE gerenciador_estacionamento.usuario (
+CREATE TABLE "usuario"(
     id BIGSERIAL PRIMARY KEY,
     alterado_por VARCHAR(255),
     criado_por VARCHAR(255),
@@ -26,7 +23,7 @@ CREATE TABLE gerenciador_estacionamento.usuario (
 );
 
 -- Tabela Vaga
-CREATE TABLE gerenciador_estacionamento.vaga (
+CREATE TABLE "vaga"(
     id BIGSERIAL PRIMARY KEY,
     alterado_por VARCHAR(255),
     criado_por VARCHAR(255),
@@ -38,7 +35,7 @@ CREATE TABLE gerenciador_estacionamento.vaga (
 );
 
 -- Tabela Veículo
-CREATE TABLE gerenciador_estacionamento.veiculo (
+CREATE TABLE "veiculo"(
     id BIGSERIAL PRIMARY KEY,
     ano VARCHAR(255),
     marca VARCHAR(255),
@@ -49,26 +46,26 @@ CREATE TABLE gerenciador_estacionamento.veiculo (
 );
 
 -- V2__Add_FK_Pessoa_Usuario.sql
-ALTER TABLE gerenciador_estacionamento.pessoa
+ALTER TABLE "proprietario"
 ADD CONSTRAINT fk_pessoa_usuario
 FOREIGN KEY (id_usuario)
-REFERENCES gerenciador_estacionamento.usuario (id);
+REFERENCES "usuario" (id);
 
 -- V3__Add_FK_Vaga_Veiculo.sql
-ALTER TABLE gerenciador_estacionamento.vaga
+ALTER TABLE "vaga"
 ADD CONSTRAINT fk_vaga_veiculo
 FOREIGN KEY (id_veiculo)
-REFERENCES gerenciador_estacionamento.veiculo (id);
+REFERENCES "veiculo" (id);
 
 -- V4__Add_FK_Veiculo_Pessoa.sql
-ALTER TABLE gerenciador_estacionamento.veiculo
+ALTER TABLE "veiculo"
 ADD CONSTRAINT fk_veiculo_pessoa
 FOREIGN KEY (id_pessoa)
-REFERENCES gerenciador_estacionamento.pessoa (id)
+REFERENCES "proprietario" (id)
 ON DELETE CASCADE;
 
 -- V5__Add_FK_Veiculo_Vaga.sql
-ALTER TABLE gerenciador_estacionamento.veiculo
+ALTER TABLE "veiculo"
 ADD CONSTRAINT fk_veiculo_vaga
 FOREIGN KEY (vaga_id)
-REFERENCES gerenciador_estacionamento.vaga(id);
+REFERENCES "vaga" (id);

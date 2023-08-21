@@ -1,12 +1,12 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.repositories;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.Proprietario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repository da entidade Pessoa
+ * Repository da entidade Proprietario
  */
 @Repository
-public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
+public interface PessoaRepository extends JpaRepository<Proprietario, Long> {
 }

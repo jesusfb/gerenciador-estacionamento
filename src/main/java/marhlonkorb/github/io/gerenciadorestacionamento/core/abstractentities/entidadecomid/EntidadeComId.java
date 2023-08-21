@@ -1,4 +1,4 @@
-package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid;
+package marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadecomid;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

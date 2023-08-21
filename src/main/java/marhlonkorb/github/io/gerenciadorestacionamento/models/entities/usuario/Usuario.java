@@ -2,7 +2,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.UserRole;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadeauditada.EntidadeAuditada;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadeauditada.EntidadeAuditada;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

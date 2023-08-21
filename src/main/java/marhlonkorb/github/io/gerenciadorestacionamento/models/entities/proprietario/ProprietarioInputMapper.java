@@ -1,26 +1,22 @@
-package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa;
+package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.LocalDate;
 /**
- * Output da entidade Pessoa
+ * Input da entidade Proprietario
  */
-public class PessoaOutputMapper {
+public class ProprietarioInputMapper {
 
     private Long id;
     private Long idUsuario;
     private String nome;
     private String cpf;
     private String apartamento;
-
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataNascimento;
+    private String dataNascimento;
     private String telefone;
 
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -28,6 +24,7 @@ public class PessoaOutputMapper {
     public Long getIdUsuario() {
         return idUsuario;
     }
+
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
@@ -56,11 +53,11 @@ public class PessoaOutputMapper {
         this.apartamento = apartamento;
     }
 
-    public LocalDate getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

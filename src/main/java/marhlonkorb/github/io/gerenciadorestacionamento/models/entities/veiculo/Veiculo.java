@@ -1,16 +1,13 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import java.util.Date;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadecomid.EntidadeComId;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.Proprietario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -22,7 +19,7 @@ public class Veiculo extends EntidadeComId {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = VeiculoDbConstantes.PESSOA_ID)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Pessoa pessoa;
+    private Proprietario proprietario;
 
     @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY)
@@ -39,12 +36,12 @@ public class Veiculo extends EntidadeComId {
 
     private String ano;
 
-    public Pessoa getPessoa() {
-        return pessoa;
+    public Proprietario getPessoa() {
+        return proprietario;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setPessoa(Proprietario proprietario) {
+        this.proprietario = proprietario;
     }
 
     public Vaga getVaga() {

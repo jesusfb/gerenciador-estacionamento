@@ -5,7 +5,7 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityController;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.Proprietario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoOutputMapper;
@@ -28,16 +28,16 @@ public class VeiculoController extends AbstractEntityController<Veiculo, Long, V
     VeiculoService veiculoService;
 
     /**
-     * Executa a ação de adicionar o id de Pessoa a tabela de Veiculo
+     * Executa a ação de adicionar o id de Proprietario a tabela de Veiculo
      *
      * @param idVeiculo
-     * @param idPessoa
+     * @param idProprietario
      * @return veiculo
      */
-    @PostMapping("/addVeiculo{idVeiculo}&{idPessoa}")
-    public ResponseEntity<?> adicionarVeiculoCadastrado(@PathVariable Veiculo idVeiculo, @PathVariable Pessoa idPessoa) {
-        if (veiculoService.adicionarVeiculoCadastrado(idVeiculo, idPessoa)) {
-            return ResponseEntity.ok("Pessoa vinculada a veículo com sucesso.");
+    @PostMapping("/addVeiculo{idVeiculo}&{idProprietario}")
+    public ResponseEntity<?> adicionarVeiculoCadastrado(@PathVariable Veiculo idVeiculo, @PathVariable Proprietario idProprietario) {
+        if (veiculoService.adicionarVeiculoCadastrado(idVeiculo, idProprietario)) {
+            return ResponseEntity.ok("Proprietario vinculada a veículo com sucesso.");
         } else {
             return ResponseEntity.badRequest().body("Não foi possível realizar o vínculo das entidades.");
         }
