@@ -1,29 +1,25 @@
-package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa;
+package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadecomid.EntidadeComId;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
-import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
- * Entidade Pessoa
+ * Entidade Proprietario
  */
 @Entity
-@Table(name = PessoaDbConstantes.TABLE_NAME)
-public class Pessoa extends EntidadeComId {
+@Table(name = ProprietarioDbConstantes.TABLE_NAME)
+public class Proprietario extends EntidadeComId {
     @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = PessoaDbConstantes.ID_USUARIO, nullable = false)
-    @JoinColumn(name = PessoaDbConstantes.USUARIO_ID)
+//    @JoinColumn(name = ProprietarioDbConstantes.ID_USUARIO, nullable = false)
+    @JoinColumn(name = ProprietarioDbConstantes.USUARIO_ID)
     private Usuario usuario;
 
     @JoinColumn(name = "veiculo")
@@ -34,19 +30,19 @@ public class Pessoa extends EntidadeComId {
     @Column(nullable = false)
     private String nome;
 
-    private String cpf;
+    private String cpfCnpj;
 
     @NotBlank(message = "Número do apartamento é obrigatório")
     private String apartamento;
 
-    @Column(name = PessoaDbConstantes.DATA_NASCIMENTO)
-    @JsonFormat(pattern = PessoaDbConstantes.DATA_NASCIMENTO_PATTERN)
+    @Column(name = ProprietarioDbConstantes.DATA_NASCIMENTO)
+    @JsonFormat(pattern = ProprietarioDbConstantes.DATA_NASCIMENTO_PATTERN)
     private LocalDate dataNascimento;
 
     @NotBlank(message = "Telefone é obrigatório")
     private String telefone;
 
-    public Pessoa() {
+    public Proprietario() {
     }
 
     public Usuario getUsuario() {
@@ -65,12 +61,12 @@ public class Pessoa extends EntidadeComId {
         this.nome = nome;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getCpfCnpj() {
+        return cpfCnpj;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setCpfCnpj(String cpfCnpj) {
+        this.cpfCnpj = cpfCnpj;
     }
 
     public String getApartamento() {

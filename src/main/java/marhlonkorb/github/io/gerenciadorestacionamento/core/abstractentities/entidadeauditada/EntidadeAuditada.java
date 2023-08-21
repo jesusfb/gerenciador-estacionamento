@@ -1,7 +1,7 @@
-package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadeauditada;
+package marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadeauditada;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadecomid.EntidadeComId;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;

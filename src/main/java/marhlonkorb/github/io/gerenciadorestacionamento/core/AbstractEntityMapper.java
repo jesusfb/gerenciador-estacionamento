@@ -1,6 +1,5 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.core;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.abstractentities.entidadecomid.EntidadeComId;
 import org.springframework.stereotype.Component;
 
 @Component

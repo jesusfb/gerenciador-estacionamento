@@ -4,11 +4,8 @@
  */
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
-import java.util.List;
-import java.util.Optional;
-
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa.Pessoa;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.Proprietario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoMapper;
@@ -34,18 +31,18 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
     private VeiculoMapper veiculoMapper;
 
     /**
-     * Adiciona o id de Pessoa a tabela de veiculo se o veículo e a pessoa estão cadastrados
+     * Adiciona o id de Proprietario a tabela de veiculo se o veículo e a proprietario estão cadastrados
      *
      * @param veiculo
-     * @param pessoa
+     * @param proprietario
      * @return boolean
      */
-    public boolean adicionarVeiculoCadastrado(Veiculo veiculo, Pessoa pessoa) {
-        if (pessoaRepository.existsById(pessoa.getId()) &&
+    public boolean adicionarVeiculoCadastrado(Veiculo veiculo, Proprietario proprietario) {
+        if (pessoaRepository.existsById(proprietario.getId()) &&
                 veiculoRepository.existsById(veiculo.getId())) {
-            veiculo.setPessoa(pessoa);
-            pessoa.setId(pessoa.getId());
-            pessoaRepository.save(pessoa);
+            veiculo.setPessoa(proprietario);
+            proprietario.setId(proprietario.getId());
+            pessoaRepository.save(proprietario);
             veiculoRepository.save(veiculo);
             return true;
         }

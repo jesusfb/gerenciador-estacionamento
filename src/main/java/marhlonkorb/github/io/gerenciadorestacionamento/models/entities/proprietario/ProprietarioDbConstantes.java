@@ -1,9 +1,9 @@
-package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.pessoa;
+package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario;
 
 /**
- * Constantes da entidade Pessoa
+ * Constantes da entidade Proprietario
  */
-public class PessoaDbConstantes {
+public class ProprietarioDbConstantes {
 
     static final String TABLE_NAME = "pessoa";
      static final String DATA_NASCIMENTO_PATTERN = "dd/MM/yyyy";
