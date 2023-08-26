@@ -5,7 +5,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprieta
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioOutputMapper;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.ProprietarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class ProprietarioService extends AbstractEntityService<Proprietario, Lon
     private ProprietarioMapper proprietarioMapper;
 
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private ProprietarioRepository proprietarioRepository;
     @Override
     public ProprietarioOutputMapper convertToDto(Object input) {
         return proprietarioMapper.convertToDto((Proprietario) input);
