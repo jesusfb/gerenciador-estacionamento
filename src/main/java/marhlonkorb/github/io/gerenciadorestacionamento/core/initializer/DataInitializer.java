@@ -1,6 +1,6 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.core.initializer;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.ProprietarioRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,7 +17,7 @@ public class DataInitializer implements CommandLineRunner {
     @Autowired
     private VeiculoRepository veiculoRepository;
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private ProprietarioRepository proprietarioRepository;
 
     @Override
     public void run(String... args) throws Exception {

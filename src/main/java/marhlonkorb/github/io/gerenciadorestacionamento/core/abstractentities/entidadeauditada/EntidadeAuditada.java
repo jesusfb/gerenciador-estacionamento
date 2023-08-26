@@ -1,11 +1,16 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadeauditada;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadecomid.EntidadeComId;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
+import java.util.Date;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
 /**
  * Classe abstrata que representa uma entidade auditada
@@ -17,22 +22,13 @@ public abstract class EntidadeAuditada extends EntidadeComId {
     private String criadoPor;
     @Column
     private String alteradoPor;
-    @Column
-    @JsonFormat(pattern = EntidadeAuditadaDbConstantes.DATE_PATTERN)
-    private LocalDate dataCriacao;
-    @Column
-    @JsonFormat(pattern = EntidadeAuditadaDbConstantes.DATE_PATTERN)
-    private LocalDate dataAlteracao;
 
-    public EntidadeAuditada() {
-        saveLocalDate();
-    }
+    @Column(updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCriacao = new Date();
 
-    private void saveLocalDate(){
-        if(this.dataCriacao == null) {
-            this.dataCriacao = LocalDate.now();
-        } else {
-            this.dataAlteracao = LocalDate.now();
-        }
-    }
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataAlteracao;
+
 }

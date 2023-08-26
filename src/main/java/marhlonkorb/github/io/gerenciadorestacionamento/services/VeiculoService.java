@@ -10,7 +10,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.V
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoOutputMapper;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.ProprietarioRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
     private VeiculoRepository veiculoRepository;
 
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private ProprietarioRepository proprietarioRepository;
 
     @Autowired
     private VeiculoMapper veiculoMapper;
@@ -38,11 +38,11 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
      * @return boolean
      */
     public boolean adicionarVeiculoCadastrado(Veiculo veiculo, Proprietario proprietario) {
-        if (pessoaRepository.existsById(proprietario.getId()) &&
+        if (proprietarioRepository.existsById(proprietario.getId()) &&
                 veiculoRepository.existsById(veiculo.getId())) {
             veiculo.setPessoa(proprietario);
             proprietario.setId(proprietario.getId());
-            pessoaRepository.save(proprietario);
+            proprietarioRepository.save(proprietario);
             veiculoRepository.save(veiculo);
             return true;
         }

@@ -3,7 +3,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.propriet
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.utils.DataConverter;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.PessoaRepository;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.ProprietarioRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.UsuarioRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProprietarioMapper extends AbstractEntityMapper<Proprietario, ProprietarioInputMapper, ProprietarioOutputMapper> {
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private ProprietarioRepository proprietarioRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Autowired
@@ -25,7 +25,7 @@ public class ProprietarioMapper extends AbstractEntityMapper<Proprietario, Propr
 
     @Override
     public Proprietario convertToEntity(ProprietarioInputMapper input) {
-        Proprietario proprietarioEncontrada = input.getId() != null ? pessoaRepository.findById(input.getId()).get() : new Proprietario();
+        Proprietario proprietarioEncontrada = input.getId() != null ? proprietarioRepository.findById(input.getId()).get() : new Proprietario();
         final Usuario usuarioEncontrado = usuarioRepository.findById(input.getIdUsuario()).get();
         proprietarioEncontrada.setUsuario(usuarioEncontrado);
         proprietarioEncontrada.setNome(input.getNome());

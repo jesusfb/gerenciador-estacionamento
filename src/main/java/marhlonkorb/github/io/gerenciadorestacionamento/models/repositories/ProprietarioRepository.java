@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Repository da entidade Proprietario
  */
 @Repository
-public interface PessoaRepository extends JpaRepository<Proprietario, Long> {
+public interface ProprietarioRepository extends JpaRepository<Proprietario, Long> {
 }
