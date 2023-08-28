@@ -2,6 +2,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.core;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,10 @@ public abstract class AbstractEntityController<T, ID, Input, DtoType> {
 
     @GetMapping("/")
     public Page<DtoType> listEntities(Pageable pageable) {
-        return (Page<DtoType>) entitiesServices.stream().map(service -> service.getPageable(pageable)) ;
+        List<DtoType> dtoList = entitiesServices.stream()
+                .flatMap(service -> service.getPageable(pageable).getContent().stream())
+                .collect(Collectors.toList());
+        return new PageImpl<>(dtoList, pageable, dtoList.size());
     }
 
     @PostMapping

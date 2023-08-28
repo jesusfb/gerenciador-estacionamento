@@ -27,14 +27,15 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
     @Column
     @Enumerated(EnumType.STRING)
     private Status status;
+
     public Usuario() {
-        this.status = Status.A;
     }
 
     public Usuario(String login, String password, UserRole role) {
         this.login = login;
         this.password = password;
         this.role = role;
+        this.status = Status.A;
     }
 
     public String getLogin() {

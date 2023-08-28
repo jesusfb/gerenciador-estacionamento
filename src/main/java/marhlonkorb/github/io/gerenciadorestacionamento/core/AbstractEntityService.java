@@ -30,8 +30,8 @@ public abstract class AbstractEntityService<T, ID, Input, DtoType> extends Abstr
     }
 
     public Page<DtoType> getPageable(Pageable pageable) {
-        List<T> entities = (List<T>) repository.findAll(pageable);
-        return (Page<DtoType>) ((Page<T>) entities).map(this::convertToDto);
+        Page<T> entitiesPage = repository.findAll(pageable);
+        return (Page<DtoType>) entitiesPage.map(this::convertToDto);
     }
 
     public DtoType create(Input input) {
