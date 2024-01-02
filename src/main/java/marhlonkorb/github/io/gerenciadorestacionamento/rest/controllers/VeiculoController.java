@@ -37,7 +37,7 @@ public class VeiculoController extends AbstractEntityController<Veiculo, Long, V
     @PostMapping("/addVeiculo{idVeiculo}&{idProprietario}")
     public ResponseEntity<?> adicionarVeiculoCadastrado(@PathVariable Veiculo idVeiculo, @PathVariable Proprietario idProprietario) {
         if (veiculoService.adicionarVeiculoCadastrado(idVeiculo, idProprietario)) {
-            return ResponseEntity.ok("Proprietario vinculada a veículo com sucesso.");
+            return ResponseEntity.ok("Proprietario vinculado a veículo com sucesso.");
         } else {
             return ResponseEntity.badRequest().body("Não foi possível realizar o vínculo das entidades.");
         }

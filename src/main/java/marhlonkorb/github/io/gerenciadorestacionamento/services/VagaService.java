@@ -5,12 +5,10 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaOutputMapper;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VagaRepository;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +28,8 @@ public class VagaService extends AbstractEntityService<Vaga, Long, VagaInputMapp
     /**
      * Aplica regra para vincular ou não veículo a vaga
      *
-     * @param veiculo
-     * @param vaga
+//     * @param veiculo
+//     * @param vaga
      * @return boolean
      */
 //    private boolean isDeveVincularVeiculoVaga(Veiculo veiculo, Vaga vaga) {

@@ -1,10 +1,8 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadecomid.EntidadeComId;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.Proprietario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;

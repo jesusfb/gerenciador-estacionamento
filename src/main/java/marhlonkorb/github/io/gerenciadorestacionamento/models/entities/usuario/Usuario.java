@@ -1,13 +1,12 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario;
 
+import jakarta.persistence.*;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.UserRole;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadeauditada.EntidadeAuditada;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,7 +17,10 @@ import java.util.List;
 @Table(name = UsuarioDbConstantes.TABLE_NAME)
 public class Usuario extends EntidadeAuditada implements UserDetails {
     @Column
-    private String login;
+    private String nome;
+
+    @Column
+    private String email;
     @Column
     private String password;
     @Column
@@ -31,19 +33,27 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
     public Usuario() {
     }
 
-    public Usuario(String login, String password, UserRole role) {
-        this.login = login;
+    public Usuario(String email, String password, UserRole role) {
+        this.email = email;
         this.password = password;
         this.role = role;
         this.status = Status.A;
     }
 
-    public String getLogin() {
-        return login;
+    public String getNome() {
+        return nome;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setPassword(String password) {
@@ -81,7 +91,7 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
 
     @Override
     public String getUsername() {
-        return login;
+        return email;
     }
 
     @Override

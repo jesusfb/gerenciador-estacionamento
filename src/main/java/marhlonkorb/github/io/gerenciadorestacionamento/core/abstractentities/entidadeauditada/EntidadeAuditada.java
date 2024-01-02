@@ -1,17 +1,11 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadeauditada;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadecomid.EntidadeComId;
-import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.UserRole;
-
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import java.time.LocalDate;
 import java.util.Date;
-
-import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
 /**
  * Classe abstrata que representa uma entidade auditada

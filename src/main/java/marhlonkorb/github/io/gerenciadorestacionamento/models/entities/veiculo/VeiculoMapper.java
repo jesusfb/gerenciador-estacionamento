@@ -1,11 +1,7 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityMapper;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaInputMapper;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaOutputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
-import marhlonkorb.github.io.gerenciadorestacionamento.services.VeiculoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

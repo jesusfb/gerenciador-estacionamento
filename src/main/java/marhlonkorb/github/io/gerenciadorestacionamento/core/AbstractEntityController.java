@@ -6,7 +6,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -39,7 +38,7 @@ public abstract class AbstractEntityController<T, ID, Input, DtoType> {
     }
 
     @PostMapping
-    public DtoType create(@RequestBody @Valid Input input) {
+    public DtoType create(@RequestBody Input input) {
         return (DtoType) entitiesServices.stream()
                 .map(service -> service.create(input))
                 .filter(Objects::nonNull)
@@ -48,7 +47,7 @@ public abstract class AbstractEntityController<T, ID, Input, DtoType> {
     }
 
     @PutMapping("/{id}")
-    public DtoType update(@PathVariable ID id, @RequestBody @Valid Input input) {
+    public DtoType update(@PathVariable ID id, @RequestBody Input input) {
         return (DtoType) entitiesServices.stream()
                 .map(service -> service.update(id, input));
     }

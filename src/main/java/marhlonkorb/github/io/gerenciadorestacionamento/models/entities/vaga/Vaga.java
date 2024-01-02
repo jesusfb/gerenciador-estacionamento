@@ -1,12 +1,11 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Ocupada;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadeauditada.EntidadeAuditada;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
-
-import javax.persistence.*;
 
 /**
  * Entidade Vaga

@@ -1,3 +1,16 @@
+-- Tabela Usuário
+CREATE TABLE "usuario"(
+    id BIGSERIAL PRIMARY KEY,
+    alterado_por VARCHAR(255),
+    criado_por VARCHAR(255),
+    data_alteracao timestamp,
+    data_criacao timestamp,
+    nome VARCHAR(255),
+    email VARCHAR(255),
+    password VARCHAR(255),
+    role VARCHAR(255),
+    status VARCHAR(255)
+);
 -- Tabela Proprietario
 CREATE TABLE "proprietario"(
     id BIGSERIAL PRIMARY KEY,
@@ -7,19 +20,6 @@ CREATE TABLE "proprietario"(
     nome VARCHAR(255) NOT NULL,
     telefone VARCHAR(255),
     id_usuario BIGINT
-);
-
--- Tabela Usuário
-CREATE TABLE "usuario"(
-    id BIGSERIAL PRIMARY KEY,
-    alterado_por VARCHAR(255),
-    criado_por VARCHAR(255),
-    data_alteracao timestamp,
-    data_criacao timestamp,
-    login VARCHAR(255),
-    password VARCHAR(255),
-    role VARCHAR(255),
-    status VARCHAR(255)
 );
 
 -- Tabela Vaga
@@ -71,5 +71,5 @@ FOREIGN KEY (vaga_id)
 REFERENCES "vaga" (id);
 
 INSERT INTO "usuario"
-(alterado_por, criado_por, data_alteracao, data_criacao, login, "password", "role", status)
+(alterado_por, criado_por, data_alteracao, data_criacao, email, "password", "role", status)
 VALUES(null, null, null, CURRENT_TIMESTAMP, 'admin', '$2a$10$EizuTnm1gIcWV2kXX6ZsSeUJ9sWQu./oCljAJ9ASuWoC61D6lyO2O', 'ADMIN', 'A');

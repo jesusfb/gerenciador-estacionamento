@@ -1,9 +1,5 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
-
-import java.util.Date;
-
 /**
  * Output da entidade Veiculo
  */
