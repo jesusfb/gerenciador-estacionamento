@@ -9,9 +9,9 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.R
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.UsuarioInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.UsuarioOutputMapper;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.validador.IUsuarioValidador;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.UsuarioRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.validador.email.IValidadorEmail;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +20,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UsuarioService extends AbstractEntityService<Usuario, Long, UsuarioInputMapper, UsuarioOutputMapper> {
+    private final UsuarioRepository usuarioRepository;
+    private final IUsuarioValidador iUsuarioValidador;
+    private final IValidadorEmail iValidadorEmail;
+
+    public UsuarioService(UsuarioRepository usuarioRepository, IUsuarioValidador iUsuarioValidador, IValidadorEmail iValidadorEmail) {
+        this.usuarioRepository = usuarioRepository;
+        this.iUsuarioValidador = iUsuarioValidador;
+        this.iValidadorEmail = iValidadorEmail;
+    }
 
     @Override
     public Object convertToDto(Object input) {
@@ -31,13 +40,9 @@ public class UsuarioService extends AbstractEntityService<Usuario, Long, Usuario
         return null;
     }
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private IValidadorEmail iValidadorEmail;
 
     public void create(RegisterDTO data) {
+        iUsuarioValidador.validaIsUsuarioExistente(data.email());
         iValidadorEmail.validar(data.email());
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         final var newUser = new Usuario(data.email(), encryptedPassword, data.role());

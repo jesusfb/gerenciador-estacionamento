@@ -2,10 +2,12 @@ package marhlonkorb.github.io.gerenciadorestacionamento.rest.exception;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import jakarta.persistence.EntityNotFoundException;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.exceptions.UsuarioException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -48,6 +50,10 @@ public class GenericExceptionHandler {
     @ExceptionHandler(JWTVerificationException.class)
     public ResponseEntity<String> jWTVerificationException(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao efetuar login. Token inválido.");
+    }
+    @ExceptionHandler({BadCredentialsException.class, UsuarioException.class })
+    public ResponseEntity<ApiErrors> loginException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiErrors(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), new ArrayList<>()));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

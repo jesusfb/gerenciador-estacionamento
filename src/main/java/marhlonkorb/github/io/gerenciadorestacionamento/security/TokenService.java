@@ -7,7 +7,6 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -18,10 +17,13 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
+    public static final String JWT_ISSUER = "gerenciador-estacionamento";
+
+
     public String generateToken(Usuario usuario) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
-            String token = JWT.create().withIssuer("gerenciador-estacionamento").withSubject(usuario.getEmail())
+            String token = JWT.create().withIssuer(JWT_ISSUER).withSubject(usuario.getEmail())
                     .withExpiresAt(getExpirationDate())
                     .sign(algorithm);
             return token;
@@ -40,7 +42,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("gerenciador-estacionamento")
+                    .withIssuer(JWT_ISSUER)
                     .build()
                     .verify(token)
                     .getSubject();
