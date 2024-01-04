@@ -4,6 +4,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.rest.exception;
 import org.springframework.http.HttpStatus;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -12,21 +13,21 @@ public class ApiErrors {
     private String message;
     private List<String> errors;
 
-    public ApiErrors(HttpStatus status, String message, List<String> errors) {
-        super();
-        this.status = status;
-        this.message = message;
-        this.errors = errors;
-    }
-
     public ApiErrors(HttpStatus status, String message, Throwable ex) {
         super();
         this.status = status;
         this.message = message;
-        this.errors = Arrays.asList(ex.getMessage());
+        this.errors = Collections.singletonList(ex.getMessage());
+    }
+
+    public ApiErrors(HttpStatus status, String message) {
+        super();
+        this.status = status;
+        this.message = message;
     }
 
     public ApiErrors(String mensagemErro) {
+        this.message = mensagemErro;
     }
 
     public ApiErrors(List<String> messages) {

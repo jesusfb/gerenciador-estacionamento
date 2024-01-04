@@ -41,11 +41,11 @@ public class UsuarioService extends AbstractEntityService<Usuario, Long, Usuario
     }
 
 
-    public void create(RegisterDTO data) {
+    public Usuario create(RegisterDTO data) {
         iUsuarioValidador.validaIsUsuarioExistente(data.email());
         iValidadorEmail.validar(data.email());
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        final var newUser = new Usuario(data.email(), encryptedPassword, data.role());
-        usuarioRepository.save(newUser);
+        final var newUser = new Usuario(data.email(), encryptedPassword, data.nome(), data.role());
+        return usuarioRepository.save(newUser);
     }
 }

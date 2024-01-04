@@ -38,22 +38,22 @@ public class GenericExceptionHandler {
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<String> tratarEntityNotFoundException(EntityNotFoundException ex) {
+    public ResponseEntity<String> entityNotFoundException(EntityNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Entidade não encontrada: " + ex.getMessage());
     }
 
     @ExceptionHandler(InternalAuthenticationServiceException.class)
     public ResponseEntity<String> authenticationException(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao efetuar login. Usuário não autorizado.");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Erro ao efetuar login. Usuário não autorizado.");
     }
 
     @ExceptionHandler(JWTVerificationException.class)
     public ResponseEntity<String> jWTVerificationException(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao efetuar login. Token inválido.");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Erro ao efetuar login. Token inválido.");
     }
     @ExceptionHandler({BadCredentialsException.class, UsuarioException.class })
     public ResponseEntity<ApiErrors> loginException(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiErrors(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), new ArrayList<>()));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiErrors(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage()));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -61,8 +61,7 @@ public class GenericExceptionHandler {
     public ResponseEntity<List<String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         List<String> errors = new ArrayList<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
-            if (error instanceof FieldError) {
-                FieldError fieldError = (FieldError) error;
+            if (error instanceof FieldError fieldError) {
                 errors.add(fieldError.getDefaultMessage());
             } else {
                 errors.add(error.getDefaultMessage());

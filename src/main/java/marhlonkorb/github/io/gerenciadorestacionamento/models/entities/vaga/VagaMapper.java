@@ -26,10 +26,10 @@ public class VagaMapper extends AbstractEntityMapper<Vaga, VagaInputMapper, Vaga
 
     @Override
     public Vaga convertToEntity(VagaInputMapper input) {
-//        final Vaga vagasEncontrada = vagaRepository.findById(input.getId()).get();
-//        vinculaEntidades(input.getIdVeiculo(), vagasEncontrada);
-//        vagasEncontrada.setId(input.getId());
-        return new Vaga();
+        final Vaga vagasEncontrada = vagaRepository.findById(input.getId()).get();
+        vinculaEntidades(input.getIdVeiculo(), vagasEncontrada);
+        vagasEncontrada.setId(input.getId());
+        return vagasEncontrada;
     }
 
     /**

@@ -18,12 +18,11 @@ import java.time.ZoneOffset;
 @Service
 public class TokenService {
 
+    // Emissor do token JWT
+    public static final String JWT_ISSUER = "gerenciador-estacionamento";
     // Chave secreta para assinar o token, injetada a partir das configurações
     @Value("${api.security.token.secret}")
     private String secret;
-
-    // Emissor do token JWT
-    public static final String JWT_ISSUER = "gerenciador-estacionamento";
 
     /**
      * Gera um token JWT para um usuário.

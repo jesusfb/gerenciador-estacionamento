@@ -33,10 +33,11 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
     public Usuario() {
     }
 
-    public Usuario(String email, String password, UserRole role) {
+    public Usuario(String email, String password, String nome, UserRole role) {
         this.email = email;
         this.password = password;
         this.role = role;
+        this.nome = nome;
         this.status = Status.A;
     }
 
