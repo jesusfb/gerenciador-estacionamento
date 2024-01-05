@@ -5,10 +5,7 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.RegisterDTO;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.UsuarioInputMapper;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.UsuarioOutputMapper;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.*;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.validador.IUsuarioValidador;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.UsuarioRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.validador.email.IValidadorEmail;
@@ -24,15 +21,18 @@ public class UsuarioService extends AbstractEntityService<Usuario, Long, Usuario
     private final IUsuarioValidador iUsuarioValidador;
     private final IValidadorEmail iValidadorEmail;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, IUsuarioValidador iUsuarioValidador, IValidadorEmail iValidadorEmail) {
+    private final UsuarioMapper usuarioMapper;
+
+    public UsuarioService(UsuarioRepository usuarioRepository, IUsuarioValidador iUsuarioValidador, IValidadorEmail iValidadorEmail, UsuarioMapper usuarioMapper) {
         this.usuarioRepository = usuarioRepository;
         this.iUsuarioValidador = iUsuarioValidador;
         this.iValidadorEmail = iValidadorEmail;
+        this.usuarioMapper= usuarioMapper;
     }
 
     @Override
     public Object convertToDto(Object input) {
-        return null;
+        return usuarioMapper.convertToDto((Usuario) input);
     }
 
     @Override

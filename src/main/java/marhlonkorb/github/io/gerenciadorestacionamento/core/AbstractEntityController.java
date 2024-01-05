@@ -15,7 +15,7 @@ public abstract class AbstractEntityController<T, ID, Input, DtoType> {
     @Autowired
     List<AbstractEntityService<T, ID, Input, DtoType>> entitiesServices;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Object> getAll() {
         return entitiesServices.stream()
                 .flatMap(service -> service.getAll().stream())
@@ -29,7 +29,7 @@ public abstract class AbstractEntityController<T, ID, Input, DtoType> {
                 .map(service -> service.getById(id));
     }
 
-    @GetMapping("/")
+    @GetMapping
     public Page<DtoType> listEntities(Pageable pageable) {
         List<DtoType> dtoList = entitiesServices.stream()
                 .flatMap(service -> service.getPageable(pageable).getContent().stream())
