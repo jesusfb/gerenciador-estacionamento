@@ -36,8 +36,8 @@ public class UsuarioService extends AbstractEntityService<Usuario, Long, Usuario
     }
 
     @Override
-    public Object convertToEntity(Object o) {
-        return null;
+    public Object convertToEntity(Object input) {
+        return usuarioMapper.convertToEntity((UsuarioInputMapper) input);
     }
 
 
