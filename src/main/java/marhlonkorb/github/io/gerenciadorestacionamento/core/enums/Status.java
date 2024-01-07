@@ -1,7 +1,6 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.core.enums;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Status {
 
@@ -26,14 +25,13 @@ public enum Status {
         this.value = value;
     }
 
-    @JsonCreator
     public static Status fromValue(String value) {
         for (Status status : Status.values()) {
             if (status.value.equalsIgnoreCase(value)) {
                 return status;
             }
         }
-        throw new IllegalArgumentException("Invalid Status description: " + value);
+        throw new IllegalArgumentException("Valor de enum inválido: " + value);
     }
 
 }

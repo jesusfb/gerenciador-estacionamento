@@ -26,7 +26,7 @@ public abstract class AbstractEntityController<T, ID, Input, DtoType> {
     @Transactional(rollbackFor = Exception.class)
     public DtoType getById(@PathVariable ID id) {
         return (DtoType) entitiesServices.stream()
-                .map(service -> service.getById(id));
+                .map(service -> service.getById(id)).findFirst();
     }
 
     @GetMapping

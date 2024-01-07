@@ -12,7 +12,7 @@ public class UsuarioOutputMapper {
     private String nome;
     private String email;
     private Status status;
-    private UserRole role;
+    private UserRole userRole;
 
     public Long getId() {
         return id;
@@ -46,11 +46,11 @@ public class UsuarioOutputMapper {
         this.status = status;
     }
 
-    public UserRole getRole() {
-        return role;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 }
