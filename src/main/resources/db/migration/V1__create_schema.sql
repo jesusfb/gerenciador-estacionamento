@@ -72,4 +72,4 @@ REFERENCES "vaga" (id);
 
 INSERT INTO "usuario"
 (alterado_por, criado_por, data_alteracao, data_criacao, email, "password", "role", status)
-VALUES(null, null, null, CURRENT_TIMESTAMP, 'admin', '$2a$10$EizuTnm1gIcWV2kXX6ZsSeUJ9sWQu./oCljAJ9ASuWoC61D6lyO2O', 'ADMIN', 'A');
+VALUES(null, null, null, CURRENT_TIMESTAMP, 'admin@manager.com.br', '$2a$10$EizuTnm1gIcWV2kXX6ZsSeUJ9sWQu./oCljAJ9ASuWoC61D6lyO2O', 'ADMIN', 'A');
