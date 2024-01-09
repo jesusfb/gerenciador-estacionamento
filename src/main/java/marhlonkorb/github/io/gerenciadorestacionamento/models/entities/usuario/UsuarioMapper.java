@@ -36,7 +36,10 @@ public class UsuarioMapper extends AbstractEntityMapper<Usuario, UsuarioInputMap
      * @param usuarioInputMapper
      */
     private void setPasswordAntesAtualizarUsuario(UsuarioInputMapper usuarioInputMapper) {
-        Optional<Usuario> usuario = usuarioRepository.findById(usuarioInputMapper.getId());
-        usuarioInputMapper.setPassword(usuario.get().getPassword());
+        // Id do usuário não será nulo quando for atualização de usuário
+        if (usuarioInputMapper.getId() != null) {
+            Optional<Usuario> usuario = usuarioRepository.findById(usuarioInputMapper.getId());
+            usuarioInputMapper.setPassword(usuario.get().getPassword());
+        }
     }
 }
