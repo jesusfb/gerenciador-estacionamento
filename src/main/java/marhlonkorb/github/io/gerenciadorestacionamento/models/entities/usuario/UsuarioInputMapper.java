@@ -1,14 +1,26 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario;
 
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.UserRole;
+
 /**
  * Input da entidade Usuario
  */
 public class UsuarioInputMapper {
+    private Long id;
     private String email;
     private String password;
     private String nome;
     private String role;
     private String status;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;

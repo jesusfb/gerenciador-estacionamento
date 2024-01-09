@@ -10,32 +10,32 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public abstract class AbstractEntityService<T, ID, Input, DtoType> extends AbstractEntityMapper {
+public abstract class AbstractEntityService<EntidadeComId, ID, Input, DtoType> extends AbstractEntityMapper {
 
     @Autowired
-    private JpaRepository<T, ID> repository;
+    private JpaRepository<EntidadeComId, ID> repository;
 
     public List<Object> getAll() {
-        List<T> entities = repository.findAll();
+        List<EntidadeComId> entities = repository.findAll();
         return  entities.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
 
     public DtoType getById(ID id) {
-        T entity = repository.findById(id)
+        EntidadeComId entity = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Não foi possível encontrar a entidade com o ID " + id));
         return (DtoType) convertToDto(entity);
     }
 
     public Page<DtoType> getPageable(Pageable pageable) {
-        Page<T> entitiesPage = repository.findAll(pageable);
+        Page<EntidadeComId> entitiesPage = repository.findAll(pageable);
         return (Page<DtoType>) entitiesPage.map(this::convertToDto);
     }
 
     public DtoType create(Input input) {
         final var convertedInput = convertToEntity(input);
-        T savedEntity = repository.save((T)convertedInput);
+        EntidadeComId savedEntity = repository.save((EntidadeComId)convertedInput);
         return (DtoType) convertToDto(savedEntity);
     }
 
@@ -44,7 +44,7 @@ public abstract class AbstractEntityService<T, ID, Input, DtoType> extends Abstr
             throw new EntityNotFoundException("Não foi possível encontrar a entidade com o ID " + id);
         }
         final var entityConverted = convertToEntity(input);
-        T savedEntity =  repository.save((T) entityConverted);
+        EntidadeComId savedEntity =  repository.save((EntidadeComId) entityConverted);
         return (DtoType) convertToDto(savedEntity);
     }
 
