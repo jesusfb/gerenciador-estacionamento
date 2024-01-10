@@ -10,7 +10,7 @@ https://github.com/MarhlonKorb/gerenciador-estacionamento.git
 
 [Link da aplicação para cada plataforma](https://www.docker.com/get-started/)
 
-3 - Ter uma IDE instalada e rodar comando para gerar artefato da aplicação:
+3 - Ter uma IDE instalada e rodar comando na raiz do projeto para gerar artefato da aplicação:
 
 ```
 mvn package
