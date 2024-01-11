@@ -18,12 +18,11 @@ import java.time.ZoneOffset;
 @Service
 public class TokenService {
 
+    // Emissor do token JWT
+    public static final String JWT_ISSUER = "gerenciador-estacionamento";
     // Chave secreta para assinar o token, injetada a partir das configurações
     @Value("${api.security.token.secret}")
     private String secret;
-
-    // Emissor do token JWT
-    public static final String JWT_ISSUER = "gerenciador-estacionamento";
 
     /**
      * Gera um token JWT para um usuário.
@@ -38,7 +37,10 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
             // Criação do token com informações como emissor, assunto, expiração, etc.
-            String token = JWT.create().withIssuer(JWT_ISSUER).withSubject(usuario.getEmail())
+            String token = JWT.create()
+                    .withClaim("usuarioLogado", usuario.converteParaUsuarioLogado().toJSON())
+                    .withIssuer(JWT_ISSUER).
+                    withSubject(usuario.getEmail())
                     .withExpiresAt(getExpirationDate())
                     .sign(algorithm);
             return token;

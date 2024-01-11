@@ -1,12 +1,13 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario;
 
 import jakarta.persistence.*;
-import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.UserRole;
-import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadeauditada.EntidadeAuditada;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -41,6 +42,15 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
         this.status = Status.A;
     }
 
+    public UsuarioLogado converteParaUsuarioLogado() {
+        return new UsuarioLogado(
+                this.getId(),
+                this.getNome(),
+                this.getEmail(),
+                this.getRole(),
+                this.getStatus());
+    }
+
     public String getNome() {
         return nome;
     }
@@ -55,10 +65,6 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public UserRole getRole() {
@@ -79,7 +85,7 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) {
+        if (this.role == UserRole.ADMIN) {
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         }
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
@@ -88,6 +94,10 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
     @Override
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
