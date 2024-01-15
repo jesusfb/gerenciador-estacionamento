@@ -26,7 +26,7 @@ public abstract class AbstractEntityController<T, ID, Input, DtoType> {
     @Transactional(rollbackFor = Exception.class)
     public DtoType getById(@PathVariable ID id) {
         return (DtoType) entitiesServices.stream()
-                .map(service -> service.getById(id)).findFirst();
+                .map(service -> service.getById(id)).findFirst().get();
     }
 
     @GetMapping
@@ -48,8 +48,8 @@ public abstract class AbstractEntityController<T, ID, Input, DtoType> {
 
     @PutMapping("/{id}")
     public DtoType update(@PathVariable ID id, @RequestBody Input input) {
-        return (DtoType) entitiesServices.stream()
-                .map(service -> service.update(id, input));
+        return  (DtoType) entitiesServices.stream()
+                .map(service -> service.update(id, input)).findFirst().get();
     }
 
     @DeleteMapping("/{id}")
