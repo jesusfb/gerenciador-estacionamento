@@ -1,8 +1,12 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoOutputMapper;
 
 import java.time.LocalDate;
+import java.util.Set;
+
 /**
  * Output da entidade Proprietario
  */
@@ -11,8 +15,10 @@ public class ProprietarioOutputMapper {
     private Long id;
     private Long idUsuario;
     private String nome;
-    private String cpf;
+    private String cpfCnpj;
     private String apartamento;
+
+    private Set<VeiculoOutputMapper> veiculos;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
@@ -40,12 +46,12 @@ public class ProprietarioOutputMapper {
         this.nome = nome;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getCpfCnpj() {
+        return cpfCnpj;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setCpfCnpj(String cpfCnpj) {
+        this.cpfCnpj = cpfCnpj;
     }
 
     public String getApartamento() {
@@ -70,5 +76,13 @@ public class ProprietarioOutputMapper {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Set<VeiculoOutputMapper> getVeiculos() {
+        return veiculos;
+    }
+
+    public void setVeiculos(Set<VeiculoOutputMapper> veiculos) {
+        this.veiculos = veiculos;
     }
 }

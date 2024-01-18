@@ -1,22 +1,18 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityMapper;
-import marhlonkorb.github.io.gerenciadorestacionamento.core.utils.DataConverter;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.ProprietarioRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.UsuarioRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProprietarioMapper extends AbstractEntityMapper<Proprietario, ProprietarioInputMapper, ProprietarioOutputMapper> {
-    @Autowired
-    private ProprietarioRepository proprietarioRepository;
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+
+    public ProprietarioMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     @Override
     public ProprietarioOutputMapper convertToDto(Proprietario input) {
@@ -25,15 +21,7 @@ public class ProprietarioMapper extends AbstractEntityMapper<Proprietario, Propr
 
     @Override
     public Proprietario convertToEntity(ProprietarioInputMapper input) {
-        Proprietario proprietarioEncontrada = input.getId() != null ? proprietarioRepository.findById(input.getId()).get() : new Proprietario();
-        final Usuario usuarioEncontrado = usuarioRepository.findById(input.getIdUsuario()).get();
-        proprietarioEncontrada.setUsuario(usuarioEncontrado);
-        proprietarioEncontrada.setNome(input.getNome());
-        proprietarioEncontrada.setCpfCnpj(input.getCpf());
-        proprietarioEncontrada.setApartamento(input.getApartamento());
-        proprietarioEncontrada.setDataNascimento(DataConverter.converteStringParaData(input.getDataNascimento()));
-        proprietarioEncontrada.setTelefone(input.getTelefone());
-        return proprietarioEncontrada;
+        return modelMapper.map(input, Proprietario.class);
     }
 
 }

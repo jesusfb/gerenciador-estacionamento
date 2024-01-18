@@ -19,6 +19,7 @@ CREATE TABLE "proprietario"(
     data_nascimento timestamp,
     nome VARCHAR(255) NOT NULL,
     telefone VARCHAR(255),
+    tipo_pessoa VARCHAR(2),
     id_usuario BIGINT
 );
 
@@ -47,7 +48,7 @@ CREATE TABLE "veiculo"(
 
 -- V2__Add_FK_Pessoa_Usuario.sql
 ALTER TABLE "proprietario"
-ADD CONSTRAINT fk_pessoa_usuario
+ADD CONSTRAINT fk_proprietario_usuario
 FOREIGN KEY (id_usuario)
 REFERENCES "usuario" (id);
 

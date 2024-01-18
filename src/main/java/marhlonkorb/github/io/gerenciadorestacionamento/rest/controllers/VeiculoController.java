@@ -5,11 +5,11 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityController;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.Proprietario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoOutputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.services.VeiculoService;
+import marhlonkorb.github.io.gerenciadorestacionamento.services.VinculaVeiculoProprietarioUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,22 +24,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("veiculo")
 public class VeiculoController extends AbstractEntityController<Veiculo, Long, VeiculoInputMapper, VeiculoOutputMapper> {
 
-    @Autowired
-    VeiculoService veiculoService;
+    private final VinculaVeiculoProprietarioUseCase vinculaVeiculoProprietarioUseCase;
+
+    public VeiculoController(VinculaVeiculoProprietarioUseCase vinculaVeiculoProprietarioUseCase) {
+        this.vinculaVeiculoProprietarioUseCase = vinculaVeiculoProprietarioUseCase;
+    }
 
     /**
-     * Executa a ação de adicionar o id de Proprietario a tabela de Veiculo
+     * Executa o vínculo do veículo ao proprietário
      *
      * @param idVeiculo
      * @param idProprietario
      * @return veiculo
      */
-    @PostMapping("/addVeiculo{idVeiculo}&{idProprietario}")
-    public ResponseEntity<?> adicionarVeiculoCadastrado(@PathVariable Veiculo idVeiculo, @PathVariable Proprietario idProprietario) {
-        if (veiculoService.adicionarVeiculoCadastrado(idVeiculo, idProprietario)) {
-            return ResponseEntity.ok("Proprietario vinculado a veículo com sucesso.");
-        } else {
-            return ResponseEntity.badRequest().body("Não foi possível realizar o vínculo das entidades.");
+    @PostMapping("/vincula{idVeiculo}&{idProprietario}")
+    public ResponseEntity<?> vinculaVeiculoProprietario(@PathVariable Long idVeiculo, @PathVariable Long idProprietario) {
+        try {
+            vinculaVeiculoProprietarioUseCase.execute(idVeiculo, idProprietario);
+            return ResponseEntity.ok("Veículo vinculado ao Proprietario com sucesso.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Não foi possível vincular o veículo ao proprietario.");
         }
     }
 }

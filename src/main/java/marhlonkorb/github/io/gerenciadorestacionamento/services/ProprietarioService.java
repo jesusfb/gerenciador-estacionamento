@@ -5,8 +5,8 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprieta
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioOutputMapper;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.exceptions.ProprietarioNotFoundException;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.ProprietarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,11 +14,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProprietarioService extends AbstractEntityService<Proprietario, Long, ProprietarioInputMapper, ProprietarioOutputMapper> {
-    @Autowired
-    private ProprietarioMapper proprietarioMapper;
+    private final ProprietarioMapper proprietarioMapper;
 
-    @Autowired
-    private ProprietarioRepository proprietarioRepository;
+    private final ProprietarioRepository proprietarioRepository;
+
+    public ProprietarioService(ProprietarioMapper proprietarioMapper, ProprietarioRepository proprietarioRepository) {
+        this.proprietarioMapper = proprietarioMapper;
+        this.proprietarioRepository = proprietarioRepository;
+    }
+
     @Override
     public ProprietarioOutputMapper convertToDto(Object input) {
         return proprietarioMapper.convertToDto((Proprietario) input);
@@ -27,5 +31,20 @@ public class ProprietarioService extends AbstractEntityService<Proprietario, Lon
     @Override
     public Proprietario convertToEntity(Object input) {
         return proprietarioMapper.convertToEntity((ProprietarioInputMapper) input);
+    }
+
+    /**
+     * Busca o proprietário pelo id
+     *
+     * @param idProprietario
+     * @return Proprietario
+     */
+    public Proprietario getProprietarioById(Long idProprietario) {
+        return proprietarioRepository.findById(idProprietario)
+                .orElseThrow(() -> new ProprietarioNotFoundException("Veículo não encontrado."));
+    }
+
+    public Proprietario save(Proprietario proprietario) {
+        return proprietarioRepository.save(proprietario);
     }
 }

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadecomid.EntidadeComId;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.TipoPessoa;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import java.time.LocalDate;
@@ -17,7 +18,6 @@ import java.util.Set;
 @Table(name = ProprietarioDbConstantes.TABLE_NAME)
 public class Proprietario extends EntidadeComId {
     @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = ProprietarioDbConstantes.ID_USUARIO, nullable = false)
     @JoinColumn(name = ProprietarioDbConstantes.USUARIO_ID)
     private Usuario usuario;
 
@@ -25,24 +25,27 @@ public class Proprietario extends EntidadeComId {
     @OneToMany
     private Set<Veiculo> veiculo;
 
-    @NotNull(message = "Nome é obrigatório")
+    @NotNull
     @Column(nullable = false)
     private String nome;
 
+    @Column
     private String cpfCnpj;
 
-    @NotBlank(message = "Número do apartamento é obrigatório")
+    @Column
+    @NotBlank
     private String apartamento;
 
     @Column(name = ProprietarioDbConstantes.DATA_NASCIMENTO)
     @JsonFormat(pattern = ProprietarioDbConstantes.DATA_NASCIMENTO_PATTERN)
     private LocalDate dataNascimento;
 
-    @NotBlank(message = "Telefone é obrigatório")
+    @Column
     private String telefone;
 
-    public Proprietario() {
-    }
+    @Column
+    @Enumerated(EnumType.STRING)
+    private TipoPessoa tipoPessoa;
 
     public Usuario getUsuario() {
         return usuario;
@@ -90,5 +93,21 @@ public class Proprietario extends EntidadeComId {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Set<Veiculo> getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Set<Veiculo> veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public TipoPessoa getTipoPessoa() {
+        return tipoPessoa;
+    }
+
+    public void setTipoPessoa(TipoPessoa tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
     }
 }

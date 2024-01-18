@@ -34,11 +34,11 @@ public class Veiculo extends EntidadeComId {
 
     private String ano;
 
-    public Proprietario getPessoa() {
+    public Proprietario getProprietario() {
         return proprietario;
     }
 
-    public void setPessoa(Proprietario proprietario) {
+    public void setProprietario(Proprietario proprietario) {
         this.proprietario = proprietario;
     }
 
