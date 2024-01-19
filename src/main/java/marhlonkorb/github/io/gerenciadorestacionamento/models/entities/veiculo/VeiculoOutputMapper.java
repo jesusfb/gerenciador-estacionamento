@@ -1,5 +1,7 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo;
 
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioOutputMapper;
+
 /**
  * Output da entidade Veiculo
  */
@@ -14,6 +16,10 @@ public class VeiculoOutputMapper {
     private String modelo;
 
     private String ano;
+    
+    private Long idVaga;
+
+    private ProprietarioOutputMapper proprietario;
 
     public Long getId() {
         return id;
@@ -53,5 +59,21 @@ public class VeiculoOutputMapper {
 
     public void setAno(String ano) {
         this.ano = ano;
+    }
+
+    public Long getIdVaga() {
+        return idVaga;
+    }
+
+    public void setIdVaga(Long idVaga) {
+        this.idVaga = idVaga;
+    }
+
+    public ProprietarioOutputMapper getProprietario() {
+        return proprietario;
+    }
+
+    public void setProprietario(ProprietarioOutputMapper proprietario) {
+        this.proprietario = proprietario;
     }
 }

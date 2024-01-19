@@ -15,7 +15,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity(name = VeiculoDbConstantes.TABLE_NAME)
 public class Veiculo extends EntidadeComId {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = VeiculoDbConstantes.PESSOA_ID)
+    @JoinColumn(name = VeiculoDbConstantes.PROPRIETARIO_ID)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Proprietario proprietario;
 
@@ -23,13 +23,13 @@ public class Veiculo extends EntidadeComId {
     @OneToOne(fetch = FetchType.LAZY)
     private Vaga vaga;
 
-    @NotBlank(message = "A placa do veículo deve ser informada")
+    @NotBlank
     private String placa;
 
-    @NotBlank(message = "A marca do veículo é obrigatória informar")
+    @NotBlank
     private String marca;
 
-    @NotBlank(message = "O modelo do veículo é obrigatório informar")
+    @NotBlank
     private String modelo;
 
     private String ano;

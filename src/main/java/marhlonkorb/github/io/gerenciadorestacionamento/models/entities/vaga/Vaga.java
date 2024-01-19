@@ -20,17 +20,16 @@ public class Vaga extends EntidadeAuditada {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private Status status = Status.A;
+    private Status status;
     @Column
     @Enumerated(EnumType.STRING)
-    private Ocupada ocupada = Ocupada.N;
-
-    public Vaga(Ocupada ocupada) {
-        this.ocupada = Ocupada.N;
-    }
+    private Ocupada ocupada;
 
     public Vaga() {
+    }
 
+    public Vaga(Ocupada ocupada) {
+        this.ocupada = ocupada;
     }
 
     public Veiculo getVeiculo() {
