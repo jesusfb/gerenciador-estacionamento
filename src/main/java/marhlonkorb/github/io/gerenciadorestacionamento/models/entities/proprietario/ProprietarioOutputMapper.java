@@ -1,14 +1,13 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoOutputMapper;
 
 import java.time.LocalDate;
 import java.util.Set;
 
 /**
- * Output da entidade Proprietario
+ * Output da entidade Proprietario teste jenkins
  */
 public class ProprietarioOutputMapper {
 
