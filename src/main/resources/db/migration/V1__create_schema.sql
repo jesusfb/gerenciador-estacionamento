@@ -60,7 +60,8 @@ REFERENCES "veiculo" (id);
 
 -- V4__Add_FK_Veiculo_Pessoa.sql
 ALTER TABLE "veiculo"
-FOREIGN KEY (id_pessoa)
+ADD CONSTRAINT fk_veiculo_proprietario
+FOREIGN KEY (id_proprietario)
 REFERENCES "proprietario" (id)
 ON DELETE CASCADE;
 
