@@ -42,7 +42,7 @@ CREATE TABLE "veiculo"(
     marca VARCHAR(255),
     modelo VARCHAR(255),
     placa VARCHAR(255),
-    id_pessoa BIGINT,
+    id_proprietario BIGINT,
     vaga_id BIGINT
 );
 
@@ -60,7 +60,6 @@ REFERENCES "veiculo" (id);
 
 -- V4__Add_FK_Veiculo_Pessoa.sql
 ALTER TABLE "veiculo"
-ADD CONSTRAINT fk_veiculo_pessoa
 FOREIGN KEY (id_pessoa)
 REFERENCES "proprietario" (id)
 ON DELETE CASCADE;

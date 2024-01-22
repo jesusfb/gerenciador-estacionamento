@@ -19,7 +19,7 @@ public class VeiculoOutputMapper {
     
     private Long idVaga;
 
-    private ProprietarioOutputMapper proprietario;
+    private Long idProprietario;
 
     public Long getId() {
         return id;
@@ -69,11 +69,11 @@ public class VeiculoOutputMapper {
         this.idVaga = idVaga;
     }
 
-    public ProprietarioOutputMapper getProprietario() {
-        return proprietario;
+    public Long getIdProprietario() {
+        return idProprietario;
     }
 
-    public void setProprietario(ProprietarioOutputMapper proprietario) {
-        this.proprietario = proprietario;
+    public void setIdProprietario(Long idProprietario) {
+        this.idProprietario = idProprietario;
     }
 }

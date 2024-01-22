@@ -10,6 +10,8 @@ public class VeiculoInputMapper {
 
     private Long id;
 
+    private Long idProprietario;
+
     private String placa;
 
     private String marca;
@@ -24,6 +26,14 @@ public class VeiculoInputMapper {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIdProprietario() {
+        return idProprietario;
+    }
+
+    public void setIdProprietario(Long idProprietario) {
+        this.idProprietario = idProprietario;
     }
 
     public String getPlaca() {
