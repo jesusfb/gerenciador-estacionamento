@@ -8,16 +8,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class VeiculoMapper extends AbstractEntityMapper<Veiculo, VeiculoInputMapper, VeiculoOutputMapper> {
-
-    @Autowired
-    VeiculoRepository veiculoRepository;
     @Autowired
     private ModelMapper modelMapper;
     @Override
     public VeiculoOutputMapper convertToDto(Veiculo input) {
         return modelMapper.map(input, VeiculoOutputMapper.class);
     }
-
     @Override
     public Veiculo convertToEntity(VeiculoInputMapper input) {
         return modelMapper.map(input, Veiculo.class);

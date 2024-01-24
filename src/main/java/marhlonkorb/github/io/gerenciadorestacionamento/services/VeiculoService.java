@@ -36,21 +36,6 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
     }
 
     /**
-     * Executa o vínculo entre o veículo e o proprietário
-     *
-     * @param idVeiculo
-     * @param idProprietario
-     */
-//    public void vinculaVeiculoProprietario(Long idVeiculo, Long idProprietario) {
-//        final Veiculo veiculo = getVeiculoById(idVeiculo);
-//        final Proprietario proprietario = proprietarioService.getProprietarioById(idProprietario);
-//        veiculo.setProprietario(proprietario);
-//        proprietario.setId(proprietario.getId());
-//        proprietarioService.save(proprietario);
-//        veiculoRepository.save(veiculo);
-//    }
-
-    /**
      * Busca o veículo pelo id
      *
      * @param idVeiculo
@@ -66,11 +51,14 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
         return veiculoMapper.convertToDto((Veiculo) input);
     }
 
+    @Override
     public Veiculo convertToEntity(Object input) {
         return veiculoMapper.convertToEntity((VeiculoInputMapper) input);
     }
 
-    public Veiculo save(Veiculo veiculo) {
-        return veiculoRepository.save(veiculo);
+    @Override
+    public VeiculoOutputMapper create(VeiculoInputMapper veiculoInputMapper) {
+        proprietarioService.getProprietarioById(veiculoInputMapper.getId());
+        return super.create(veiculoInputMapper);
     }
 }

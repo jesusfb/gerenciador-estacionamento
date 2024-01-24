@@ -7,6 +7,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprieta
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioOutputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.exceptions.ProprietarioNotFoundException;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.ProprietarioRepository;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,7 +42,7 @@ public class ProprietarioService extends AbstractEntityService<Proprietario, Lon
      */
     public Proprietario getProprietarioById(Long idProprietario) {
         return proprietarioRepository.findById(idProprietario)
-                .orElseThrow(() -> new ProprietarioNotFoundException("Veículo não encontrado."));
+                .orElseThrow(() -> new InvalidDataAccessApiUsageException("Proprietário não encontrado."));
     }
 
     public Proprietario save(Proprietario proprietario) {

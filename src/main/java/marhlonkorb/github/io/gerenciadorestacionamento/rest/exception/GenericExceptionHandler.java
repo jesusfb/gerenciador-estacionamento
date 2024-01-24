@@ -5,6 +5,7 @@ import jakarta.persistence.EntityNotFoundException;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.exceptions.UsuarioException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -54,6 +55,11 @@ public class GenericExceptionHandler {
     @ExceptionHandler({BadCredentialsException.class, UsuarioException.class })
     public ResponseEntity<ApiErrors> loginException(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiErrors(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage()));
+    }
+
+    @ExceptionHandler(InvalidDataAccessApiUsageException.class)
+    public ResponseEntity<String> dataAcessException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getLocalizedMessage());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
