@@ -1,7 +1,7 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
-import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.UserRole;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Role;
 
 /**
  * Output da entidade Usuario
@@ -12,7 +12,7 @@ public class UsuarioOutputMapper {
     private String nome;
     private String email;
     private Status status;
-    private UserRole userRole;
+    private Role role;
 
     public Long getId() {
         return id;
@@ -46,11 +46,11 @@ public class UsuarioOutputMapper {
         this.status = status;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
+    public Role getUserRole() {
+        return role;
     }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setUserRole(Role role) {
+        this.role = role;
     }
 }

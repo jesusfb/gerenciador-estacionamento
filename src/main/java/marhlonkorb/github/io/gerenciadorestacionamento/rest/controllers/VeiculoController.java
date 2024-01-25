@@ -8,11 +8,10 @@ import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityContro
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoOutputMapper;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import marhlonkorb.github.io.gerenciadorestacionamento.services.VeiculoService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 /**
  * Classe responsável por tratar as requisições Http para a classe Veiculo
@@ -20,4 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("veiculo")
 public class VeiculoController extends AbstractEntityController<Veiculo, Long, VeiculoInputMapper, VeiculoOutputMapper> {
+    private final VeiculoService veiculoService;
+
+    public VeiculoController(VeiculoService veiculoService) {
+        this.veiculoService = veiculoService;
+    }
+
+    @GetMapping("/findAllByIdProprietario/{idProprietario}")
+    Set<VeiculoOutputMapper> findAllByIdProprietario(@PathVariable Long idProprietario){
+        return veiculoService.findAllByIdProprietario(idProprietario);
+    }
 }

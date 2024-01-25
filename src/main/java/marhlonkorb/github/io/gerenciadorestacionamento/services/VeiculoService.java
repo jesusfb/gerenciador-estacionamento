@@ -14,8 +14,14 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.V
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.exceptions.VeiculoNotFoundException;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.ProprietarioRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Service da entidade Veiculo
@@ -25,14 +31,13 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
 
     private final VeiculoRepository veiculoRepository;
 
-    private final ProprietarioService proprietarioService;
-
     private final VeiculoMapper veiculoMapper;
+    private final ModelMapper modelMapper;
 
-    public VeiculoService(VeiculoRepository veiculoRepository, ProprietarioService proprietarioService, VeiculoMapper veiculoMapper) {
+    public VeiculoService(VeiculoRepository veiculoRepository, VeiculoMapper veiculoMapper, ModelMapper modelMapper) {
         this.veiculoRepository = veiculoRepository;
-        this.proprietarioService = proprietarioService;
         this.veiculoMapper = veiculoMapper;
+        this.modelMapper = modelMapper;
     }
 
     /**
@@ -56,9 +61,18 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
         return veiculoMapper.convertToEntity((VeiculoInputMapper) input);
     }
 
-    @Override
-    public VeiculoOutputMapper create(VeiculoInputMapper veiculoInputMapper) {
-        proprietarioService.getProprietarioById(veiculoInputMapper.getId());
-        return super.create(veiculoInputMapper);
+    /**
+     * Busca todos os veículos associados a um proprietário pelo seu ID.
+     *
+     * @param idProprietario O ID do proprietário para o qual os veículos serão recuperados.
+     * @return Um conjunto (Set) de objetos VeiculoOutputMapper representando os veículos do proprietário.
+     */
+    public Set<VeiculoOutputMapper> findAllByIdProprietario(Long idProprietario) {
+        // Recupera os veículos associados ao proprietário do repositório
+        var veiculosProprietario = veiculoRepository.findAllByProprietarioId(idProprietario);
+        // Realiza o mapeamento dos veículos para objetos do tipo VeiculoOutputMapper usando o ModelMapper
+        // O uso de TypeToken ajuda a lidar com a natureza genérica da coleção Set<VeiculoOutputMapper>
+        return modelMapper.map(veiculosProprietario, new TypeToken<Set<VeiculoOutputMapper>>() {}.getType());
     }
+
 }

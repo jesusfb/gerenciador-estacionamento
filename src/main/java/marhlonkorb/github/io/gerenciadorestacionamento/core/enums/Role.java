@@ -1,14 +1,13 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.core.enums;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-public enum Status {
 
-    A("Ativo"),
-    I("Inativo");
+public enum Role {
+    // AE = Admin Empresa
+    // UM = Usuario Comum
+    ADMIN("Admin"), USER("Usuário comum");
 
     private String value;
 
-    Status(String value) {
+    Role(String value){
         this.value = value;
     }
 
@@ -17,4 +16,3 @@ public enum Status {
     }
 
 }
-

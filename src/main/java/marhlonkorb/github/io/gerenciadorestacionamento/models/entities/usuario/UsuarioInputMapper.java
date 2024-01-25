@@ -1,8 +1,5 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
-import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.UserRole;
-
 /**
  * Input da entidade Usuario
  */

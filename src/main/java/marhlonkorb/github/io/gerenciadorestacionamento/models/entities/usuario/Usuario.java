@@ -3,7 +3,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario;
 import jakarta.persistence.*;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadeauditada.EntidadeAuditada;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
-import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.UserRole;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +26,7 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
     private String password;
     @Column
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private Role role;
     @Column
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -34,7 +34,7 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
     public Usuario() {
     }
 
-    public Usuario(String email, String password, String nome, UserRole role) {
+    public Usuario(String email, String password, String nome, Role role) {
         this.email = email;
         this.password = password;
         this.role = role;
@@ -67,11 +67,11 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
         this.email = email;
     }
 
-    public UserRole getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -85,7 +85,7 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UserRole.ADMIN) {
+        if (this.role == Role.ADMIN) {
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         }
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
