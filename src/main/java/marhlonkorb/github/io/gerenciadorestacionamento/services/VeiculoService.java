@@ -5,23 +5,23 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.Proprietario;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.exceptions.ProprietarioNotFoundException;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoOutputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.exceptions.VeiculoNotFoundException;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.ProprietarioRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Comparator;
 
-import java.util.Collections;
+// Resto do seu código...
+
+
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Service da entidade Veiculo
@@ -69,10 +69,43 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
      */
     public Set<VeiculoOutputMapper> findAllByIdProprietario(Long idProprietario) {
         // Recupera os veículos associados ao proprietário do repositório
-        var veiculosProprietario = veiculoRepository.findAllByProprietarioId(idProprietario);
+        final Set<Veiculo> veiculosProprietario = veiculoRepository.findAllByProprietarioId(idProprietario);
         // Realiza o mapeamento dos veículos para objetos do tipo VeiculoOutputMapper usando o ModelMapper
         // O uso de TypeToken ajuda a lidar com a natureza genérica da coleção Set<VeiculoOutputMapper>
-        return modelMapper.map(veiculosProprietario, new TypeToken<Set<VeiculoOutputMapper>>() {}.getType());
+        return modelMapper.map(veiculosProprietario, new TypeToken<Set<VeiculoOutputMapper>>() {
+        }.getType());
+    }
+
+    /**
+     * Marca um veículo como principal para um determinado proprietário.
+     * <p>
+     * Busca todos os veículos associados a um proprietário com base no ID do proprietário,
+     * atualiza os status dos veículos e salva as alterações no repositório.
+     *
+     * @param veiculo veículo que será marcado como principal.
+     */
+    public void marcarComoPrincipal(VeiculoInputMapper veiculo) {
+        // Atualiza os status dos veículos
+        atualizaStatusVeiculo(veiculo);
+        // Busca todos os veículos associados ao proprietário pelo ID do proprietário
+        Set<Veiculo> veiculosEncontrados = veiculoRepository.findAllByProprietarioId(veiculo.getIdProprietario());
+        // Percorre os veículos encontrados
+        veiculosEncontrados.stream().forEach(v -> {
+            // Se o id do veículo não for igual ao id do veículo que está sendo atualizado
+            if (!v.getId().equals(veiculo.getId())) {
+                v.setPrincipal(false);
+            }
+        });
+        veiculoRepository.saveAll(veiculosEncontrados);
+    }
+
+    /**
+     * Atualiza os status dos veículos, desmarcando todos como não principais e marcando o específico como principal.
+     */
+    private void atualizaStatusVeiculo(VeiculoInputMapper veiculo) {
+        final Veiculo veiculoEncontrado = veiculoRepository.findById(veiculo.getId()).get();
+        veiculoEncontrado.setPrincipal(!veiculo.isPrincipal());
+        veiculoRepository.save(veiculoEncontrado);
     }
 
 }

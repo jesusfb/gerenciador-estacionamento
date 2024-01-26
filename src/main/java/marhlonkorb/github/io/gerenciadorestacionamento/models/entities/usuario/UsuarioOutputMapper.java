@@ -46,11 +46,11 @@ public class UsuarioOutputMapper {
         this.status = status;
     }
 
-    public Role getUserRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setUserRole(Role role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }

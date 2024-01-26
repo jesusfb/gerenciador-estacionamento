@@ -20,6 +20,8 @@ public class VeiculoInputMapper {
 
     private String ano;
 
+    private boolean principal;
+
     public Long getId() {
         return id;
     }
@@ -66,5 +68,13 @@ public class VeiculoInputMapper {
 
     public void setAno(String ano) {
         this.ano = ano;
+    }
+
+    public boolean isPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(boolean principal) {
+        this.principal = principal;
     }
 }

@@ -34,6 +34,9 @@ public class Veiculo extends EntidadeComId {
 
     private String ano;
 
+    @Column()
+    private boolean principal;
+
     public Proprietario getProprietario() {
         return proprietario;
     }
@@ -80,5 +83,13 @@ public class Veiculo extends EntidadeComId {
 
     public void setAno(String ano) {
         this.ano = ano;
+    }
+
+    public boolean isPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(boolean principal) {
+        this.principal = principal;
     }
 }

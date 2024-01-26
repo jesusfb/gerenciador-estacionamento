@@ -11,6 +11,10 @@ import java.util.Set;
  */
 @Repository
 public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
-
+    /**
+     * Busca todos os veículos de acordo com o idProprietario
+     * @param idProprietario dos veículos
+     * @return Set<Veiculo> Veículos do proprietário
+     */
     Set<Veiculo> findAllByProprietarioId(Long idProprietario);
 }

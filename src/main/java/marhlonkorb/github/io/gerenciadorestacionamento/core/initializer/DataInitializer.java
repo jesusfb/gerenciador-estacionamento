@@ -40,7 +40,7 @@ public class DataInitializer implements CommandLineRunner {
 //                for (int i = 0; i < 200; i++) {
 //                    // Crie um novo registro com os dados desejados
 //                    Vaga registro = new Vaga();
-//                    registro.setOcupada(Ocupada.N);
+//                    registro.setOcupada(StatusVaga.N);
 //                    statement.setString(1, registro.getStatus().toString());
 //                    statement.setString(2, registro.getOcupada().toString());
 //                    // Executa a inserção dos registros

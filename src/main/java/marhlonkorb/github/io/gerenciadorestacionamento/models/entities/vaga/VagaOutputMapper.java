@@ -1,6 +1,6 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Ocupada;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.StatusVaga;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
 
 /**
@@ -14,7 +14,7 @@ public class VagaOutputMapper {
 
     private Status status;
 
-    private Ocupada ocupada;
+    private StatusVaga statusVaga;
     public Long getId() {
         return id;
     }
@@ -39,11 +39,11 @@ public class VagaOutputMapper {
         this.status = status;
     }
 
-    public Ocupada getOcupada() {
-        return ocupada;
+    public StatusVaga getOcupada() {
+        return statusVaga;
     }
 
-    public void setOcupada(Ocupada ocupada) {
-        this.ocupada = ocupada;
+    public void setOcupada(StatusVaga statusVaga) {
+        this.statusVaga = statusVaga;
     }
 }

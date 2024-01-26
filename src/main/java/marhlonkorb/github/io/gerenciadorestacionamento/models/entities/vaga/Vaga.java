@@ -2,7 +2,7 @@ package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Ocupada;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.StatusVaga;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadeauditada.EntidadeAuditada;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
@@ -23,13 +23,13 @@ public class Vaga extends EntidadeAuditada {
     private Status status;
     @Column
     @Enumerated(EnumType.STRING)
-    private Ocupada ocupada;
+    private StatusVaga statusVaga;
 
     public Vaga() {
     }
 
-    public Vaga(Ocupada ocupada) {
-        this.ocupada = ocupada;
+    public Vaga(StatusVaga statusVaga) {
+        this.statusVaga = statusVaga;
     }
 
     public Veiculo getVeiculo() {
@@ -48,11 +48,11 @@ public class Vaga extends EntidadeAuditada {
         this.status = status;
     }
 
-    public Ocupada getOcupada() {
-        return ocupada;
+    public StatusVaga getOcupada() {
+        return statusVaga;
     }
 
-    public void setOcupada(Ocupada ocupada) {
-        this.ocupada = ocupada;
+    public void setOcupada(StatusVaga statusVaga) {
+        this.statusVaga = statusVaga;
     }
 }

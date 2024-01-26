@@ -30,7 +30,7 @@ CREATE TABLE "vaga"(
     criado_por VARCHAR(255),
     data_alteracao timestamp,
     data_criacao timestamp,
-    ocupada VARCHAR(255),
+    statusVaga VARCHAR(255),
     status VARCHAR(255),
     id_veiculo BIGINT
 );
@@ -42,6 +42,7 @@ CREATE TABLE "veiculo"(
     marca VARCHAR(255),
     modelo VARCHAR(255),
     placa VARCHAR(255),
+    principal BOOLEAN DEFAULT false,
     id_proprietario BIGINT,
     vaga_id BIGINT
 );

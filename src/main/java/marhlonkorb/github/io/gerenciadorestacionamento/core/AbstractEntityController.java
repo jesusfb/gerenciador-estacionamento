@@ -20,10 +20,13 @@ public abstract class AbstractEntityController<T, ID, Input, DtoType> {
 
     @GetMapping("/all")
     public List<Object> getAll() {
-        return entitiesServices.stream()
+        List<Object> allEntities = entitiesServices.stream()
                 .flatMap(service -> service.getAll().stream())
+                .sorted(Comparator.comparingLong(entity -> ((EntidadeComId) entity).getId()))
                 .collect(Collectors.toList());
+        return allEntities;
     }
+
 
     @GetMapping("/{id}")
     @Transactional(rollbackFor = Exception.class)
