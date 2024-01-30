@@ -14,14 +14,11 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.Veicu
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
-import java.util.Comparator;
 
 // Resto do seu código...
 
 
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Service da entidade Veiculo
@@ -84,7 +81,7 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
      *
      * @param veiculo veículo que será marcado como principal.
      */
-    public void marcarComoPrincipal(VeiculoInputMapper veiculo) {
+    public void selecionaComoPrincipal(VeiculoInputMapper veiculo) {
         // Atualiza os status dos veículos
         atualizaStatusVeiculo(veiculo);
         // Busca todos os veículos associados ao proprietário pelo ID do proprietário

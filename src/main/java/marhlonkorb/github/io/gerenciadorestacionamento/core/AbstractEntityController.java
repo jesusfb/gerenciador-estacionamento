@@ -22,7 +22,6 @@ public abstract class AbstractEntityController<T, ID, Input, DtoType> {
     public List<Object> getAll() {
         List<Object> allEntities = entitiesServices.stream()
                 .flatMap(service -> service.getAll().stream())
-                .sorted(Comparator.comparingLong(entity -> ((EntidadeComId) entity).getId()))
                 .collect(Collectors.toList());
         return allEntities;
     }

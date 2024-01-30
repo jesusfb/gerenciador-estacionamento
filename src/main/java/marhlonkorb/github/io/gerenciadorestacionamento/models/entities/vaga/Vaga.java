@@ -21,7 +21,7 @@ public class Vaga extends EntidadeAuditada {
     @Column
     @Enumerated(EnumType.STRING)
     private Status status;
-    @Column
+    @Column(name = "status_vaga")
     @Enumerated(EnumType.STRING)
     private StatusVaga statusVaga;
 
@@ -48,11 +48,11 @@ public class Vaga extends EntidadeAuditada {
         this.status = status;
     }
 
-    public StatusVaga getOcupada() {
+    public StatusVaga getStatusVaga() {
         return statusVaga;
     }
 
-    public void setOcupada(StatusVaga statusVaga) {
+    public void setStatusVaga(StatusVaga statusVaga) {
         this.statusVaga = statusVaga;
     }
 }

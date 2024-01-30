@@ -30,7 +30,7 @@ CREATE TABLE "vaga"(
     criado_por VARCHAR(255),
     data_alteracao timestamp,
     data_criacao timestamp,
-    statusVaga VARCHAR(255),
+    status_vaga VARCHAR(1),
     status VARCHAR(255),
     id_veiculo BIGINT
 );
