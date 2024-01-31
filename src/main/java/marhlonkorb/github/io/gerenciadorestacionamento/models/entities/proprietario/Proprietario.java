@@ -33,7 +33,6 @@ public class Proprietario extends EntidadeComId {
     private String cpfCnpj;
 
     @Column
-    @NotBlank
     private String apartamento;
 
     @Column(name = ProprietarioDbConstantes.DATA_NASCIMENTO)

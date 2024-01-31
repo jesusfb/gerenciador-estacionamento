@@ -5,9 +5,11 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprieta
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioOutputMapper;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.ProprietarioRepository;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Service da entidade Proprietario
@@ -17,6 +19,7 @@ public class ProprietarioService extends AbstractEntityService<Proprietario, Lon
     private final ProprietarioMapper proprietarioMapper;
 
     private final ProprietarioRepository proprietarioRepository;
+
 
     public ProprietarioService(ProprietarioMapper proprietarioMapper, ProprietarioRepository proprietarioRepository) {
         this.proprietarioMapper = proprietarioMapper;
@@ -50,5 +53,17 @@ public class ProprietarioService extends AbstractEntityService<Proprietario, Lon
 
     public Proprietario getProprietarioByIdUsuario(Long idUsuario){
         return proprietarioRepository.getByUsuarioId(idUsuario);
+    }
+
+    /**
+     * Cria um novo proprietário
+     * @param usuario
+     * @return Proprietario
+     */
+    public Proprietario create(Usuario usuario){
+        Proprietario proprietario = new Proprietario();
+        proprietario.setNome(usuario.getNome());
+        proprietario.setUsuario(usuario);
+        return save(proprietario);
     }
 }

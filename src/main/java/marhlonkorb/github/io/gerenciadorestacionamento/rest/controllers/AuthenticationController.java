@@ -70,9 +70,9 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody @Valid RegisterDTO data) {
         // Cria um novo usuário com base nos dados fornecidos
-        var usuarioCriado = usuarioService.create(data);
+        Usuario usuarioCriado = usuarioService.create(data);
         // Gera um token JWT para o novo usuário registrado
-        var token = tokenService.generateToken(usuarioCriado);
+        String token = tokenService.generateToken(usuarioCriado);
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 }
