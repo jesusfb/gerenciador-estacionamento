@@ -39,11 +39,11 @@ public class VagaOutputMapper {
         this.status = status;
     }
 
-    public StatusVaga getOcupada() {
+    public StatusVaga getStatusVaga() {
         return statusVaga;
     }
 
-    public void setOcupada(StatusVaga statusVaga) {
+    public void setStatusVaga(StatusVaga statusVaga) {
         this.statusVaga = statusVaga;
     }
 }
