@@ -9,7 +9,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaOutputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
+import marhlonkorb.github.io.gerenciadorestacionamento.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -23,10 +23,7 @@ public class DataConverter {
             LocalDate data = LocalDate.parse(dataString, formatter);
             LocalDate dataMinima = LocalDate.of(1900, 1, 1);
             LocalDate dataMaxima = LocalDate.of(2100, 12, 31);
-            if (data.isBefore(dataMinima) || data.isAfter(dataMaxima)) {
-                return false;
-            }
-            return true;
+            return !data.isBefore(dataMinima) && !data.isAfter(dataMaxima);
         } catch (DateTimeParseException e) {
             return false;
         }

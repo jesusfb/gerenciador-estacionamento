@@ -29,8 +29,8 @@ public class ProprietarioController extends AbstractEntityController<Proprietari
     public ProprietarioController(ProprietarioService proprietarioService) {
         this.proprietarioService = proprietarioService;
     }
-    @GetMapping("/getIdProprietarioPeloIdUsuario={id}")
-    public Long getIdProprietarioPeloIdUsuario(@PathVariable Long id){
-        return proprietarioService.getProprietarioByIdUsuario(id).getId();
+    @GetMapping("/getProprietarioPeloIdUsuario={id}")
+    public ProprietarioOutputMapper getIdProprietarioPeloIdUsuario(@PathVariable Long id){
+        return proprietarioService.getProprietarioByIdUsuario(id);
     }
 }

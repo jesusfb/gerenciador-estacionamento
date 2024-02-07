@@ -8,9 +8,8 @@ import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityServic
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.*;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.exceptions.UsuarioException;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.validador.IUsuarioValidador;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.UsuarioRepository;
+import marhlonkorb.github.io.gerenciadorestacionamento.repositories.UsuarioRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.validador.email.IValidadorEmail;
-import org.springframework.data.repository.Repository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

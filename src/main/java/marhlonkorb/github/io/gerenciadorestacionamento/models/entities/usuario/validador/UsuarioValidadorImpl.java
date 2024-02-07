@@ -1,7 +1,7 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.validador;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.exceptions.UsuarioException;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.UsuarioRepository;
+import marhlonkorb.github.io.gerenciadorestacionamento.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

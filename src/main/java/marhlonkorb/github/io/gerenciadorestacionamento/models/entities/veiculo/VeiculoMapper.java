@@ -1,7 +1,6 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityMapper;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.VeiculoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

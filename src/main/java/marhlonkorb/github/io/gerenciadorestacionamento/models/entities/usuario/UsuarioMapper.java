@@ -1,7 +1,7 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityMapper;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.repositories.UsuarioRepository;
+import marhlonkorb.github.io.gerenciadorestacionamento.repositories.UsuarioRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
