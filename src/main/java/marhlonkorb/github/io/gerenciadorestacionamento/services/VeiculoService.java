@@ -105,4 +105,9 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
         veiculoRepository.save(veiculoEncontrado);
     }
 
+    public VeiculoOutputMapper findVeiculoPrincipal(Long idProprietario){
+        Veiculo veiculoEncontrado = veiculoRepository.findByProprietarioIdAndPrincipal(idProprietario, true);
+        return modelMapper.map(veiculoEncontrado, VeiculoOutputMapper.class);
+    }
+
 }

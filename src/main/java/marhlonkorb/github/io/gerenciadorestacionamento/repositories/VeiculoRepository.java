@@ -17,4 +17,6 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
      * @return Set<Veiculo> Veículos do proprietário
      */
     Set<Veiculo> findAllByProprietarioId(Long idProprietario);
+
+    Veiculo findByProprietarioIdAndPrincipal(Long idProprietario, boolean principal);
 }

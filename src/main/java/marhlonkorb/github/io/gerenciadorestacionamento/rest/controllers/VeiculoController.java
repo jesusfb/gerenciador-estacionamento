@@ -29,9 +29,14 @@ public class VeiculoController extends AbstractEntityController<Veiculo, Long, V
     public Set<VeiculoOutputMapper> findAllByIdProprietario(@PathVariable Long idProprietario){
         return veiculoService.findAllByIdProprietario(idProprietario);
     }
+    @GetMapping("/findVeiculoPrincipal/{idProprietario}")
+    public VeiculoOutputMapper findVeiculoPrincipal(@PathVariable Long idProprietario){
+        return veiculoService.findVeiculoPrincipal(idProprietario);
+    }
 
     @PutMapping("/selecionaComoPrincipal")
     public void selecionaComoPrincipal(@RequestBody VeiculoInputMapper veiculo){
         veiculoService.selecionaComoPrincipal(veiculo);
     }
+
 }
