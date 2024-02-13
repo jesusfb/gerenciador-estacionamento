@@ -44,7 +44,7 @@ CREATE TABLE "veiculo"(
     placa VARCHAR(255),
     principal BOOLEAN DEFAULT false,
     id_proprietario BIGINT,
-    vaga_id BIGINT
+    id_vaga BIGINT
 );
 
 -- V2__Add_FK_Pessoa_Usuario.sql
@@ -69,7 +69,7 @@ ON DELETE CASCADE;
 -- V5__Add_FK_Veiculo_Vaga.sql
 ALTER TABLE "veiculo"
 ADD CONSTRAINT fk_veiculo_vaga
-FOREIGN KEY (vaga_id)
+FOREIGN KEY (id_vaga)
 REFERENCES "vaga" (id);
 
 INSERT INTO "usuario"

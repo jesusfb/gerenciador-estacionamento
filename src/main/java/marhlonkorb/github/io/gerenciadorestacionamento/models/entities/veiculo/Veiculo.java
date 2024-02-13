@@ -21,6 +21,7 @@ public class Veiculo extends EntidadeComId {
 
     @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_vaga")
     private Vaga vaga;
 
     @NotBlank

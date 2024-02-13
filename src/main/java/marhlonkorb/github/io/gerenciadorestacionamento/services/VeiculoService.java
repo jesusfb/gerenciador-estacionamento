@@ -15,9 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
-// Resto do seu código...
-
-
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -105,9 +103,9 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
         veiculoRepository.save(veiculoEncontrado);
     }
 
-    public VeiculoOutputMapper findVeiculoPrincipal(Long idProprietario){
-        Veiculo veiculoEncontrado = veiculoRepository.findByProprietarioIdAndPrincipal(idProprietario, true);
-        return modelMapper.map(veiculoEncontrado, VeiculoOutputMapper.class);
+    public Optional<VeiculoOutputMapper> findVeiculoPrincipal(Long idProprietario) {
+        Optional<Veiculo> veiculoEncontrado = veiculoRepository.findByProprietarioIdAndPrincipal(idProprietario, true);
+        return veiculoEncontrado.map(veiculo -> Optional.ofNullable(modelMapper.map(veiculo, VeiculoOutputMapper.class))).orElse(null);
     }
 
 }

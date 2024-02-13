@@ -11,6 +11,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.V
 import marhlonkorb.github.io.gerenciadorestacionamento.services.VeiculoService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -30,7 +31,7 @@ public class VeiculoController extends AbstractEntityController<Veiculo, Long, V
         return veiculoService.findAllByIdProprietario(idProprietario);
     }
     @GetMapping("/findVeiculoPrincipal/{idProprietario}")
-    public VeiculoOutputMapper findVeiculoPrincipal(@PathVariable Long idProprietario){
+    public Optional<VeiculoOutputMapper> findVeiculoPrincipal(@PathVariable Long idProprietario){
         return veiculoService.findVeiculoPrincipal(idProprietario);
     }
 

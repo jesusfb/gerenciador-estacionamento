@@ -4,6 +4,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.V
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -18,5 +19,5 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
      */
     Set<Veiculo> findAllByProprietarioId(Long idProprietario);
 
-    Veiculo findByProprietarioIdAndPrincipal(Long idProprietario, boolean principal);
+    Optional<Veiculo> findByProprietarioIdAndPrincipal(Long idProprietario, boolean principal);
 }
