@@ -55,4 +55,5 @@ public class Vaga extends EntidadeAuditada {
     public void setStatusVaga(StatusVaga statusVaga) {
         this.statusVaga = statusVaga;
     }
+
 }

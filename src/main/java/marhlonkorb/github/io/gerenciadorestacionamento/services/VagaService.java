@@ -9,8 +9,10 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaOutputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
+import marhlonkorb.github.io.gerenciadorestacionamento.repositories.VagaRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,11 +21,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class VagaService extends AbstractEntityService<Vaga, Long, VagaInputMapper, VagaOutputMapper> {
 
-    @Autowired
-    private VeiculoRepository veiculoRepository;
+    private final VeiculoRepository veiculoRepository;
+    private final VagaMapper vagaMapper;
+    private final VagaRepository vagaRepository;
 
-    @Autowired
-    private VagaMapper vagaMapper;
+    private final AdicionaVeiculoVagaUseCase adicionaVeiculoVagaUseCase;
+
+    public VagaService(VeiculoRepository veiculoRepository, VagaMapper vagaMapper, VagaRepository vagaRepository, AdicionaVeiculoVagaUseCase adicionaVeiculoVagaUseCase) {
+        this.veiculoRepository = veiculoRepository;
+        this.vagaMapper = vagaMapper;
+        this.vagaRepository = vagaRepository;
+        this.adicionaVeiculoVagaUseCase = adicionaVeiculoVagaUseCase;
+    }
 
     /**
      * Aplica regra para vincular ou não veículo a vaga
@@ -73,5 +82,24 @@ public class VagaService extends AbstractEntityService<Vaga, Long, VagaInputMapp
     @Override
     public Vaga convertToEntity(Object input) {
         return vagaMapper.convertToEntity((VagaInputMapper) input);
+    }
+
+    /**
+     * Busca o proprietário pelo id
+     *
+     * @param idVaga
+     * @return Proprietario
+     */
+    public Vaga getVagaById(Long idVaga) {
+        return vagaRepository.findById(idVaga)
+                .orElseThrow(() -> new InvalidDataAccessApiUsageException("Vaga não encontrada."));
+    }
+
+    public Vaga save(Vaga vaga){
+        return vagaRepository.save(vaga);
+    }
+
+    public void adicionaVeiculoVagaUseCase(Long idVaga, Long idVeiculo){
+        adicionaVeiculoVagaUseCase.execute(idVaga, idVeiculo);
     }
 }

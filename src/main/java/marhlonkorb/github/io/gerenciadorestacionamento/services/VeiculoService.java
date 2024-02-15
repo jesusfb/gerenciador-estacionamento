@@ -108,4 +108,7 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
         return veiculoEncontrado.map(veiculo -> Optional.ofNullable(modelMapper.map(veiculo, VeiculoOutputMapper.class))).orElse(null);
     }
 
+    public Veiculo save(Veiculo veiculo) {
+        return veiculoRepository.save(veiculo);
+    }
 }
