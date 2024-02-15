@@ -12,6 +12,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga
 import marhlonkorb.github.io.gerenciadorestacionamento.repositories.VagaRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +26,12 @@ public class VagaService extends AbstractEntityService<Vaga, Long, VagaInputMapp
     private final VagaMapper vagaMapper;
     private final VagaRepository vagaRepository;
 
-    private final AdicionaVeiculoVagaUseCase adicionaVeiculoVagaUseCase;
+    private AdicionaVeiculoVagaUseCase adicionaVeiculoVagaUseCase;
 
-    public VagaService(VeiculoRepository veiculoRepository, VagaMapper vagaMapper, VagaRepository vagaRepository, AdicionaVeiculoVagaUseCase adicionaVeiculoVagaUseCase) {
+    public VagaService(VeiculoRepository veiculoRepository, VagaMapper vagaMapper, VagaRepository vagaRepository) {
         this.veiculoRepository = veiculoRepository;
         this.vagaMapper = vagaMapper;
         this.vagaRepository = vagaRepository;
-        this.adicionaVeiculoVagaUseCase = adicionaVeiculoVagaUseCase;
     }
 
     /**
