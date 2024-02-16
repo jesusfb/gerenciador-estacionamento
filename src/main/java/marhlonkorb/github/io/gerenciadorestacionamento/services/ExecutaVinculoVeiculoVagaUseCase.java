@@ -3,21 +3,21 @@ package marhlonkorb.github.io.gerenciadorestacionamento.services;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.StatusVaga;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class AdicionaVeiculoVagaUseCase {
+public class ExecutaVinculoVeiculoVagaUseCase {
 
-    private final VagaService vagaService;
-    private final VeiculoService veiculoService;
+    @Autowired
+    private VagaService vagaService;
 
-    public AdicionaVeiculoVagaUseCase(VagaService vagaService, VeiculoService veiculoService) {
-        this.vagaService = vagaService;
-        this.veiculoService = veiculoService;
-    }
+    @Autowired
+    private VeiculoService veiculoService;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void execute(Long idVaga, Long idVeiculo) {
         final Vaga vagaEncontrada = vagaService.getVagaById(idVaga);
         final Veiculo veiculoEncontrado = veiculoService.getVeiculoById(idVeiculo);

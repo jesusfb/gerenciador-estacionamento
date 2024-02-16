@@ -8,10 +8,10 @@ import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityContro
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.VagaOutputMapper;
+import marhlonkorb.github.io.gerenciadorestacionamento.services.ExecutaVinculoVeiculoVagaUseCase;
 import marhlonkorb.github.io.gerenciadorestacionamento.services.VagaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Classe responsável por controlar o registro de veiculos no estacionamento
@@ -22,10 +22,12 @@ public class VagaController extends AbstractEntityController<Vaga, Long, VagaInp
 
     @Autowired
     private VagaService vagaService;
+    @Autowired
+    private ExecutaVinculoVeiculoVagaUseCase executaVinculoVeiculoVagaUseCase;
 
-//    @PostMapping("/addVeiculo={idVeiculo}Vaga={idVaga}")
-//    public void vincularVeiculoVaga(@PathVariable Long idVeiculo, @PathVariable Long idVaga) {
-//        vagaService.vincularVeiculoVaga(idVeiculo, idVaga);
-//    }
+    @PutMapping("/executaVinculoVeiculoVaga/idVeiculo={idVeiculo}&idVaga={idVaga}")
+    public void executaVinculoVeiculoVaga(@PathVariable Long idVeiculo, @PathVariable Long idVaga) {
+        executaVinculoVeiculoVagaUseCase.execute(idVeiculo, idVaga);
+    }
 
 }
