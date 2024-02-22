@@ -29,46 +29,6 @@ public class VagaService extends AbstractEntityService<Vaga, Long, VagaInputMapp
         this.vagaRepository = vagaRepository;
     }
 
-    /**
-     * Aplica regra para vincular ou não veículo a vaga
-     *
-//     * @param veiculo
-//     * @param vaga
-     * @return boolean
-     */
-//    private boolean isDeveVincularVeiculoVaga(Veiculo veiculo, Vaga vaga) {
-//        return vaga.getVeiculo() == null && veiculo.getVaga() == null && veiculo.getPessoa() != null;
-//    }
-//
-//    private void removerVeiculoVagaAnterior(Veiculo veiculo) {
-//        if (veiculo.getVaga() != null) {
-//            final var vagaEncontrada = vagaRepository.findById(veiculo.getVaga().getId()).get();
-//            vagaEncontrada.setVeiculo(null);
-//            vagaRepository.save(vagaEncontrada);
-//            veiculo.setVaga(null);
-//            veiculoRepository.save(veiculo);
-//        }
-//    }
-//
-//    /**
-//     * Permite adicionar veiculo a vaga se há vaga disponível(Em teste)
-//     *
-//     * @param idVeiculo
-//     * @param idVaga
-//     * @return vaga
-//     */
-//    public void vincularVeiculoVaga(Long idVeiculo, Long idVaga) {
-//        final Vaga vagaEncontrada = vagaRepository.findById(idVaga).get();
-//        final var veiculoEncontrado = veiculoRepository.findById(idVeiculo).get();
-//        removerVeiculoVagaAnterior(veiculoEncontrado);
-//        if (isDeveVincularVeiculoVaga(veiculoEncontrado, vagaEncontrada)) {
-//            veiculoEncontrado.setVaga(vagaEncontrada);
-//            veiculoRepository.save(veiculoEncontrado);
-//            vagaEncontrada.setVeiculo(veiculoEncontrado);
-//        }
-//        vagaRepository.save(vagaEncontrada);
-//    }
-
     @Override
     public VagaOutputMapper convertToDto(Object input) {
         return vagaMapper.convertToDto((Vaga) input);

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadecomid.EntidadeComId;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.StatusVaga;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.Proprietario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.vaga.Vaga;
 import org.hibernate.annotations.OnDelete;
@@ -92,5 +93,14 @@ public class Veiculo extends EntidadeComId {
 
     public void setPrincipal(boolean principal) {
         this.principal = principal;
+    }
+
+    public boolean isContemVaga() {
+        return this.getVaga() != null;
+    }
+
+    public void adicionarVaga(Vaga vaga){
+            vaga.setStatusVaga(StatusVaga.O);
+            this.vaga = vaga;
     }
 }

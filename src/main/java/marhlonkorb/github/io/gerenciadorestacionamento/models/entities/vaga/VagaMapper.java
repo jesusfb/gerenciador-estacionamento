@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VagaMapper extends AbstractEntityMapper<Vaga, VagaInputMapper, VagaOutputMapper> {
+public class VagaMapper implements AbstractEntityMapper<Vaga, VagaInputMapper, VagaOutputMapper> {
 
     @Autowired
     VagaRepository vagaRepository;
@@ -26,24 +26,7 @@ public class VagaMapper extends AbstractEntityMapper<Vaga, VagaInputMapper, Vaga
 
     @Override
     public Vaga convertToEntity(VagaInputMapper input) {
-        final Vaga vagasEncontrada = vagaRepository.findById(input.getId()).get();
-        vinculaEntidades(input.getIdVeiculo(), vagasEncontrada);
-        vagasEncontrada.setId(input.getId());
-        return vagasEncontrada;
+        return modelMapper.map(input, Vaga.class);
     }
 
-    /**
-     * Realiza a vinculação ou remoção do vínculo entre as entidades Vaga e Veículo
-     *
-     * @param id
-     * @param vaga
-     */
-    private void vinculaEntidades(Long id, Vaga vaga) {
-        if (id != null) {
-            final Veiculo veiculoEncontrado = veiculoRepository.findById(id).get();
-            vaga.setVeiculo(veiculoEncontrado);
-        } else {
-            vaga.setVeiculo(null);
-        }
-    }
 }

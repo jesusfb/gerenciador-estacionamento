@@ -36,9 +36,9 @@ public class Vaga extends EntidadeAuditada {
         return veiculo;
     }
 
-    public void setVeiculo(Veiculo veiculo) {
-        this.veiculo = veiculo;
-    }
+//    public void setVeiculo(Veiculo veiculo) {
+//        this.veiculo = veiculo;
+//    }
 
     public Status getStatus() {
         return status;
@@ -56,4 +56,12 @@ public class Vaga extends EntidadeAuditada {
         this.statusVaga = statusVaga;
     }
 
+    public boolean isContemVeiculo(){
+        return this.getVeiculo() != null || this.statusVaga.equals(StatusVaga.O);
+    }
+
+    public void adicionarVeiculo(Veiculo veiculo){
+            this.veiculo = veiculo;
+            this.statusVaga = StatusVaga.O;
+    }
 }
