@@ -1,6 +1,6 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityMapper;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.IGenericEntityMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.repositories.UsuarioRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class UsuarioMapper extends AbstractEntityMapper<Usuario, UsuarioInputMapper, UsuarioOutputMapper> {
+public class UsuarioMapper implements IGenericEntityMapper<Usuario, UsuarioInputMapper, UsuarioOutputMapper> {
 
     private final ModelMapper modelMapper;
 

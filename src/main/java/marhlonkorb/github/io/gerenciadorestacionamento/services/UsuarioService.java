@@ -4,7 +4,7 @@
  */
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.IGenericEntityService;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.*;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.exceptions.UsuarioException;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.validador.IUsuarioValidador;
@@ -20,7 +20,7 @@ import java.util.Optional;
  * Service da entidade Usuario
  */
 @Service
-public class UsuarioService extends AbstractEntityService<Usuario, Long, UsuarioInputMapper, UsuarioOutputMapper> {
+public class UsuarioService extends IGenericEntityService<Usuario, Long, UsuarioInputMapper, UsuarioOutputMapper> {
     private final UsuarioRepository usuarioRepository;
     private final IUsuarioValidador iUsuarioValidador;
     private final IValidadorEmail iValidadorEmail;

@@ -1,12 +1,12 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityMapper;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.IGenericEntityMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VeiculoMapper extends AbstractEntityMapper<Veiculo, VeiculoInputMapper, VeiculoOutputMapper> {
+public class VeiculoMapper implements IGenericEntityMapper<Veiculo, VeiculoInputMapper, VeiculoOutputMapper> {
     @Autowired
     private ModelMapper modelMapper;
     @Override

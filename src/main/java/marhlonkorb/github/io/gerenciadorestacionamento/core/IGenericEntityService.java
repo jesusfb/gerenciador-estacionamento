@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public abstract class AbstractEntityService<EntidadeComId, ID, Input, DtoType> extends AbstractEntityMapper<EntidadeComId, Input, DtoType> {
+public abstract class IGenericEntityService<EntidadeComId, ID, Input, DtoType> implements IGenericEntityMapper<EntidadeComId, Input, DtoType> {
 
     @Autowired
     private JpaRepository<EntidadeComId, ID> repository;

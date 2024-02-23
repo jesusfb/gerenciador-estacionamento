@@ -1,11 +1,11 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityMapper;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.IGenericEntityMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProprietarioMapper extends AbstractEntityMapper<Proprietario, ProprietarioInputMapper, ProprietarioOutputMapper> {
+public class ProprietarioMapper implements IGenericEntityMapper<Proprietario, ProprietarioInputMapper, ProprietarioOutputMapper> {
     private final ModelMapper modelMapper;
 
     public ProprietarioMapper(ModelMapper modelMapper) {
