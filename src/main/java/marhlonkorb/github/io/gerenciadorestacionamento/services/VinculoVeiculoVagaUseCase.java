@@ -22,7 +22,6 @@ public class VinculoVeiculoVagaUseCase {
         if (!veiculoEncontrado.isContemVaga() && !vagaEncontrada.isContemVeiculo()) {
             veiculoEncontrado.adicionarVaga(vagaEncontrada);
             vagaEncontrada.adicionarVeiculo(veiculoEncontrado);
-            veiculoService.save(veiculoEncontrado);
             vagaService.save(vagaEncontrada);
         }
     }

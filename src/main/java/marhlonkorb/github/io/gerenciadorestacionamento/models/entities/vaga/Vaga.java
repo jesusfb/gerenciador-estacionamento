@@ -14,7 +14,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.V
 public class Vaga extends EntidadeAuditada {
 
     @JsonManagedReference
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = VagaDbConstantes.VEICULO_ID)
     private Veiculo veiculo;
 

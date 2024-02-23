@@ -38,18 +38,19 @@ public class UsuarioService extends AbstractEntityService<Usuario, Long, Usuario
     }
 
     @Override
-    public Object convertToDto(Object input) {
-        return usuarioMapper.convertToDto((Usuario) input);
+    public UsuarioOutputMapper convertToDto(Usuario input) {
+        return usuarioMapper.convertToDto(input);
     }
 
     @Override
-    public Object convertToEntity(Object input) {
-        return usuarioMapper.convertToEntity((UsuarioInputMapper) input);
+    public Usuario convertToEntity(UsuarioInputMapper input) {
+        return usuarioMapper.convertToEntity(input);
     }
 
 
     /**
      * Cria um novo usuário
+     *
      * @param data
      * @return
      */
@@ -65,7 +66,7 @@ public class UsuarioService extends AbstractEntityService<Usuario, Long, Usuario
         return novoUsuario;
     }
 
-    public Usuario findById(Usuario usuario){
+    public Usuario findById(Usuario usuario) {
         final Optional<Usuario> usuarioEncontrado = usuarioRepository.findById(usuario.getId());
         if (usuarioEncontrado.isEmpty()) {
             throw new UsuarioException("Usuário não encontrado.");

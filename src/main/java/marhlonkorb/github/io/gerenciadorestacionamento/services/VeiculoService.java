@@ -47,13 +47,13 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
     }
 
     @Override
-    public VeiculoOutputMapper convertToDto(Object input) {
-        return veiculoMapper.convertToDto((Veiculo) input);
+    public VeiculoOutputMapper convertToDto(Veiculo input) {
+        return veiculoMapper.convertToDto(input);
     }
 
     @Override
-    public Veiculo convertToEntity(Object input) {
-        return veiculoMapper.convertToEntity((VeiculoInputMapper) input);
+    public Veiculo convertToEntity(VeiculoInputMapper input) {
+        return veiculoMapper.convertToEntity(input);
     }
 
     /**

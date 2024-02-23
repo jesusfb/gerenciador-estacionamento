@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VagaMapper implements AbstractEntityMapper<Vaga, VagaInputMapper, VagaOutputMapper> {
+public class VagaMapper extends AbstractEntityMapper<Vaga, VagaInputMapper, VagaOutputMapper> {
 
     @Autowired
     VagaRepository vagaRepository;

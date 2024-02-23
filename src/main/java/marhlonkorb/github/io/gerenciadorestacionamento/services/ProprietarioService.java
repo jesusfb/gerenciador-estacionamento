@@ -26,13 +26,13 @@ public class ProprietarioService extends AbstractEntityService<Proprietario, Lon
     }
 
     @Override
-    public ProprietarioOutputMapper convertToDto(Object input) {
-        return proprietarioMapper.convertToDto((Proprietario) input);
+    public ProprietarioOutputMapper convertToDto(Proprietario input) {
+        return proprietarioMapper.convertToDto(input);
     }
 
     @Override
-    public Proprietario convertToEntity(Object input) {
-        return proprietarioMapper.convertToEntity((ProprietarioInputMapper) input);
+    public Proprietario convertToEntity(ProprietarioInputMapper input) {
+        return proprietarioMapper.convertToEntity(input);
     }
 
     /**

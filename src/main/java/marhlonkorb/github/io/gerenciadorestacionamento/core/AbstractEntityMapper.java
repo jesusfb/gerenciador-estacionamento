@@ -4,7 +4,7 @@ import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.ent
 import org.springframework.stereotype.Component;
 
 @Component
-public interface AbstractEntityMapper<EntidadeComId, Input, DtoType> {
+public abstract class AbstractEntityMapper<EntidadeComId, Input, DtoType> {
     public abstract DtoType convertToDto(EntidadeComId input);
     public abstract EntidadeComId convertToEntity(Input input);
 

@@ -5,7 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProprietarioMapper implements AbstractEntityMapper<Proprietario, ProprietarioInputMapper, ProprietarioOutputMapper> {
+public class ProprietarioMapper extends AbstractEntityMapper<Proprietario, ProprietarioInputMapper, ProprietarioOutputMapper> {
     private final ModelMapper modelMapper;
 
     public ProprietarioMapper(ModelMapper modelMapper) {

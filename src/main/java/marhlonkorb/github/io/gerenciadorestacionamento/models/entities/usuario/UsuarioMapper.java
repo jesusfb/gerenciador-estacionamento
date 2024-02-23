@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class UsuarioMapper implements AbstractEntityMapper<Usuario, UsuarioInputMapper, UsuarioOutputMapper> {
+public class UsuarioMapper extends AbstractEntityMapper<Usuario, UsuarioInputMapper, UsuarioOutputMapper> {
 
     private final ModelMapper modelMapper;
 

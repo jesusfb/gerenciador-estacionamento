@@ -30,13 +30,13 @@ public class VagaService extends AbstractEntityService<Vaga, Long, VagaInputMapp
     }
 
     @Override
-    public VagaOutputMapper convertToDto(Object input) {
-        return vagaMapper.convertToDto((Vaga) input);
+    public VagaOutputMapper convertToDto(Vaga input) {
+        return vagaMapper.convertToDto(input);
     }
 
     @Override
-    public Vaga convertToEntity(Object input) {
-        return vagaMapper.convertToEntity((VagaInputMapper) input);
+    public Vaga convertToEntity(VagaInputMapper input) {
+        return vagaMapper.convertToEntity(input);
     }
 
     /**
