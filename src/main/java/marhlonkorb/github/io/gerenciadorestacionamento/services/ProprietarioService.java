@@ -1,6 +1,6 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.core.IGenericEntityService;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.Proprietario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioMapper;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * Service da entidade Proprietario
  */
 @Service
-public class ProprietarioService extends IGenericEntityService<Proprietario, Long, ProprietarioInputMapper, ProprietarioOutputMapper> {
+public class ProprietarioService extends AbstractEntityService<Proprietario, Long, ProprietarioInputMapper, ProprietarioOutputMapper> {
     private final ProprietarioMapper proprietarioMapper;
 
     private final ProprietarioRepository proprietarioRepository;

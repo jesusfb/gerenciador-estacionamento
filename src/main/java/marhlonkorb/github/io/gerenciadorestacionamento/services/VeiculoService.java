@@ -4,7 +4,7 @@
  */
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.core.IGenericEntityService;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.Veiculo;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoInputMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.veiculo.VeiculoMapper;
@@ -22,7 +22,7 @@ import java.util.Set;
  * Service da entidade Veiculo
  */
 @Service
-public class VeiculoService extends IGenericEntityService<Veiculo, Long, VeiculoInputMapper, VeiculoOutputMapper> {
+public class VeiculoService extends AbstractEntityService<Veiculo, Long, VeiculoInputMapper, VeiculoOutputMapper> {
 
     private final VeiculoRepository veiculoRepository;
 

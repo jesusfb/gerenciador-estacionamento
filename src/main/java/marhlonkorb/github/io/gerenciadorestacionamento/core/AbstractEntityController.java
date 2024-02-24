@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 public abstract class AbstractEntityController<T, ID, Input, DtoType> {
     @Autowired
-    IGenericEntityService<T, ID, Input, DtoType> service;
+    AbstractEntityService<T, ID, Input, DtoType> service;
 
     @GetMapping("/all")
     public List<Object> getAll() {
