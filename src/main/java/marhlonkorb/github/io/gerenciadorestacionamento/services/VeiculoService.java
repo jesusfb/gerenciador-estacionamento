@@ -46,16 +46,6 @@ public class VeiculoService extends AbstractEntityService<Veiculo, Long, Veiculo
                 .orElseThrow(() -> new VeiculoNotFoundException("Veículo não encontrado."));
     }
 
-    @Override
-    public VeiculoOutputMapper convertToDto(Veiculo input) {
-        return veiculoMapper.convertToDto(input);
-    }
-
-    @Override
-    public Veiculo convertToEntity(VeiculoInputMapper input) {
-        return veiculoMapper.convertToEntity(input);
-    }
-
     /**
      * Busca todos os veículos associados a um proprietário pelo seu ID.
      *

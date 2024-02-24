@@ -25,28 +25,14 @@ public class UsuarioService extends AbstractEntityService<Usuario, Long, Usuario
     private final IUsuarioValidador iUsuarioValidador;
     private final IValidadorEmail iValidadorEmail;
 
-    private final UsuarioMapper usuarioMapper;
-
     private final ProprietarioService proprietarioService;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, IUsuarioValidador iUsuarioValidador, IValidadorEmail iValidadorEmail, UsuarioMapper usuarioMapper, ProprietarioService proprietarioService) {
+    public UsuarioService(UsuarioRepository usuarioRepository, IUsuarioValidador iUsuarioValidador, IValidadorEmail iValidadorEmail, ProprietarioService proprietarioService) {
         this.usuarioRepository = usuarioRepository;
         this.iUsuarioValidador = iUsuarioValidador;
         this.iValidadorEmail = iValidadorEmail;
-        this.usuarioMapper = usuarioMapper;
         this.proprietarioService = proprietarioService;
     }
-
-    @Override
-    public UsuarioOutputMapper convertToDto(Usuario input) {
-        return usuarioMapper.convertToDto(input);
-    }
-
-    @Override
-    public Usuario convertToEntity(UsuarioInputMapper input) {
-        return usuarioMapper.convertToEntity(input);
-    }
-
 
     /**
      * Cria um novo usuário

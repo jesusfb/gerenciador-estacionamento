@@ -1,5 +1,6 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
+import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.Proprietario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioInputMapper;
@@ -19,20 +20,9 @@ public class ProprietarioService extends AbstractEntityService<Proprietario, Lon
 
     private final ProprietarioRepository proprietarioRepository;
 
-
     public ProprietarioService(ProprietarioMapper proprietarioMapper, ProprietarioRepository proprietarioRepository) {
         this.proprietarioMapper = proprietarioMapper;
         this.proprietarioRepository = proprietarioRepository;
-    }
-
-    @Override
-    public ProprietarioOutputMapper convertToDto(Proprietario input) {
-        return proprietarioMapper.convertToDto(input);
-    }
-
-    @Override
-    public Proprietario convertToEntity(ProprietarioInputMapper input) {
-        return proprietarioMapper.convertToEntity(input);
     }
 
     /**
@@ -52,7 +42,7 @@ public class ProprietarioService extends AbstractEntityService<Proprietario, Lon
 
     public ProprietarioOutputMapper getProprietarioByIdUsuario(Long idUsuario){
         final Proprietario proprietarioEncontrado = proprietarioRepository.getByUsuarioId(idUsuario);
-        return convertToDto(proprietarioEncontrado);
+        return proprietarioMapper.convertToDto(proprietarioEncontrado);
     }
 
     /**
