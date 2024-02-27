@@ -1,9 +1,11 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario;
 
+import com.nimbusds.jose.shaded.gson.Gson;
 import jakarta.persistence.*;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.abstractentities.entidadeauditada.EntidadeAuditada;
-import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Role;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.builder.UsuarioBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,8 +19,6 @@ import java.util.List;
 @Entity
 @Table(name = UsuarioDbConstantes.TABLE_NAME)
 public class Usuario extends EntidadeAuditada implements UserDetails {
-    @Column
-    private String nome;
 
     @Column
     private String email;
@@ -34,29 +34,22 @@ public class Usuario extends EntidadeAuditada implements UserDetails {
     public Usuario() {
     }
 
-    public Usuario(String email, String password, String nome, Role role) {
+    public Usuario(Long id, String email, String password, Role role, Status status) {
+        this.setId(id);
         this.email = email;
         this.password = password;
         this.role = role;
-        this.nome = nome;
-        this.status = Status.A;
+        this.status = status;
     }
 
-    public UsuarioLogado converteParaUsuarioLogado() {
-        return new UsuarioLogado(
-                this.getId(),
-                this.getNome(),
-                this.getEmail(),
-                this.getRole(),
-                this.getStatus());
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String converteParaUsuarioLogado() {
+        var usuario = new UsuarioBuilder().
+                setId(this.getId()).
+                setEmail(this.getEmail()).
+                setRole(this.role).
+                setStatus(this.status).build();
+        Gson gson = new Gson();
+        return gson.toJson(usuario);
     }
 
     public String getEmail() {

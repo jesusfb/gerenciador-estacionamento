@@ -38,7 +38,7 @@ public class TokenService {
 
             // Criação do token com informações como emissor, assunto, expiração, etc.
             String token = JWT.create()
-                    .withClaim("usuarioLogado", usuario.converteParaUsuarioLogado().toJSON())
+                    .withClaim("usuarioLogado", usuario.converteParaUsuarioLogado())
                     .withIssuer(JWT_ISSUER).
                     withSubject(usuario.getEmail())
                     .withExpiresAt(getExpirationDate())

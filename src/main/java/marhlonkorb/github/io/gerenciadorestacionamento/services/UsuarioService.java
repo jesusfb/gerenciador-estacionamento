@@ -5,7 +5,12 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.*;
+import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Status;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.UsuarioInputCadastro;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.UsuarioInputMapper;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.UsuarioOutputMapper;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.builder.UsuarioBuilder;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.exceptions.UsuarioException;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.validador.IUsuarioValidador;
 import marhlonkorb.github.io.gerenciadorestacionamento.repositories.UsuarioRepository;
@@ -37,18 +42,22 @@ public class UsuarioService extends AbstractEntityService<Usuario, Long, Usuario
     /**
      * Cria um novo usuário
      *
-     * @param data
+     * @param usuarioInputCadastro
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public Usuario create(RegisterDTO data) {
-        iUsuarioValidador.validaIsUsuarioExistente(data.email());
-        iValidadorEmail.validar(data.email());
-        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        final var novoUsuario = new Usuario(data.email(), encryptedPassword, data.nome(), data.role());
+    public Usuario create(UsuarioInputCadastro usuarioInputCadastro) {
+        iUsuarioValidador.validaIsUsuarioExistente(usuarioInputCadastro.email());
+        iValidadorEmail.validar(usuarioInputCadastro.email());
+        String encryptedPassword = new BCryptPasswordEncoder().encode(usuarioInputCadastro.password());
+        final var novoUsuario = new UsuarioBuilder()
+                .setEmail(usuarioInputCadastro.email())
+                .setPassword(encryptedPassword)
+                .setRole(usuarioInputCadastro.role())
+                .setStatus(Status.A).build();
         usuarioRepository.save(novoUsuario);
         // Cria o vínculo do usuário com um proprietário
-        proprietarioService.create(novoUsuario);
+        proprietarioService.adicionaUsuarioNovoProprietario(novoUsuario);
         return novoUsuario;
     }
 

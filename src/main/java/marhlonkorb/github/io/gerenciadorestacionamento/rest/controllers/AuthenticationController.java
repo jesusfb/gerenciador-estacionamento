@@ -3,8 +3,9 @@ package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 import jakarta.validation.Valid;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.AuthenticationDTO;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.LoginResponseDTO;
-import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.RegisterDTO;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.UsuarioInputCadastro;
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.exceptions.UsuarioException;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.validador.IUsuarioValidador;
 import marhlonkorb.github.io.gerenciadorestacionamento.security.TokenService;
 import marhlonkorb.github.io.gerenciadorestacionamento.services.UsuarioService;
@@ -68,11 +69,15 @@ public class AuthenticationController {
      * @return Resposta contendo o token JWT gerado para o novo usuário.
      */
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Valid RegisterDTO data) {
-        // Cria um novo usuário com base nos dados fornecidos
-        Usuario usuarioCriado = usuarioService.create(data);
-        // Gera um token JWT para o novo usuário registrado
-        String token = tokenService.generateToken(usuarioCriado);
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+    public ResponseEntity<?> register(@RequestBody @Valid UsuarioInputCadastro data) {
+        try {
+            // Cria um novo usuário com base nos dados fornecidos
+            Usuario usuarioCriado = usuarioService.create(data);
+            // Gera um token JWT para o novo usuário registrado
+            String token = tokenService.generateToken(usuarioCriado);
+            return ResponseEntity.ok(new LoginResponseDTO(token));
+        } catch (UsuarioException ex) {
+            return ResponseEntity.badRequest().body(ex.getLocalizedMessage());
+        }
     }
 }

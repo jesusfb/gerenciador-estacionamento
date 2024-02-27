@@ -5,7 +5,6 @@ CREATE TABLE "usuario"(
     criado_por VARCHAR(255),
     data_alteracao timestamp,
     data_criacao timestamp,
-    nome VARCHAR(255),
     email VARCHAR(255),
     password VARCHAR(255),
     role VARCHAR(255),

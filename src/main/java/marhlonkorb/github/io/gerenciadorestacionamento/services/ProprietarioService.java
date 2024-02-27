@@ -1,6 +1,5 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.services;
 
-import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityMapper;
 import marhlonkorb.github.io.gerenciadorestacionamento.core.AbstractEntityService;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.Proprietario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.proprietario.ProprietarioInputMapper;
@@ -46,14 +45,13 @@ public class ProprietarioService extends AbstractEntityService<Proprietario, Lon
     }
 
     /**
-     * Cria um novo proprietário
+     * Cria o vínculo do usuário com um proprietário
      * @param usuario
      * @return Proprietario
      */
-    public Proprietario create(Usuario usuario){
+    public void adicionaUsuarioNovoProprietario(Usuario usuario){
         Proprietario proprietario = new Proprietario();
-        proprietario.setNome(usuario.getNome());
         proprietario.setUsuario(usuario);
-        return save(proprietario);
+        save(proprietario);
     }
 }

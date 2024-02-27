@@ -1,9 +1,12 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.validador;
+
+import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.exceptions.UsuarioException;
+
 /**
  * Interface que define contrato para as validações de usuário
  */
 public interface IUsuarioValidador {
 
-    public void validaIsUsuarioExistente(String email);
-    public void validaIsUsuarioInexistente(String email);
+    public void validaIsUsuarioExistente(String email) throws UsuarioException;
+    public void validaIsUsuarioInexistente(String email) throws UsuarioException;
 }
