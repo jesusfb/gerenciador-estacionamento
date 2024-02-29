@@ -9,7 +9,6 @@ import marhlonkorb.github.io.gerenciadorestacionamento.core.enums.Role;
 public class UsuarioOutputMapper {
 
     private Long id;
-    private String nome;
     private String email;
     private Status status;
     private Role role;
@@ -20,14 +19,6 @@ public class UsuarioOutputMapper {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getEmail() {

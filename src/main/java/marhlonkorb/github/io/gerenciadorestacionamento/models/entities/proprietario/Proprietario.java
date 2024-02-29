@@ -30,7 +30,6 @@ public class Proprietario extends EntidadeComId {
     private Set<Veiculo> veiculo;
 
     @NotNull
-    @Column(nullable = false)
     private String nome;
 
     @Column

@@ -1,14 +1,14 @@
 package marhlonkorb.github.io.gerenciadorestacionamento.rest.controllers;
 
-import jakarta.validation.Valid;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.AuthenticationDTO;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.LoginResponseDTO;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.Usuario;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.UsuarioInputCadastro;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.exceptions.UsuarioException;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.validador.IUsuarioValidador;
+import marhlonkorb.github.io.gerenciadorestacionamento.repositories.UsuarioRepository;
 import marhlonkorb.github.io.gerenciadorestacionamento.security.TokenService;
-import marhlonkorb.github.io.gerenciadorestacionamento.services.UsuarioService;
+import marhlonkorb.github.io.gerenciadorestacionamento.services.CriaUsuarioProprietarioUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,22 +26,24 @@ public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
-    private final UsuarioService usuarioService;
+    private final CriaUsuarioProprietarioUseCase criaUsuarioProprietarioUseCase;
     private final IUsuarioValidador iUsuarioValidador;
+    private final UsuarioRepository usuarioRepository;
 
     /**
      * Construtor da classe, injetando as dependências necessárias.
      *
      * @param authenticationManager Gerenciador de autenticação do Spring Security.
      * @param tokenService          Serviço para geração e validação de tokens JWT.
-     * @param usuarioService        Serviço para manipulação de entidades de usuário.
      * @param iUsuarioValidador     Validador de usuário para garantir consistência nos dados.
      */
-    public AuthenticationController(AuthenticationManager authenticationManager, TokenService tokenService, UsuarioService usuarioService, IUsuarioValidador iUsuarioValidador) {
+    public AuthenticationController(AuthenticationManager authenticationManager, TokenService tokenService, CriaUsuarioProprietarioUseCase criaUsuarioProprietarioUseCase, IUsuarioValidador iUsuarioValidador,
+                                    UsuarioRepository usuarioRepository) {
         this.authenticationManager = authenticationManager;
         this.tokenService = tokenService;
-        this.usuarioService = usuarioService;
+        this.criaUsuarioProprietarioUseCase = criaUsuarioProprietarioUseCase;
         this.iUsuarioValidador = iUsuarioValidador;
+        this.usuarioRepository = usuarioRepository;
     }
 
     /**
@@ -69,10 +71,11 @@ public class AuthenticationController {
      * @return Resposta contendo o token JWT gerado para o novo usuário.
      */
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Valid UsuarioInputCadastro data) {
+    public ResponseEntity<?> register(@RequestBody UsuarioInputCadastro data) {
         try {
-            // Cria um novo usuário com base nos dados fornecidos
-            Usuario usuarioCriado = usuarioService.create(data);
+            // Cria um novo usuário e proprietário com base nos dados fornecidos
+            criaUsuarioProprietarioUseCase.execute(data);
+            Usuario usuarioCriado = usuarioRepository.findUsuarioByEmail(data.email());
             // Gera um token JWT para o novo usuário registrado
             String token = tokenService.generateToken(usuarioCriado);
             return ResponseEntity.ok(new LoginResponseDTO(token));

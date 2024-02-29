@@ -45,13 +45,14 @@ public class ProprietarioService extends AbstractEntityService<Proprietario, Lon
     }
 
     /**
-     * Cria o vínculo do usuário com um proprietário
+     * Cria o vínculo do usuário com um novo proprietário
      * @param usuario
      * @return Proprietario
      */
     public void adicionaUsuarioNovoProprietario(Usuario usuario){
         Proprietario proprietario = new Proprietario();
         proprietario.setUsuario(usuario);
+        proprietario.setNome(usuario.getEmail());
         save(proprietario);
     }
 }
