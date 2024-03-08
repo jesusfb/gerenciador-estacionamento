@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * Classe que executa a validação de email
  */
 @Component
-public class EmailValidador implements IValidadorEmail {
+public class EmailValidador implements IEmailValidador {
     /* Regex para comparar a formatação do email recebido */
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 

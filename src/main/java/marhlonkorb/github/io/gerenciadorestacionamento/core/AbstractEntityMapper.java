@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public abstract class AbstractEntityMapper<EntidadeComId, Input, DtoType> {
 
-    public abstract DtoType convertToDto(EntidadeComId input);
-    public abstract EntidadeComId convertToEntity(Input input);
+    protected abstract DtoType convertToDto(EntidadeComId input);
+    protected abstract EntidadeComId convertToEntity(Input input);
 
 }

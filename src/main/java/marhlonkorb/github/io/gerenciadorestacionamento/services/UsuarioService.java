@@ -12,7 +12,6 @@ import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.U
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.exceptions.UsuarioException;
 import marhlonkorb.github.io.gerenciadorestacionamento.models.entities.usuario.validador.IUsuarioValidador;
 import marhlonkorb.github.io.gerenciadorestacionamento.repositories.UsuarioRepository;
-import marhlonkorb.github.io.gerenciadorestacionamento.validador.email.IValidadorEmail;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -24,13 +23,10 @@ import java.util.Optional;
 public class UsuarioService extends AbstractEntityService<Usuario, Long, UsuarioInputMapper, UsuarioOutputMapper> {
     private final UsuarioRepository usuarioRepository;
     private final IUsuarioValidador iUsuarioValidador;
-    private final IValidadorEmail iValidadorEmail;
 
-
-    public UsuarioService(UsuarioRepository usuarioRepository, IUsuarioValidador iUsuarioValidador, IValidadorEmail iValidadorEmail) {
+    public UsuarioService(UsuarioRepository usuarioRepository, IUsuarioValidador iUsuarioValidador) {
         this.usuarioRepository = usuarioRepository;
         this.iUsuarioValidador = iUsuarioValidador;
-        this.iValidadorEmail = iValidadorEmail;
     }
 
     /**
@@ -40,15 +36,10 @@ public class UsuarioService extends AbstractEntityService<Usuario, Long, Usuario
      * @return Usuario
      */
     public Usuario create(Usuario usuario) {
-        validar(usuario);
+        iUsuarioValidador.validar(usuario);
         String encryptedPassword = new BCryptPasswordEncoder().encode(usuario.getPassword());
         usuario.setStatus(Status.A);
         return  usuarioRepository.save(usuario);
-    }
-
-    private void validar(Usuario usuario){
-        iValidadorEmail.validar(usuario.getEmail());
-        iUsuarioValidador.validaIsUsuarioExistente(usuario.getEmail());
     }
 
     public Usuario findById(Usuario usuario) {
